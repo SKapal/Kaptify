@@ -13,13 +13,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
+extension UIColor {
+    convenience init(r: CGFloat, b: CGFloat, g: CGFloat) {
+        self.init(red: r/255, green: b/255, blue: g/255, alpha: 1)
+    }
+}
