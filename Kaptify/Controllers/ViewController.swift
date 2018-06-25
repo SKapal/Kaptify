@@ -12,8 +12,18 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
+        
+        let leftButton = UIBarButtonItem(title: "Login", style: .plain, target: self, action: Selector(("handleLogoutButton")))
+        
+        self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationItem.leftBarButtonItem = leftButton
+
+    }
+    func handleLogoutButton() {
+        
     }
 
 }
