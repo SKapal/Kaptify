@@ -18,10 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // Creating a window the same size as the screen
         window = UIWindow(frame: UIScreen.main.bounds)
+        UIApplication.shared.statusBarStyle = .lightContent
         // set the window to our view controller
         window!.rootViewController = ViewController()
         //Add navigation bar
         window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        UINavigationBar.appearance().barTintColor = UIColor(r: 28, b: 27, g: 27)
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().isTranslucent = false
+    
         // show window
         window!.makeKeyAndVisible()
         return true

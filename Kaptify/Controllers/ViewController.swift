@@ -16,16 +16,14 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         
+        // add leftButton
         let leftButton = UIBarButtonItem(title: "Login", style: .plain, target: self, action: Selector(("handleLogoutButton")))
-        
         self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationItem.leftBarButtonItem = leftButton
-
     }
     func handleLogoutButton() {
         
     }
-
 }
 
 extension UIColor {
