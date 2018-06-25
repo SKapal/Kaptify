@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         // set the window to our view controller
         window!.rootViewController = ViewController()
-        //Add navigation bar
+        //Add navigation bar with style	
         window?.rootViewController = UINavigationController(rootViewController: ViewController())
         UINavigationBar.appearance().barTintColor = UIColor(r: 28, b: 27, g: 27)
         UINavigationBar.appearance().tintColor = .white

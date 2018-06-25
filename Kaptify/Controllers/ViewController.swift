@@ -17,12 +17,13 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         
         // add leftButton
-        let leftButton = UIBarButtonItem(title: "Login", style: .plain, target: self, action: Selector(("handleLogoutButton")))
         self.navigationItem.leftItemsSupplementBackButton = true
-        self.navigationItem.leftBarButtonItem = leftButton
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(ViewController.handleLogoutButton))
     }
-    func handleLogoutButton() {
-        
+    
+    @objc func handleLogoutButton() {
+        let loginController = LoginViewController()
+        present(loginController, animated: true, completion: nil)
     }
 }
 
