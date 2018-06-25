@@ -15,15 +15,22 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
-        
-        // add leftButton
-        self.navigationItem.leftItemsSupplementBackButton = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(ViewController.handleLogoutButton))
+        setupNavBar()
     }
     
     @objc func handleLogoutButton() {
         let loginController = LoginViewController()
         present(loginController, animated: true, completion: nil)
+    }
+    
+    func setupNavBar() {
+        // add leftButton
+        self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(ViewController.handleLogoutButton))
+        let title = UIImage(named: "Logo_text")
+        let imageView = UIImageView(image: title)
+        imageView.contentMode = .scaleAspectFill
+        self.navigationItem.titleView = imageView
     }
 }
 
