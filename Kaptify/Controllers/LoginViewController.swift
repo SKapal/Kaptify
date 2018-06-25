@@ -14,12 +14,32 @@ class LoginViewController: UIViewController {
     let IMAGE_WIDTH: CGFloat = 235
     let IMAGE_HEIGHT: CGFloat = 268
     
+    
+    
     let loginCardImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Login_image")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+    
+    let emailTextField: UITextField = {
+        let email = UITextField()
+        email.backgroundColor = .white
+        email.layer.cornerRadius = 5
+        email.placeholder = "Email"
+        email.translatesAutoresizingMaskIntoConstraints = false
+        return email
+    }()
+    
+    let passTextField: UITextField = {
+        let pass = UITextField()
+        pass.backgroundColor = .white
+        pass.layer.cornerRadius = 5
+        pass.placeholder = "Password"
+        pass.translatesAutoresizingMaskIntoConstraints = false
+        return pass
     }()
     
     let loginButton: UIButton = {
@@ -50,13 +70,35 @@ class LoginViewController: UIViewController {
         view.addSubview(loginCardImage)
         view.addSubview(loginButton)
         view.addSubview(registerButton)
+        view.addSubview(emailTextField)
+        view.addSubview(passTextField)
 
-        
         // setup constraints
         setupLoginCardImage()
         setupLoginButton()
         setupRegisterButton()
+        setupEmailTextField()
+        setupPassTextField()
     }
+  
+    func setupEmailTextField() {
+        // x, y, width, height constraints
+        emailTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
+        emailTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 175).isActive = true
+        emailTextField.widthAnchor.constraint(equalToConstant: 185).isActive = true
+        emailTextField.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
+    
+    func setupPassTextField() {
+        // x, y, width, height constraints
+        passTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
+        passTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
+        passTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 12).isActive = true
+        passTextField.widthAnchor.constraint(equalToConstant: 185).isActive = true
+        passTextField.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
+    
     
     func setupLoginButton() {
         // x, y, width, height constraints
@@ -81,5 +123,6 @@ class LoginViewController: UIViewController {
         loginCardImage.widthAnchor.constraint(equalToConstant: IMAGE_WIDTH).isActive = true
         loginCardImage.heightAnchor.constraint(equalToConstant: IMAGE_HEIGHT).isActive = true
     }
+    
 
 }
