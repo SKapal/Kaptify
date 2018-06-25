@@ -54,14 +54,22 @@
 		B75EBD2120E0600E0012C34F /* Kaptify */ = {
 			isa = PBXGroup;
 			children = (
+				B75EBD3420E066900012C34F /* Controllers */,
 				B75EBD2220E0600E0012C34F /* AppDelegate.swift */,
-				B75EBD2420E0600E0012C34F /* ViewController.swift */,
 				B75EBD2620E0600E0012C34F /* Main.storyboard */,
 				B75EBD2920E060100012C34F /* Assets.xcassets */,
 				B75EBD2B20E060100012C34F /* LaunchScreen.storyboard */,
 				B75EBD2E20E060100012C34F /* Info.plist */,
 			);
 			path = Kaptify;
+			sourceTree = "<group>";
+		};
+		B75EBD3420E066900012C34F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B75EBD2420E0600E0012C34F /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
