@@ -81,7 +81,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
-        
+        addSubViewsWithConstraints()
+    }
+    
+    func addSubViewsWithConstraints() {
         // add subviews
         view.addSubview(loginCardImage)
         view.addSubview(loginButton)
