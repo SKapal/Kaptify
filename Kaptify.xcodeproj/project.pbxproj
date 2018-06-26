@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71CAC89D3D3D5029E2156441 /* Pods_Kaptify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B30E3B31E469F504C6B325 /* Pods_Kaptify.framework */; };
 		B73BBE6820E06FC700F27C16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BBE6720E06FC700F27C16 /* LoginViewController.swift */; };
+		B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */; };
 		B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2220E0600E0012C34F /* AppDelegate.swift */; };
 		B75EBD2520E0600E0012C34F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2420E0600E0012C34F /* ViewController.swift */; };
 		B75EBD2820E0600E0012C34F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75EBD2620E0600E0012C34F /* Main.storyboard */; };
@@ -16,7 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3CE4FE9912F1AD6845A4030A /* Pods-Kaptify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kaptify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kaptify/Pods-Kaptify.debug.xcconfig"; sourceTree = "<group>"; };
+		75B30E3B31E469F504C6B325 /* Pods_Kaptify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kaptify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B73BBE6720E06FC700F27C16 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B75EBD1F20E0600E0012C34F /* Kaptify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kaptify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75EBD2220E0600E0012C34F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B75EBD2420E0600E0012C34F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +29,7 @@
 		B75EBD2920E060100012C34F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B75EBD2C20E060100012C34F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B75EBD2E20E060100012C34F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C02998E938D12186454403E6 /* Pods-Kaptify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kaptify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kaptify/Pods-Kaptify.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71CAC89D3D3D5029E2156441 /* Pods_Kaptify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		109BADE1D3839209CF8AA6A6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75B30E3B31E469F504C6B325 /* Pods_Kaptify.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C3EE87DAB4D42EF58F905A5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3CE4FE9912F1AD6845A4030A /* Pods-Kaptify.debug.xcconfig */,
+				C02998E938D12186454403E6 /* Pods-Kaptify.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B75EBD1620E0600E0012C34F = {
 			isa = PBXGroup;
 			children = (
 				B75EBD2120E0600E0012C34F /* Kaptify */,
 				B75EBD2020E0600E0012C34F /* Products */,
+				7C3EE87DAB4D42EF58F905A5 /* Pods */,
+				109BADE1D3839209CF8AA6A6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +88,7 @@
 				B75EBD2920E060100012C34F /* Assets.xcassets */,
 				B75EBD2B20E060100012C34F /* LaunchScreen.storyboard */,
 				B75EBD2E20E060100012C34F /* Info.plist */,
+				B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */,
 			);
 			path = Kaptify;
 			sourceTree = "<group>";
@@ -82,9 +109,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B75EBD3120E060100012C34F /* Build configuration list for PBXNativeTarget "Kaptify" */;
 			buildPhases = (
+				B36DEC6EDC051102D83EEB47 /* [CP] Check Pods Manifest.lock */,
 				B75EBD1B20E0600E0012C34F /* Sources */,
 				B75EBD1C20E0600E0012C34F /* Frameworks */,
 				B75EBD1D20E0600E0012C34F /* Resources */,
+				F7714C6F00BCE0828B29DFAC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -134,12 +163,58 @@
 			buildActionMask = 2147483647;
 			files = (
 				B75EBD2D20E060100012C34F /* LaunchScreen.storyboard in Resources */,
+				B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */,
 				B75EBD2A20E060100012C34F /* Assets.xcassets in Resources */,
 				B75EBD2820E0600E0012C34F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B36DEC6EDC051102D83EEB47 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kaptify-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7714C6F00BCE0828B29DFAC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Kaptify/Pods-Kaptify-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kaptify/Pods-Kaptify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B75EBD1B20E0600E0012C34F /* Sources */ = {
@@ -290,6 +365,7 @@
 		};
 		B75EBD3220E060100012C34F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CE4FE9912F1AD6845A4030A /* Pods-Kaptify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -308,6 +384,7 @@
 		};
 		B75EBD3320E060100012C34F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C02998E938D12186454403E6 /* Pods-Kaptify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
