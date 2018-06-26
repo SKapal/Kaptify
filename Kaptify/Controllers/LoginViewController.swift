@@ -14,14 +14,29 @@ class LoginViewController: UIViewController {
     let IMAGE_WIDTH: CGFloat = 235
     let IMAGE_HEIGHT: CGFloat = 268
     
-    
-    
+    // UI Elements to be added to View
     let loginCardImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Login_image")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+    
+    let emailUIView: UIView = {
+        let emailBG = UIView()
+        emailBG.backgroundColor = .white
+        emailBG.layer.cornerRadius = 5
+        emailBG.translatesAutoresizingMaskIntoConstraints = false
+        return emailBG
+    }()
+    
+    let passUIView: UIView = {
+        let passBG = UIView()
+        passBG.backgroundColor = .white
+        passBG.layer.cornerRadius = 5
+        passBG.translatesAutoresizingMaskIntoConstraints = false
+        return passBG
     }()
     
     let emailTextField: UITextField = {
@@ -37,6 +52,7 @@ class LoginViewController: UIViewController {
         let pass = UITextField()
         pass.backgroundColor = .white
         pass.layer.cornerRadius = 5
+        pass.isSecureTextEntry = true
         pass.placeholder = "Password"
         pass.translatesAutoresizingMaskIntoConstraints = false
         return pass
@@ -70,6 +86,8 @@ class LoginViewController: UIViewController {
         view.addSubview(loginCardImage)
         view.addSubview(loginButton)
         view.addSubview(registerButton)
+        view.addSubview(emailUIView)
+        view.addSubview(passUIView)
         view.addSubview(emailTextField)
         view.addSubview(passTextField)
 
@@ -77,10 +95,30 @@ class LoginViewController: UIViewController {
         setupLoginCardImage()
         setupLoginButton()
         setupRegisterButton()
+        setupEmailUIView()
+        setupPassUIView()
         setupEmailTextField()
         setupPassTextField()
     }
-  
+    
+    func setupEmailUIView() {
+        // x, y, width, height constraints
+        emailUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
+        emailUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
+        emailUIView.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 175).isActive = true
+        emailUIView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        emailUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
+    
+    func setupPassUIView() {
+        // x, y, width, height constraints
+        passUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
+        passUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
+        passUIView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 12).isActive = true
+        passUIView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        passUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
+    
     func setupEmailTextField() {
         // x, y, width, height constraints
         emailTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
