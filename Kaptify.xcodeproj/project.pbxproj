@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		71CAC89D3D3D5029E2156441 /* Pods_Kaptify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B30E3B31E469F504C6B325 /* Pods_Kaptify.framework */; };
-		B73BBE6820E06FC700F27C16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BBE6720E06FC700F27C16 /* LoginViewController.swift */; };
+		B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */; };
 		B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */; };
 		B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2220E0600E0012C34F /* AppDelegate.swift */; };
 		B75EBD2520E0600E0012C34F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2420E0600E0012C34F /* ViewController.swift */; };
@@ -20,7 +20,7 @@
 /* Begin PBXFileReference section */
 		3CE4FE9912F1AD6845A4030A /* Pods-Kaptify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kaptify.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kaptify/Pods-Kaptify.debug.xcconfig"; sourceTree = "<group>"; };
 		75B30E3B31E469F504C6B325 /* Pods_Kaptify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kaptify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B73BBE6720E06FC700F27C16 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B75EBD1F20E0600E0012C34F /* Kaptify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kaptify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75EBD2220E0600E0012C34F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				B75EBD2420E0600E0012C34F /* ViewController.swift */,
-				B73BBE6720E06FC700F27C16 /* LoginViewController.swift */,
+				B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -221,7 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B73BBE6820E06FC700F27C16 /* LoginViewController.swift in Sources */,
+				B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */,
 				B75EBD2520E0600E0012C34F /* ViewController.swift in Sources */,
 				B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */,
 			);

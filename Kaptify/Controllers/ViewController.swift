@@ -19,14 +19,14 @@ class ViewController: UIViewController {
     }
     
     @objc func handleLogoutButton() {
-        let loginController = LoginViewController()
-        present(loginController, animated: true, completion: nil)
+        let registerController = RegisterViewController()
+        present(registerController, animated: true, completion: nil)
     }
     
     func setupNavBar() {
         // add leftButton
         self.navigationItem.leftItemsSupplementBackButton = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Login", style: .plain, target: self, action: #selector(ViewController.handleLogoutButton))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(ViewController.handleLogoutButton))
         let title = UIImage(named: "Logo_text")
         let imageView = UIImageView(image: title)
         imageView.contentMode = .scaleAspectFill

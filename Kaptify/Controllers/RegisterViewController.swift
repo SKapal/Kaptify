@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  Kaptify
 //
 //  Created by Sahil Kapal on 2018-06-24.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class LoginViewController: UIViewController {
+class RegisterViewController: UIViewController {
     
     let IMAGE_WIDTH: CGFloat = 235
     let IMAGE_HEIGHT: CGFloat = 268
@@ -155,6 +155,8 @@ class LoginViewController: UIViewController {
         view.addSubview(passUIView)
         view.addSubview(emailTextField)
         view.addSubview(passTextField)
+        view.addSubview(userUIView)
+        view.addSubview(userTextField)
         
         // setup constraints
         setupLoginCardImage()
@@ -164,13 +166,34 @@ class LoginViewController: UIViewController {
         setupPassUIView()
         setupEmailTextField()
         setupPassTextField()
+        setupUserUIView()
+        setupUserTextField()
+    }
+    
+    // MARK: Setup view constraints
+    func setupUserTextField() {
+        // x, y, width, height constraints
+        userTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
+        userTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
+        userTextField.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 138).isActive = true
+        userTextField.widthAnchor.constraint(equalToConstant: 185).isActive = true
+        userTextField.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
+    
+    func setupUserUIView() {
+        // x, y, width, height constraints
+        userUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
+        userUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
+        userUIView.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 138).isActive = true
+        userUIView.widthAnchor.constraint(equalToConstant: 185).isActive = true
+        userUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
     func setupEmailUIView() {
         // x, y, width, height constraints
         emailUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         emailUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
-        emailUIView.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 178).isActive = true
+        emailUIView.topAnchor.constraint(equalTo: userUIView.bottomAnchor, constant: 12).isActive = true
         emailUIView.widthAnchor.constraint(equalToConstant: 185).isActive = true
         emailUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
