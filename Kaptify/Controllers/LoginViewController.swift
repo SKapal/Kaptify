@@ -142,7 +142,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
-        
+        setupViewsAndConstraints()
+
+    }
+    
+    func setupViewsAndConstraints() {
         // add subviews
         view.addSubview(loginCardImage)
         view.addSubview(loginButton)
@@ -151,7 +155,7 @@ class LoginViewController: UIViewController {
         view.addSubview(passUIView)
         view.addSubview(emailTextField)
         view.addSubview(passTextField)
-
+        
         // setup constraints
         setupLoginCardImage()
         setupLoginButton()
