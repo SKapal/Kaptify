@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class LoginViewController: UIViewController {
@@ -14,7 +15,16 @@ class LoginViewController: UIViewController {
     let IMAGE_WIDTH: CGFloat = 235
     let IMAGE_HEIGHT: CGFloat = 268
     
-    // UI Elements to be added to View
+    // MARK: Locking screen rotation
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    // MARK: UI Elements to be added to View
     let loginCardImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Login_image")
@@ -58,24 +68,75 @@ class LoginViewController: UIViewController {
         return pass
     }()
     
-    let loginButton: UIButton = {
-        let login = UIButton()
+    let userUIView: UIView = {
+        let userBG = UIView()
+        userBG.backgroundColor = .white
+        userBG.layer.cornerRadius = 5
+        userBG.translatesAutoresizingMaskIntoConstraints = false
+        return userBG
+    }()
+    
+    let userTextField: UITextField = {
+        let user = UITextField()
+        user.backgroundColor = .white
+        user.layer.cornerRadius = 5
+        user.placeholder = "Username"
+        user.translatesAutoresizingMaskIntoConstraints = false
+        return user
+    }()
+    
+    lazy var registerButton: UIButton = {
+        let register = UIButton(type: .system) // shows button animation
+        register.backgroundColor = UIColor(r: 28, b: 27, g: 27)
+        register.setTitle("REGISTER", for: .normal)
+        register.setTitleColor(.white, for: .normal)
+        register.layer.cornerRadius = 20
+        register.translatesAutoresizingMaskIntoConstraints = false
+        
+        register.addTarget(self, action: #selector(handleRegistration), for: .touchUpInside)
+        return register
+    }()
+    
+    @objc func handleRegistration() {
+        guard let email = emailTextField.text, let password = passTextField.text else {
+            print("Error: Invalid form")
+            //TODO: Add popup view directing user to input valid fields
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, err) in
+            if err != nil {
+                print(err!)
+                return
+            }
+            
+            guard let uid = user?.uid else {
+                return
+            }
+            
+            let ref = Database.database().reference(fromURL: "https://kaptify-5a0af.firebaseio.com/")
+            let usersRef = ref.child("Users").child(uid)
+            let values = ["Email": email]
+            
+            usersRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                if error != nil {
+                    print(error ?? "Error occured")
+                    return
+                }
+            })
+            /* Authentication successful, pop loginview */
+            
+        })
+    }
+    
+    lazy var loginButton: UIButton = {
+        let login = UIButton(type: .system)
         login.backgroundColor = UIColor(r: 28, b: 27, g: 27)
         login.setTitle("LOGIN", for: .normal)
         login.setTitleColor(.white, for: .normal)
         login.layer.cornerRadius = 20
         login.translatesAutoresizingMaskIntoConstraints = false
         return login
-    }()
-    
-    let registerButton: UIButton = {
-        let register = UIButton()
-        register.backgroundColor = UIColor(r: 28, b: 27, g: 27)
-        register.setTitle("REGISTER", for: .normal)
-        register.setTitleColor(.white, for: .normal)
-        register.layer.cornerRadius = 20
-        register.translatesAutoresizingMaskIntoConstraints = false
-        return register
     }()
 
     override func viewDidLoad() {
@@ -105,8 +166,8 @@ class LoginViewController: UIViewController {
         // x, y, width, height constraints
         emailUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         emailUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
-        emailUIView.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 175).isActive = true
-        emailUIView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        emailUIView.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 178).isActive = true
+        emailUIView.widthAnchor.constraint(equalToConstant: 185).isActive = true
         emailUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
@@ -115,7 +176,7 @@ class LoginViewController: UIViewController {
         passUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         passUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
         passUIView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 12).isActive = true
-        passUIView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        passUIView.widthAnchor.constraint(equalToConstant: 185).isActive = true
         passUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
@@ -123,7 +184,7 @@ class LoginViewController: UIViewController {
         // x, y, width, height constraints
         emailTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
         emailTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
-        emailTextField.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 175).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: loginCardImage.topAnchor, constant: 178).isActive = true
         emailTextField.widthAnchor.constraint(equalToConstant: 185).isActive = true
         emailTextField.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
@@ -138,20 +199,20 @@ class LoginViewController: UIViewController {
     }
     
     
-    func setupLoginButton() {
-        // x, y, width, height constraints
-        loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        loginButton.topAnchor.constraint(equalTo: loginCardImage.bottomAnchor, constant: 12).isActive = true
-        loginButton.widthAnchor.constraint(equalTo: loginCardImage.widthAnchor).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    }
-    
     func setupRegisterButton() {
         // x, y, width, height constraints
         registerButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 12).isActive = true
+        registerButton.topAnchor.constraint(equalTo: loginCardImage.bottomAnchor, constant: 12).isActive = true
         registerButton.widthAnchor.constraint(equalTo: loginCardImage.widthAnchor).isActive = true
         registerButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func setupLoginButton() {
+        // x, y, width, height constraints
+        loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        loginButton.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 12).isActive = true
+        loginButton.widthAnchor.constraint(equalTo: loginCardImage.widthAnchor).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func setupLoginCardImage() {

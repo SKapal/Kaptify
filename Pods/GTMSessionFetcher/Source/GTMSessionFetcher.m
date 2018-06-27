@@ -258,7 +258,7 @@ static GTMSessionFetcherTestBlock GTM_NULLABLE_TYPE gGlobalTestBlock;
   return allowsInsecureRequests;
 #else
   // For builds targeting iOS 8 or 10.10 and earlier, we want to require fetcher
-  // security checks.
+  // security checks.f
   return YES;
 #endif  // GTM_TARGET_SUPPORTS_APP_TRANSPORT_SECURITY
 }
