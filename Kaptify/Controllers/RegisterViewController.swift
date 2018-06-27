@@ -25,6 +25,14 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: UI Elements to be added to View
+    let registerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Register"
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let loginCardImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Login_image")
@@ -162,6 +170,7 @@ class RegisterViewController: UIViewController {
         view.addSubview(passTextField)
         view.addSubview(userUIView)
         view.addSubview(userTextField)
+        view.addSubview(registerLabel)
         
         // setup constraints
         setupLoginCardImage()
@@ -173,9 +182,18 @@ class RegisterViewController: UIViewController {
         setupPassTextField()
         setupUserUIView()
         setupUserTextField()
+        setupRegisterLabel()
     }
     
     // MARK: Setup view constraints
+    func setupRegisterLabel() {
+        // x, y, width, height constraints
+        registerLabel.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
+        registerLabel.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
+        registerLabel.bottomAnchor.constraint(equalTo: userTextField.topAnchor, constant: -8).isActive = true
+        registerLabel.widthAnchor.constraint(equalToConstant: 185).isActive = true
+        registerLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
     func setupUserTextField() {
         // x, y, width, height constraints
         userTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
