@@ -150,7 +150,8 @@ class RegisterViewController: UIViewController {
     }()
     
     @objc func handleLogin() {
-        
+        let loginController = LoginViewController()
+        present(loginController, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
