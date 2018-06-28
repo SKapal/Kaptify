@@ -183,6 +183,9 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         setupViewsAndConstraints()
+        if Auth.auth().currentUser?.uid == nil {
+            cancelButton.isHidden = true
+        }
     }
     
     func setupViewsAndConstraints() {

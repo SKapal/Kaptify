@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Kaptify
 //
 //  Created by Sahil Kapal on 2018-06-24.
@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     func setupNavBar() {
         // add leftButton
         self.navigationItem.leftItemsSupplementBackButton = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(ViewController.handleLogout))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(HomeViewController.handleLogout))
         let title = UIImage(named: "Logo_text")
         let imageView = UIImageView(image: title)
         imageView.contentMode = .scaleAspectFill

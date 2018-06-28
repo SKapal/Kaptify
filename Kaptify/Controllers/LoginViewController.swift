@@ -114,6 +114,7 @@ class LoginViewController: UIViewController {
     
     func setupViewsAndConstraints() {
         // Add subviews to view
+
         self.view.addSubview(cancelButton)
         self.view.addSubview(loginCardImage)
         self.view.addSubview(loginLabel)
@@ -203,9 +204,6 @@ class LoginViewController: UIViewController {
         loginButton.widthAnchor.constraint(equalToConstant: IMAGE_WIDTH - 5).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
-    
-    
-
 }
 
 extension LoginViewController {
