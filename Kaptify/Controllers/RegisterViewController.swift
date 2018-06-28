@@ -14,6 +14,8 @@ class RegisterViewController: UIViewController {
     
     let IMAGE_WIDTH: CGFloat = 235
     let IMAGE_HEIGHT: CGFloat = 268
+    let CANCEL_WIDTH: CGFloat = 25
+    let CANCEL_HEIGHT: CGFloat = 27
     
     // MARK: Locking screen rotation
     override var shouldAutorotate: Bool {
@@ -25,6 +27,20 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: UI Elements to be added to View
+    let cancelButton: UIButton = {
+        let cancel = UIButton()
+        let xImage = UIImage(named: "Cancel_btn")
+        cancel.setImage(xImage, for: .normal)
+        cancel.translatesAutoresizingMaskIntoConstraints = false
+        cancel.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
+
+        return cancel
+    }()
+    
+    @objc func handleCancel() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     let registerLabel: UILabel = {
         let label = UILabel()
         label.text = "Register"
@@ -140,13 +156,20 @@ class RegisterViewController: UIViewController {
     
     lazy var loginButton: UIButton = {
         let login = UIButton(type: .system)
-        login.backgroundColor = UIColor(r: 28, b: 27, g: 27)
-        login.setTitle("LOGIN", for: .normal)
-        login.setTitleColor(.white, for: .normal)
-        login.layer.cornerRadius = 20
+        login.setTitle("Login", for: .normal)
+        login.setTitleColor(UIColor(r: 255, b: 157, g: 41), for: .normal)
+        // login.layer.cornerRadius = 20
         login.translatesAutoresizingMaskIntoConstraints = false
         login.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return login
+    }()
+    
+    let loginMessageLabel: UILabel = {
+        let message = UILabel()
+        message.text = "Existing member?"
+        message.textColor = .white
+        message.translatesAutoresizingMaskIntoConstraints = false
+        return message
     }()
     
     @objc func handleLogin() {
@@ -172,6 +195,8 @@ class RegisterViewController: UIViewController {
         view.addSubview(userUIView)
         view.addSubview(userTextField)
         view.addSubview(registerLabel)
+        view.addSubview(cancelButton)
+        view.addSubview(loginMessageLabel)
         
         // setup constraints
         setupLoginCardImage()
@@ -184,9 +209,26 @@ class RegisterViewController: UIViewController {
         setupUserUIView()
         setupUserTextField()
         setupRegisterLabel()
+        setupCancelButton()
+        setupLoginMessageLabel()
     }
     
     // MARK: Setup view constraints
+    func setupLoginMessageLabel() {
+        // x, y, width, height constraints
+        loginMessageLabel.leftAnchor.constraint(equalTo: registerLabel.leftAnchor).isActive = true
+        loginMessageLabel.topAnchor.constraint(equalTo: loginButton.topAnchor).isActive = true
+        loginMessageLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    }
+    
+    func setupCancelButton() {
+        // x, y, width, height constraints
+        cancelButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
+        cancelButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: CANCEL_WIDTH).isActive = true
+        cancelButton.heightAnchor.constraint(equalToConstant: CANCEL_HEIGHT).isActive = true
+    }
+    
     func setupRegisterLabel() {
         // x, y, width, height constraints
         registerLabel.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
@@ -260,10 +302,9 @@ class RegisterViewController: UIViewController {
     
     func setupLoginButton() {
         // x, y, width, height constraints
-        loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        loginButton.leftAnchor.constraint(equalTo: loginMessageLabel.rightAnchor, constant: 5).isActive = true
         loginButton.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 12).isActive = true
-        loginButton.widthAnchor.constraint(equalToConstant: IMAGE_WIDTH - 5).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = false
     }
     
     func setupLoginCardImage() {
