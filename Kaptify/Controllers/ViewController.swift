@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -15,10 +16,23 @@ class ViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
+        
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+            handleLogout()
+        }
+        
         setupNavBar()
     }
     
-    @objc func handleLogoutButton() {
+    @objc func handleLogout() {
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutErr {
+            print(logoutErr)
+        }
+        
         let registerController = RegisterViewController()
         present(registerController, animated: true, completion: nil)
     }
@@ -26,7 +40,7 @@ class ViewController: UIViewController {
     func setupNavBar() {
         // add leftButton
         self.navigationItem.leftItemsSupplementBackButton = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(ViewController.handleLogoutButton))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(ViewController.handleLogout))
         let title = UIImage(named: "Logo_text")
         let imageView = UIImageView(image: title)
         imageView.contentMode = .scaleAspectFill

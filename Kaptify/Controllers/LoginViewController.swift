@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -27,8 +28,7 @@ class LoginViewController: UIViewController {
     }()
     
     @objc func handleCancel() {
-        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-        self.dismiss(animated: true, completion: nil)
+        dismissViewsOnSuccess()
     }
     
     let loginCardImage: UIImageView = {
@@ -91,9 +91,20 @@ class LoginViewController: UIViewController {
         login.translatesAutoresizingMaskIntoConstraints = false
         
         /*TODO: */
-        // register.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        login.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return login
     }()
+    
+    @objc func handleLogin () {
+        guard let email = emailTextField.text, let password = passTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if error != nil {
+                print(error ?? "Login error")
+                return
+            }
+            self.dismissViewsOnSuccess()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -195,4 +206,11 @@ class LoginViewController: UIViewController {
     
     
 
+}
+
+extension LoginViewController {
+    func dismissViewsOnSuccess() {
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
 }
