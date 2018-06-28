@@ -150,6 +150,8 @@ class RegisterViewController: UIViewController {
                 }
             })
             /* Authentication successful, pop loginview */
+            self.dismiss(animated: true, completion: nil)
+            // maybe show a wheel load spin?
             
         })
     }
