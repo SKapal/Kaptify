@@ -9,7 +9,18 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController {
+class HomeViewController: UITableViewController {
+    
+    lazy var optionsButton: UIButton = {
+        let options = UIButton(type: .system)
+        let optionsImage = UIImage(named: "options_btn")
+        let optionsImageView = UIImageView(image: optionsImage)
+        optionsImageView.contentMode = .scaleAspectFill
+        options.setImage(optionsImageView.image, for: .normal)
+        options.translatesAutoresizingMaskIntoConstraints = false
+        options.addTarget(self, action: #selector(handleOptions), for: .touchUpInside)
+        return options
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +29,14 @@ class HomeViewController: UIViewController {
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         
         if Auth.auth().currentUser?.uid == nil {
-            perform(#selector(handleLogout), with: nil, afterDelay: 0)
-            handleLogout()
+            perform(#selector(handleOptions), with: nil, afterDelay: 0)
+            handleOptions()
         }
         
         setupNavBar()
     }
     
-    @objc func handleLogout() {
+    @objc func handleOptions() {
         
         do {
             try Auth.auth().signOut()
@@ -40,7 +51,7 @@ class HomeViewController: UIViewController {
     func setupNavBar() {
         // add leftButton
         self.navigationItem.leftItemsSupplementBackButton = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(HomeViewController.handleLogout))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: optionsButton)
         let title = UIImage(named: "Logo_text")
         let imageView = UIImageView(image: title)
         imageView.contentMode = .scaleAspectFill

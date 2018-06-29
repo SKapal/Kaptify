@@ -17,6 +17,7 @@
 		B75EBD2D20E060100012C34F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75EBD2B20E060100012C34F /* LaunchScreen.storyboard */; };
 		B7C05F2720E34DF600B26E0A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2620E34DF600B26E0A /* LoginViewController.swift */; };
 		B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */; };
+		B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		B75EBD2E20E060100012C34F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7C05F2620E34DF600B26E0A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		C02998E938D12186454403E6 /* Pods-Kaptify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kaptify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kaptify/Pods-Kaptify.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				B75EBD2420E0600E0012C34F /* HomeViewController.swift */,
+				B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */,
 				B7C05F2C20E5C4EC00B26E0A /* Registration_Flow */,
 			);
 			path = Controllers;
@@ -245,6 +248,7 @@
 			files = (
 				B7C05F2720E34DF600B26E0A /* LoginViewController.swift in Sources */,
 				B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */,
+				B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */,
 				B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */,
 				B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */,
 				B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */,
