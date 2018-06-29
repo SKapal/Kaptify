@@ -47,9 +47,3 @@ class HomeViewController: UIViewController {
         self.navigationItem.titleView = imageView
     }
 }
-
-extension UIColor {
-    convenience init(r: CGFloat, b: CGFloat, g: CGFloat) {
-        self.init(red: r/255, green: b/255, blue: g/255, alpha: 1)
-    }
-}

@@ -13,14 +13,16 @@ class LoginViewController: UIViewController {
     
     let IMAGE_WIDTH: CGFloat = 235
     let IMAGE_HEIGHT: CGFloat = 268
-    let CANCEL_WIDTH: CGFloat = 25
-    let CANCEL_HEIGHT: CGFloat = 27
+    let CANCEL_WIDTH: CGFloat = 64
+    let CANCEL_HEIGHT: CGFloat = 64
     
     // MARK: UI Elements to be added to View
     let cancelButton: UIButton = {
         let cancel = UIButton()
         let xImage = UIImage(named: "Cancel_btn")
-        cancel.setImage(xImage, for: .normal)
+        let xImageView = UIImageView(image: xImage)
+        xImageView.contentMode = .scaleAspectFill
+        cancel.setImage(xImageView.image, for: .normal)
         cancel.translatesAutoresizingMaskIntoConstraints = false
         cancel.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
         
@@ -110,9 +112,9 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         setupViewsAndConstraints()
-        if Auth.auth().currentUser?.uid == nil {
-            cancelButton.isHidden = true
-        }
+//        if Auth.auth().currentUser?.uid == nil {
+//            cancelButton.isHidden = true
+//        }
     }
     
     func setupViewsAndConstraints() {
@@ -141,7 +143,7 @@ class LoginViewController: UIViewController {
     
     func setupCancelButton() {
         // x, y, width, height constraints
-        cancelButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
+        cancelButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
         cancelButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
         cancelButton.widthAnchor.constraint(equalToConstant: CANCEL_WIDTH).isActive = true
         cancelButton.heightAnchor.constraint(equalToConstant: CANCEL_HEIGHT).isActive = true
