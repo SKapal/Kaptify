@@ -24,16 +24,18 @@ class HomeViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view, typically from a nib.
+
         self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         
+        checkIfValidUser()
+        setupNavBar()
+    }
+    
+    func checkIfValidUser() {
         if Auth.auth().currentUser?.uid == nil {
             perform(#selector(handleOptions), with: nil, afterDelay: 0)
             handleOptions()
         }
-        
-        setupNavBar()
     }
     
     @objc func handleOptions() {
