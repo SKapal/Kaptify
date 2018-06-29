@@ -9,7 +9,16 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UITableViewController {
+class HomeViewController: UIViewController {
+    
+    let collectionBg: UIImageView = {
+        let imV = UIImageView()
+        let im = UIImage(named: "collection_bg")
+        imV.image = im
+        imV.translatesAutoresizingMaskIntoConstraints = false
+        imV.contentMode = .scaleAspectFill
+        return imV
+    }()
     
     lazy var optionsButton: UIButton = {
         let options = UIButton(type: .system)
@@ -29,6 +38,18 @@ class HomeViewController: UITableViewController {
         
         checkIfValidUser()
         setupNavBar()
+        
+        self.view.addSubview(collectionBg)
+        setupCollectionBg()
+
+    }
+    func setupCollectionBg() {
+        collectionBg.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        collectionBg.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        collectionBg.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        collectionBg.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        //collectionBg.widthAnchor.constraint(equalToConstant: 375).isActive = true
+        collectionBg.heightAnchor.constraint(equalToConstant: 229).isActive = true
     }
     
     func checkIfValidUser() {
