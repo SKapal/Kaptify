@@ -48,7 +48,6 @@ class HomeViewController: UIViewController {
         collectionBg.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
         collectionBg.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         collectionBg.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        //collectionBg.widthAnchor.constraint(equalToConstant: 375).isActive = true
         collectionBg.heightAnchor.constraint(equalToConstant: 229).isActive = true
     }
     
@@ -75,6 +74,7 @@ class HomeViewController: UIViewController {
         // add leftButton
         self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: optionsButton)
+        // add title 
         let title = UIImage(named: "Logo_text")
         let imageView = UIImageView(image: title)
         imageView.contentMode = .scaleAspectFill

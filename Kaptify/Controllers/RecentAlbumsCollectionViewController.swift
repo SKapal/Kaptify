@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RecentAlbumsCollectionViewController.swift
 //  Kaptify
 //
 //  Created by Sahil Kapal on 2018-06-29.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RecentAlbumsCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
