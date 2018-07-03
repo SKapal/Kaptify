@@ -11,6 +11,15 @@ import Firebase
 
 class HomeViewController: UIViewController {
     
+    let recentReleaseLabel: UILabel = {
+        let rLabel = UILabel()
+        rLabel.text = "Recent Releases"
+        rLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
+        rLabel.textColor = .white
+        rLabel.translatesAutoresizingMaskIntoConstraints = false
+        return rLabel
+    }()
+    
     let collectionBg: UIImageView = {
         let imV = UIImageView()
         let im = UIImage(named: "collection_bg")
@@ -40,7 +49,9 @@ class HomeViewController: UIViewController {
         setupNavBar()
         
         self.view.addSubview(collectionBg)
+        self.view.addSubview(recentReleaseLabel)
         setupCollectionBg()
+        setupRecentReleaseLabel()
 
     }
     func setupCollectionBg() {
@@ -49,6 +60,12 @@ class HomeViewController: UIViewController {
         collectionBg.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         collectionBg.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         collectionBg.heightAnchor.constraint(equalToConstant: 229).isActive = true
+    }
+    
+    func setupRecentReleaseLabel() {
+        recentReleaseLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        recentReleaseLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 15).isActive = true
+        recentReleaseLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func checkIfValidUser() {
