@@ -18,6 +18,8 @@
 		B7C05F2720E34DF600B26E0A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2620E34DF600B26E0A /* LoginViewController.swift */; };
 		B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */; };
 		B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */; };
+		B7E21D8520EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */; };
+		B7E21D8620EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		B7C05F2620E34DF600B26E0A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
+		B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		C02998E938D12186454403E6 /* Pods-Kaptify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kaptify.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kaptify/Pods-Kaptify.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +135,8 @@
 		B7C05F3320E5F7C500B26E0A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */,
+				B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +203,7 @@
 			files = (
 				B75EBD2D20E060100012C34F /* LaunchScreen.storyboard in Resources */,
 				B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */,
+				B7E21D8620EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib in Resources */,
 				B75EBD2A20E060100012C34F /* Assets.xcassets in Resources */,
 				B75EBD2820E0600E0012C34F /* Main.storyboard in Resources */,
 			);
@@ -260,6 +267,7 @@
 				B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */,
 				B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */,
 				B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */,
+				B7E21D8520EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

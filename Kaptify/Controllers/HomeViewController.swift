@@ -9,7 +9,32 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    let cellIdentifier = "cellIdentifier"
+    let objects = ["Cat", "Dog", "Fish"]
+    
+    //MARK: Collection View protocol methods
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.objects.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = albumCollection.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
+        cell.albumLabel.text = self.objects[indexPath.item]
+        return cell
+    }
+    
+    //MARK: Home View UI Elements
+    let albumCollection: UICollectionView = {
+        let collection = UICollectionView()
+        collection.backgroundColor = UIColor(r: 28, b: 27, g: 27) /* TEMP */
+        return collection
+    }()
     
     let recentReleaseLabel: UILabel = {
         let rLabel = UILabel()
@@ -40,6 +65,7 @@ class HomeViewController: UIViewController {
         return options
     }()
 
+    //MARK: Activity Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,12 +74,35 @@ class HomeViewController: UIViewController {
         checkIfValidUser()
         setupNavBar()
         
+        setupUIElements()
+    }
+    
+    func setupUIElements() {
         self.view.addSubview(collectionBg)
         self.view.addSubview(recentReleaseLabel)
+        self.view.addSubview(albumCollection)
+        
         setupCollectionBg()
+        setupAlbumCollection()
         setupRecentReleaseLabel()
-
+        
+        self.albumCollection.delegate = self
+        self.albumCollection.dataSource = self
     }
+    
+    //MARK: Setup view constraints
+    func setupAlbumCollection() {
+        //load cell from nib
+        self.albumCollection.register(UINib(nibName: "AlbumCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
+        self.albumCollection.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        
+        // Setup collection constraints
+        albumCollection.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        albumCollection.topAnchor.constraint(equalTo: recentReleaseLabel.bottomAnchor, constant: 20).isActive = true
+        albumCollection.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4).isActive = true
+        albumCollection.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+    }
+    
     func setupCollectionBg() {
         collectionBg.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         collectionBg.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
