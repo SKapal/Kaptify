@@ -32,7 +32,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 10, width: view.frame.width, height: view.frame.height / 3)
+        albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 20, width: view.frame.width, height: 185)
     }
     
     //MARK: Home View UI Elements
