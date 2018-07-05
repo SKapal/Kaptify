@@ -12,7 +12,7 @@ import Firebase
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let cellIdentifier = "cellIdentifier"
-    let objects = ["Cat", "Dog", "Fish"]
+    let objects = ["Yeezus", "Lost & Found", "Scorpion"]
     
     //MARK: Collection View protocol methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.objects.count
-    }
+    } 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = albumCollection.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
@@ -31,7 +31,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     //MARK: Home View UI Elements
     let albumCollection: UICollectionView = {
-        let collection = UICollectionView()
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 16
+        layout.scrollDirection = .vertical
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = UIColor(r: 28, b: 27, g: 27) /* TEMP */
         return collection
     }()
@@ -78,16 +81,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func setupUIElements() {
+        self.view.addSubview(albumCollection)
         self.view.addSubview(collectionBg)
         self.view.addSubview(recentReleaseLabel)
-        self.view.addSubview(albumCollection)
         
         setupCollectionBg()
         setupAlbumCollection()
         setupRecentReleaseLabel()
         
-        self.albumCollection.delegate = self
-        self.albumCollection.dataSource = self
+        albumCollection.delegate = self
+        albumCollection.dataSource = self
     }
     
     //MARK: Setup view constraints
