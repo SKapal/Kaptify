@@ -12,7 +12,7 @@ import Firebase
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let cellIdentifier = "cellIdentifier"
-    let objects = ["Yeezus", "Lost & Found", "Scorpion"]
+    let objects = ["Yeezus", "Lost & Found", "Scorpion", "Lol", "hi"]
     
     //MARK: Collection View protocol methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -21,21 +21,29 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.objects.count
-    } 
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = albumCollection.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
-        cell.albumLabel.text = self.objects[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
+        cell.albumLabel?.text = self.objects[indexPath.item]
+        cell.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         return cell
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 10, width: view.frame.width, height: view.frame.height / 3)
     }
     
     //MARK: Home View UI Elements
     let albumCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 98, height: 130)
+        layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = UIColor(r: 28, b: 27, g: 27) /* TEMP */
+        collection.backgroundColor = .clear /* TEMP */
         return collection
     }()
     
@@ -77,20 +85,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         checkIfValidUser()
         setupNavBar()
         
+        albumCollection.delegate = self
+        albumCollection.dataSource = self
+        
         setupUIElements()
     }
     
     func setupUIElements() {
-        self.view.addSubview(albumCollection)
         self.view.addSubview(collectionBg)
         self.view.addSubview(recentReleaseLabel)
+        self.view.addSubview(albumCollection)
         
         setupCollectionBg()
         setupAlbumCollection()
         setupRecentReleaseLabel()
-        
-        albumCollection.delegate = self
-        albumCollection.dataSource = self
     }
     
     //MARK: Setup view constraints
@@ -102,7 +110,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         // Setup collection constraints
         albumCollection.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         albumCollection.topAnchor.constraint(equalTo: recentReleaseLabel.bottomAnchor, constant: 20).isActive = true
-        albumCollection.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4).isActive = true
+        albumCollection.heightAnchor.constraint(equalToConstant: 200).isActive = true
         albumCollection.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
     }
     
