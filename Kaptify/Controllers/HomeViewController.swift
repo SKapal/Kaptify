@@ -24,8 +24,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
+        let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
         cell.albumLabel?.text = self.objects[indexPath.item]
+        print(self.objects[indexPath.item])
+        print("Cell label: \(cell.albumLabel?.text)")
         cell.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         return cell
     }
