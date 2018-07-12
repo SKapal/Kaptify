@@ -20,7 +20,8 @@ class CustomTabBarController: UITabBarController {
         setupNavBarAppearance()
         setupTabBarAppearance()
         
-        viewControllers = [homeController, setupTabBarItems(imageName: "search_unselected"), setupTabBarItems(imageName: "plus_unselected"), setupTabBarItems(imageName: "profile_unselected"), setupTabBarItems(imageName: "settings_unselected")]
+        // Updated for current functionality:
+        viewControllers = [homeController, /*setupTabBarItems(imageName: "search_unselected"), setupTabBarItems(imageName: "plus_unselected"),*/ setupTabBarItems(imageName: "profile_unselected"), setupTabBarItems(imageName: "settings_unselected")]
         
     }
     

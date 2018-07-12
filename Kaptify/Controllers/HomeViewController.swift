@@ -9,33 +9,10 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController {
     
     let cellIdentifier = "cellIdentifier"
     let objects = ["Yeezus", "Lost & Found", "Scorpion", "Lol", "hi"]
-    
-    //MARK: Collection View protocol methods
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.objects.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
-        cell.albumLabel?.text = self.objects[indexPath.item]
-        print(self.objects[indexPath.item])
-        print("Cell label: \(cell.albumLabel?.text)")
-        cell.backgroundColor = UIColor(r: 51, b: 51, g: 51)
-        return cell
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 20, width: view.frame.width, height: 185)
-    }
     
     //MARK: Home View UI Elements
     let albumCollection: UICollectionView = {
@@ -45,7 +22,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         layout.itemSize = CGSize(width: 98, height: 130)
         layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = .clear /* TEMP */
+        collection.backgroundColor = .clear
         return collection
     }()
     
@@ -158,5 +135,30 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let imageView = UIImageView(image: title)
         imageView.contentMode = .scaleAspectFill
         self.navigationItem.titleView = imageView
+    }
+}
+
+//MARK: Extension with Collection View protocol methods
+extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSource  {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.objects.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
+        print(cell.albumLabel)
+        cell.albumLabel.text = self.objects[indexPath.item]
+        cell.backgroundColor = UIColor(r: 51, b: 51, g: 51)
+        return cell
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 20, width: view.frame.width, height: 185)
     }
 }
