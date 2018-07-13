@@ -315,10 +315,26 @@ class RegisterViewController: UIViewController {
     func setupLoginCardImage() {
         // x, y, width, height constraints
         loginCardImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        loginCardImage.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        loginCardImage.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -50).isActive = true
         loginCardImage.widthAnchor.constraint(equalToConstant: IMAGE_WIDTH).isActive = true
         loginCardImage.heightAnchor.constraint(equalToConstant: IMAGE_HEIGHT).isActive = true
     }
     
 
+}
+
+extension RegisterViewController {
+    func dismissViewsOnSuccess() {
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

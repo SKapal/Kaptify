@@ -115,6 +115,7 @@ class LoginViewController: UIViewController {
 //        if Auth.auth().currentUser?.uid == nil {
 //            cancelButton.isHidden = true
 //        }
+        self.hideKeyboardWhenTappedAround()
     }
     
     func setupViewsAndConstraints() {
@@ -152,7 +153,7 @@ class LoginViewController: UIViewController {
     func setupLoginCardImage() {
         // x, y, width, height constraints
         loginCardImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        loginCardImage.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        loginCardImage.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -50).isActive = true
         loginCardImage.widthAnchor.constraint(equalToConstant: IMAGE_WIDTH).isActive = true
         loginCardImage.heightAnchor.constraint(equalToConstant: IMAGE_HEIGHT).isActive = true
     }
@@ -215,5 +216,14 @@ extension LoginViewController {
     func dismissViewsOnSuccess() {
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         self.dismiss(animated: true, completion: nil)
+    }
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
