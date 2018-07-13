@@ -186,6 +186,7 @@ class RegisterViewController: UIViewController {
         if Auth.auth().currentUser?.uid == nil {
             cancelButton.isHidden = true
         }
+        self.hideKeyboardWhenTappedAround()
     }
     
     func setupViewsAndConstraints() {

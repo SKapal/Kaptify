@@ -17,11 +17,18 @@ class CustomTabBarController: UITabBarController {
         let homeController = UINavigationController(rootViewController: HomeViewController())
         homeController.tabBarItem.image = UIImageView(image: UIImage(named: "home_unselected")).image
         
+        // Setup for ProfileViewController as root
+        let profileController = UINavigationController(rootViewController: ProfileViewController())
+        profileController.tabBarItem.image = UIImageView(image: UIImage(named: "profile_unselected")).image
+        
+        // Setup for SettingsViewController as root
+        
+        
         setupNavBarAppearance()
         setupTabBarAppearance()
         
         // Updated for current functionality:
-        viewControllers = [homeController, /*setupTabBarItems(imageName: "search_unselected"), setupTabBarItems(imageName: "plus_unselected"),*/ setupTabBarItems(imageName: "profile_unselected"), setupTabBarItems(imageName: "settings_unselected")]
+        viewControllers = [homeController, /*setupTabBarItems(imageName: "search_unselected"), setupTabBarItems(imageName: "plus_unselected"),*/ profileController, setupTabBarItems(imageName: "settings_unselected")]
         
     }
     

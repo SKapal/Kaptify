@@ -115,7 +115,6 @@ class HomeViewController: UIViewController {
     }
     
     @objc func handleOptions() {
-        
         do {
             try Auth.auth().signOut()
         } catch let logoutErr {
@@ -151,7 +150,6 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
-        print(cell.albumLabel)
         cell.albumLabel?.text = self.objects[indexPath.item]
         cell.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         return cell
