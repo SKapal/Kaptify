@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
         layout.itemSize = CGSize(width: 98, height: 130)
         layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = .clear
+        collection.backgroundColor = .black
         return collection
     }()
     
