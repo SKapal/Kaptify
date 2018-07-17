@@ -12,15 +12,15 @@ import Firebase
 class HomeViewController: UIViewController {
     
     let cellIdentifier = "cellIdentifier"
-    let objects = ["Yeezus", "Lost & Found", "Scorpion", "Lol", "hi"]
+    let objects = ["Yeezus", "Lost & Found", "Scorpion", "Lol", "hi", "MBDTF", "Flower Boy", "Nirvana", "Beasty boys"]
     
     //MARK: Home View UI Elements
     let albumCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: 150, height: 175)
-        layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
+        layout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .clear
         return collection
@@ -159,7 +159,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 20, width: view.frame.width, height: 185)
+        albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 20, width: view.frame.width, height: self.view.frame.height - (self.tabBarController?.tabBar.frame.height)! + self.recentReleaseLabel.frame.height)
     }
     
 }
