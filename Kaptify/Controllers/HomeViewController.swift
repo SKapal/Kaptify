@@ -19,10 +19,10 @@ class HomeViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 98, height: 130)
+        layout.itemSize = CGSize(width: 150, height: 175)
         layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = .black
+        collection.backgroundColor = .clear
         return collection
     }()
     
@@ -84,13 +84,13 @@ class HomeViewController: UIViewController {
     func setupAlbumCollection() {
         //load cell from nib
         self.albumCollection.register(UINib(nibName: "AlbumCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
-        self.albumCollection.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        //self.albumCollection.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
         // Setup collection constraints
-        albumCollection.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        albumCollection.topAnchor.constraint(equalTo: recentReleaseLabel.bottomAnchor, constant: 20).isActive = true
-        albumCollection.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        albumCollection.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+//        albumCollection.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        albumCollection.topAnchor.constraint(equalTo: recentReleaseLabel.bottomAnchor, constant: 20).isActive = true
+//        albumCollection.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1/3).isActive = true
+//        albumCollection.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
     }
     
     func setupCollectionBg() {
@@ -150,8 +150,10 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
-        cell.albumLabel?.text = self.objects[indexPath.item]
-        cell.backgroundColor = UIColor(r: 51, b: 51, g: 51)
+        cell.albumImage.image = UIImage(named: "mbdtf")
+        cell.albumLabel.text = self.objects[indexPath.item]
+        cell.albumLabel.textColor = .white
+        cell.backgroundColor = .clear //UIColor(r: 51, b: 51, g: 51)
         return cell
     }
     
@@ -159,4 +161,5 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
         super.viewWillLayoutSubviews()
         albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 20, width: view.frame.width, height: 185)
     }
+    
 }
