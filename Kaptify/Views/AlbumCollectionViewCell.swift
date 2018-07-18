@@ -9,8 +9,8 @@
 import UIKit
 
 class AlbumCollectionViewCell: UICollectionViewCell {
-
     @IBOutlet weak var albumImage: UIImageView!
     @IBOutlet weak var albumLabel: UILabel!
-    
+    @IBOutlet weak var artistLabel: UILabel!
+    @IBOutlet weak var addButton: UIButton!
 }
