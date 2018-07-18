@@ -9,58 +9,9 @@
 import UIKit
 import Firebase
 
-struct object: Decodable {
-    let feed: Feed?
-}
-
-struct Feed: Decodable {
-    let title: String?
-    let id: String?
-
-    
-    struct Author: Decodable {
-        let name: String?
-        let uri: String?
-    }
-    
-    let author: Author?
-    struct Link: Decodable {
-        let url: String?
-        private enum CodingKeys: String, CodingKey {
-            case url = "self"
-        }
-    }
-    let links: [Link]?
-    let copyright: String?
-    let country: String?
-    let icon: String?
-    let updated: String?
-    
-    let results: [Album]?
-}
-
-
-struct Album: Decodable {
-    let artistName: String?
-    let id: String?
-    let releaseDate: String?
-    let name: String?
-    let artworkUrl100: String?
-    let kind: String?
-    let copyright: String?
-    let artistId: String?
-    let artistUrl: String?
-    struct Genre: Decodable {
-        let genreId: String?
-        let name: String?
-        let url: String?
-    }
-    let genres: [Genre]?
-    let url: String?
-}
-
-
 class HomeViewController: UIViewController {
+    
+    let dataFetcher = DataFetcher()
     
     let cellIdentifier = "cellIdentifier"
     let objects = ["Yeezus", "Lost & Found", "Scorpion", "Lol", "hi", "MBDTF", "Flower Boy", "Nirvana", "Beasty boys", "For the only time ever I will die"]
@@ -121,26 +72,7 @@ class HomeViewController: UIViewController {
         
         setupUIElements()
         
-        //Networking (Remove later)
-        let jsonString = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json"
-        guard let url = URL(string: jsonString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            // check error
-            // check response (200)
-            
-            guard let data = data else { return }
-//            let dataString = String(data: data, encoding: .utf8)
-//            print(dataString)
-            
-            do {
-                let obj = try JSONDecoder().decode(object.self, from: data)
-                print(obj.feed?.results?.first?.name)
-            } catch let jsonError {
-                print("Error with json", jsonError)
-            }
-            
-        }.resume()
+        self.dataFetcher.obtainData()
     }
     
     func setupUIElements() {
