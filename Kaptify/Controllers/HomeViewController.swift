@@ -14,8 +14,12 @@ class HomeViewController: UIViewController {
     let dataFetcher = DataFetcher()
     
     let cellIdentifier = "cellIdentifier"
+    
+    //Temporary Test Data
     let objects = ["Yeezus", "Lost & Found", "Scorpion", "Lol", "hi", "MBDTF", "Flower Boy", "Nirvana", "Beasty boys", "For the only time ever I will die"]
     let names = ["Kanye West", "Jorja Smith", "Drake", "meme", "sup", "Kanye West", "Tyler the Creator", "Nirvana", "Beasty boys", "Sahil"]
+    
+    var albums = [Album]()
     
     //MARK: Home View UI Elements
     let albumCollection: UICollectionView = {
@@ -72,17 +76,37 @@ class HomeViewController: UIViewController {
         
         setupUIElements()
         
-        self.dataFetcher.obtainData()
+//        self.dataFetcher.obtainData()
+        //Networking (Remove later)
+        let jsonString = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json"
+        guard let url = URL(string: jsonString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            // check error
+            // check response (200)
+            
+            guard let data = data else { return }
+            
+            do {
+                let obj = try JSONDecoder().decode(object.self, from: data)
+                guard let results = obj.feed?.results else { return }
+                self.albums = results
+                DispatchQueue.main.async {
+                    self.albumCollection.reloadData()
+                }
+            } catch let jsonError {
+                print("Error with json", jsonError)
+            }
+            
+        }.resume()
     }
     
     func setupUIElements() {
         self.view.addSubview(collectionBg)
-        self.view.addSubview(recentReleaseLabel)
         self.view.addSubview(albumCollection)
         
         setupCollectionBg()
         setupAlbumCollection()
-        setupRecentReleaseLabel()
     }
     
     //MARK: Setup view constraints
@@ -90,12 +114,7 @@ class HomeViewController: UIViewController {
         //load cell from nib
         self.albumCollection.register(UINib(nibName: "AlbumCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
         //self.albumCollection.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-        
-        // Setup collection constraints
-//        albumCollection.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        albumCollection.topAnchor.constraint(equalTo: recentReleaseLabel.bottomAnchor, constant: 20).isActive = true
-//        albumCollection.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1/3).isActive = true
-//        albumCollection.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+
     }
     
     func setupCollectionBg() {
@@ -104,12 +123,6 @@ class HomeViewController: UIViewController {
         collectionBg.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         collectionBg.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         collectionBg.heightAnchor.constraint(equalToConstant: 229).isActive = true
-    }
-    
-    func setupRecentReleaseLabel() {
-        recentReleaseLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        recentReleaseLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 15).isActive = true
-        recentReleaseLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func checkIfValidUser() {
@@ -150,23 +163,46 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.objects.count
+        return self.albums.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
-        cell.albumImage.image = UIImage(named: "mbdtf")
-        cell.albumLabel.text = self.objects[indexPath.item]
-        cell.artistLabel.text = self.names[indexPath.item]
-        cell.artistLabel.textColor = .white
+        
+        
+        // cell.albumImage.image = UIImage(named: "mbdtf")
+        cell.albumImage.layer.masksToBounds = true
+        cell.albumImage.layer.cornerRadius = 7
+        
+        cell.albumLabel.text = self.albums[indexPath.item].name //self.objects[indexPath.item]
         cell.albumLabel.textColor = .white
+        
+        cell.artistLabel.text = self.albums[indexPath.item].artistName //self.names[indexPath.item]
+        cell.artistLabel.textColor = .white
+        
+        guard let artwork = self.albums[indexPath.item].artworkUrl100 else { return UICollectionViewCell() }
+        if let imageURL = URL(string: artwork) {
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: imageURL)
+                if let data = data {
+                    let image = UIImage(data: data)
+                    DispatchQueue.main.async {
+                        cell.albumImage.image = image
+                    }
+                }
+                
+            }
+        }
+        
+        
+        
         cell.backgroundColor = .clear //UIColor(r: 51, b: 51, g: 51)
         return cell
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        albumCollection.frame = CGRect(x: 0, y: recentReleaseLabel.frame.origin.y + recentReleaseLabel.frame.height + 20, width: view.frame.width, height: self.view.frame.height - (self.tabBarController?.tabBar.frame.height)! + self.recentReleaseLabel.frame.height)
+        albumCollection.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
     }
     
 }

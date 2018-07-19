@@ -10,6 +10,8 @@ import Foundation
 
 class DataFetcher {
     
+    var albums = [Album]()
+    
     func obtainData() {
         //Networking (Remove later)
         let jsonString = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json"
@@ -23,7 +25,9 @@ class DataFetcher {
             
             do {
                 let obj = try JSONDecoder().decode(object.self, from: data)
-                print(obj.feed?.results?.first?.name)
+                guard let results = obj.feed?.results else { return }
+                self.albums = results
+                
             } catch let jsonError {
                 print("Error with json", jsonError)
             }
