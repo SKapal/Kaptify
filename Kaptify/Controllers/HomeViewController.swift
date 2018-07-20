@@ -33,15 +33,6 @@ class HomeViewController: UIViewController {
         return collection
     }()
     
-    let recentReleaseLabel: UILabel = {
-        let rLabel = UILabel()
-        rLabel.text = "Recent Releases"
-        rLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 18)
-        rLabel.textColor = .white
-        rLabel.translatesAutoresizingMaskIntoConstraints = false
-        return rLabel
-    }()
-    
     let collectionBg: UIImageView = {
         let imV = UIImageView()
         let im = UIImage(named: "collection_bg")
@@ -61,6 +52,16 @@ class HomeViewController: UIViewController {
         options.addTarget(self, action: #selector(handleOptions), for: .touchUpInside)
         return options
     }()
+    
+    let dropDownbutton: DropDownButton = {
+        let btn = DropDownButton.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let btnImage = UIImage(named: "DropDownButton")
+        let btnImageView = UIImageView(image: btnImage)
+        btnImageView.contentMode = .scaleAspectFill
+        btn.setImage(btnImageView.image, for: .normal)
+        //btn.tintColor = .white
+        return btn
+    }()
 
     //MARK: Activity Life cycle
     override func viewDidLoad() {
@@ -78,7 +79,10 @@ class HomeViewController: UIViewController {
         
 //        self.dataFetcher.obtainData()
         //Networking (Remove later)
-        let jsonString = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json"
+        requestDataAndPopulateView(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json")
+    }
+    
+    func requestDataAndPopulateView(jsonString: String) {
         guard let url = URL(string: jsonString) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -113,8 +117,6 @@ class HomeViewController: UIViewController {
     func setupAlbumCollection() {
         //load cell from nib
         self.albumCollection.register(UINib(nibName: "AlbumCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
-        //self.albumCollection.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
-
     }
     
     func setupCollectionBg() {
@@ -147,6 +149,7 @@ class HomeViewController: UIViewController {
         // add leftButton
         self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: optionsButton)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dropDownbutton)
         // add title 
         let title = UIImage(named: "Logo_text")
         let imageView = UIImageView(image: title)
@@ -168,24 +171,25 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AlbumCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! AlbumCollectionViewCell
-        
-        
-        // cell.albumImage.image = UIImage(named: "mbdtf")
+
+        // Round album image
         cell.albumImage.layer.masksToBounds = true
         cell.albumImage.layer.cornerRadius = 7
-        
-        cell.albumLabel.text = self.albums[indexPath.item].name //self.objects[indexPath.item]
+
+        cell.albumLabel.text = self.albums[indexPath.item].name
         cell.albumLabel.textColor = .white
-        
-        cell.artistLabel.text = self.albums[indexPath.item].artistName //self.names[indexPath.item]
+
+        cell.artistLabel.text = self.albums[indexPath.item].artistName
         cell.artistLabel.textColor = .white
-        
+
         guard let artwork = self.albums[indexPath.item].artworkUrl100 else { return UICollectionViewCell() }
         if let imageURL = URL(string: artwork) {
+            // Load image data on background thread
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageURL)
                 if let data = data {
                     let image = UIImage(data: data)
+                    // Update UI on main thread
                     DispatchQueue.main.async {
                         cell.albumImage.image = image
                     }
@@ -193,10 +197,8 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
                 
             }
         }
-        
-        
-        
-        cell.backgroundColor = .clear //UIColor(r: 51, b: 51, g: 51)
+
+        cell.backgroundColor = .clear
         return cell
     }
     
@@ -206,3 +208,12 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     }
     
 }
+
+
+
+
+
+
+
+
+
