@@ -127,8 +127,11 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
                 self.albumCollection.reloadData()
             }
         }
-        self.height.constant = 0
-        self.isOpen = false
+        // if drop down is open, close:
+        if(height.constant > 0) {
+            self.animateDropDown(toHeight: 0, with: -1)
+            self.isOpen = false
+        }
     }
     
     func setupUIElements() {
