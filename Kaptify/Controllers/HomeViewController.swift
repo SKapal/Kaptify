@@ -15,10 +15,6 @@ class HomeViewController: UIViewController {
     
     let cellIdentifier = "cellIdentifier"
     
-    //Temporary Test Data
-    let objects = ["Yeezus", "Lost & Found", "Scorpion", "Lol", "hi", "MBDTF", "Flower Boy", "Nirvana", "Beasty boys", "For the only time ever I will die"]
-    let names = ["Kanye West", "Jorja Smith", "Drake", "meme", "sup", "Kanye West", "Tyler the Creator", "Nirvana", "Beasty boys", "Sahil"]
-    
     var albums = [Album]()
     
     //MARK: Home View UI Elements
@@ -53,15 +49,51 @@ class HomeViewController: UIViewController {
         return options
     }()
     
-    let dropDownbutton: DropDownButton = {
-        let btn = DropDownButton.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        let btnImage = UIImage(named: "DropDownButton")
-        let btnImageView = UIImageView(image: btnImage)
-        btnImageView.contentMode = .scaleAspectFill
-        btn.setImage(btnImageView.image, for: .normal)
-        //btn.tintColor = .white
-        return btn
+    lazy var dropButton: UIButton = {
+        let drop = UIButton(type: .system)
+        let dropImage = UIImage(named: "DropDownButton")
+        let dropIV = UIImageView(image: dropImage)
+        dropIV.contentMode = .scaleAspectFill
+        drop.setImage(dropIV.image, for: .normal)
+        drop.translatesAutoresizingMaskIntoConstraints = false
+        drop.isUserInteractionEnabled = true
+        drop.addTarget(self, action: #selector(handleDrop), for: .touchUpInside)
+        return drop
     }()
+    
+    let dropView: DropDownView = {
+        let view = DropDownView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var isOpen:Bool = false
+    @objc func handleDrop() {
+        print(isOpen)
+        if !isOpen {
+            isOpen = true
+            animateDropDown(toHeight: 86, with: 1)
+        } else {
+            isOpen = false
+            animateDropDown(toHeight: 0, with: -1)
+        }
+    }
+    
+    func animateDropDown(toHeight height: CGFloat, with multiplier: CGFloat) {
+        NSLayoutConstraint.deactivate([self.height])
+        self.height.constant = height
+        NSLayoutConstraint.activate([self.height])
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+            if multiplier == 1 {
+                self.dropView.layoutIfNeeded()
+                self.dropView.center.y = self.dropView.center.y  + multiplier * (self.dropView.frame.height/2)
+            } else {
+                self.dropView.center.y = self.dropView.center.y  + multiplier * (self.dropView.frame.height/2)
+                self.dropView.layoutIfNeeded()
+            }
+            
+        }, completion: nil)
+    }
 
     //MARK: Activity Life cycle
     override func viewDidLoad() {
@@ -92,12 +124,23 @@ class HomeViewController: UIViewController {
     func setupUIElements() {
         self.view.addSubview(collectionBg)
         self.view.addSubview(albumCollection)
+        self.view.addSubview(dropView)
+        self.view.bringSubview(toFront: dropView)
         
         setupCollectionBg()
         setupAlbumCollection()
+        setupDropView()
     }
+    var height = NSLayoutConstraint()
     
     //MARK: Setup view constraints
+    func setupDropView() {
+        dropView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        dropView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        dropView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        height = dropView.heightAnchor.constraint(equalToConstant: 0)
+    }
+    
     func setupAlbumCollection() {
         //load cell from nib
         self.albumCollection.register(UINib(nibName: "AlbumCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
@@ -130,10 +173,10 @@ class HomeViewController: UIViewController {
     }
     
     func setupNavBar() {
-        // add leftButton
+        // add leftButton and rightButton
         self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: optionsButton)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dropDownbutton)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dropButton)
         // add title 
         let title = UIImage(named: "Logo_text")
         let imageView = UIImageView(image: title)
