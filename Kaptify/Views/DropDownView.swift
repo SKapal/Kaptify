@@ -14,6 +14,8 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     let dropDownOptions = ["⭐️  Top", "🌊  Fresh"]
     var tableView = UITableView()
+    let dataFetcher = DataFetcher()
+    var dropDelegate: NetworkRequestDelegate!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,11 +29,13 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
         setupTableView()
         self.bringSubview(toFront: tableView)
         self.tableView.isScrollEnabled = false
+        
     }
     
     
     func setupTableView() {
         tableView.tableFooterView = nil
+        
         
         tableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
@@ -56,13 +60,21 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = dropDownOptions[indexPath.row]
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 12)
+        cell.selectionStyle = .none
 
         cell.backgroundColor = UIColor(r: 28, b: 27, g: 27)
         return cell
     }
+    var completionHandler: (([Album]) -> Void)?
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(self.dropDownOptions[indexPath.item])
+        if indexPath.item == 0 {
+            // download default data (TOP)
+            dropDelegate.requestDataAndPopulateView(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json")
+        } else {
+            // download diff data (NEW)
+            dropDelegate.requestDataAndPopulateView(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/new-releases/all/25/explicit.json")
+        }
     }
     
     

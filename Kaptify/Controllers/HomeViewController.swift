@@ -9,7 +9,13 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController {
+protocol NetworkRequestDelegate {
+    func requestDataAndPopulateView(jsonString: String)
+}
+
+class HomeViewController: UIViewController, NetworkRequestDelegate {
+    
+    
     
     let dataFetcher = DataFetcher()
     
@@ -67,6 +73,7 @@ class HomeViewController: UIViewController {
         return view
     }()
     
+    
     var isOpen:Bool = false
     @objc func handleDrop() {
         print(isOpen)
@@ -106,19 +113,22 @@ class HomeViewController: UIViewController {
         
         albumCollection.delegate = self
         albumCollection.dataSource = self
+        dropView.dropDelegate = self
         
         setupUIElements()
         requestDataAndPopulateView(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json")
     }
     
-    func requestDataAndPopulateView(jsonString: String) {
-        dataFetcher.obtainData(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json") { (result, err) in
+    public func requestDataAndPopulateView(jsonString: String) {
+        dataFetcher.obtainData(jsonString: jsonString) { (result, err) in
             guard let payload = result else {return}
             self.albums = payload
             DispatchQueue.main.async {
                 self.albumCollection.reloadData()
             }
         }
+        self.height.constant = 0
+        self.isOpen = false
     }
     
     func setupUIElements() {
