@@ -23,9 +23,12 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
+        tableView.allowsSelection = true
         setupTableView()
+        self.bringSubview(toFront: tableView)
+        self.tableView.isScrollEnabled = false
     }
+    
     
     func setupTableView() {
         tableView.tableFooterView = nil
@@ -52,9 +55,8 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell()
         cell.textLabel?.text = dropDownOptions[indexPath.row]
         cell.textLabel?.textColor = .white
-        // Helvetica Neue Bold 12.0
-        let font = UIFont(name: "Helvetica Neue", size: 12)
-        cell.textLabel?.font = font //UIFont(name: "Helvetica Neue Bold", size: 12.0)
+        cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 12)
+
         cell.backgroundColor = UIColor(r: 28, b: 27, g: 27)
         return cell
     }
@@ -62,6 +64,7 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(self.dropDownOptions[indexPath.item])
     }
+    
     
 }
 

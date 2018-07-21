@@ -325,11 +325,11 @@ class RegisterViewController: UIViewController {
 }
 
 extension RegisterViewController {
-    func dismissViewsOnSuccess() {
+    private func dismissViewsOnSuccess() {
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
         self.dismiss(animated: true, completion: nil)
     }
-    func hideKeyboardWhenTappedAround() {
+    private func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         

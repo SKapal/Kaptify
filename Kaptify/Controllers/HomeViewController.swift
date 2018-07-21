@@ -76,33 +76,17 @@ class HomeViewController: UIViewController {
         albumCollection.dataSource = self
         
         setupUIElements()
-        
-//        self.dataFetcher.obtainData()
-        //Networking (Remove later)
         requestDataAndPopulateView(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json")
     }
     
     func requestDataAndPopulateView(jsonString: String) {
-        guard let url = URL(string: jsonString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            // check error
-            // check response (200)
-            
-            guard let data = data else { return }
-            
-            do {
-                let obj = try JSONDecoder().decode(object.self, from: data)
-                guard let results = obj.feed?.results else { return }
-                self.albums = results
-                DispatchQueue.main.async {
-                    self.albumCollection.reloadData()
-                }
-            } catch let jsonError {
-                print("Error with json", jsonError)
+        dataFetcher.obtainData(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json") { (result, err) in
+            guard let payload = result else {return}
+            self.albums = payload
+            DispatchQueue.main.async {
+                self.albumCollection.reloadData()
             }
-            
-        }.resume()
+        }
     }
     
     func setupUIElements() {

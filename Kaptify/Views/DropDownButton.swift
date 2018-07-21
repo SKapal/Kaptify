@@ -29,6 +29,7 @@ class DropDownButton: UIButton {
         self.superview?.addSubview(dropView)
         self.superview?.bringSubview(toFront: dropView)
         
+        
         dropView.topAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         dropView.rightAnchor.constraint(equalTo: (superview?.rightAnchor)!).isActive = true
         dropView.widthAnchor.constraint(equalToConstant: 100).isActive = true
@@ -36,7 +37,6 @@ class DropDownButton: UIButton {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(isOpen)
         if !isOpen {
             isOpen = true
             animateDropDown(toHeight: 86, with: 1)
