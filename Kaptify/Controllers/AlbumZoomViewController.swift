@@ -118,7 +118,8 @@ class AlbumZoomViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor =  UIColor(r: 51, b: 51, g: 51)
+        self.view.backgroundColor =  .clear //UIColor(r: 51, b: 51, g: 51)
+        self.view.isOpaque = false
         
         self.setupView()
         
@@ -168,19 +169,20 @@ class AlbumZoomViewController: UIViewController {
         albumBackgroundImage.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         albumBackgroundImage.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         albumBackgroundImage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -self.view.frame.height/2).isActive = true
-        albumBackgroundImage.heightAnchor.constraint(equalToConstant: self.view.frame.height * 5/10).isActive = true
+        albumBackgroundImage.heightAnchor.constraint(equalToConstant: self.view.frame.height * 4/10).isActive = true
     }
     
     func setupBlur() {
-        blur.topAnchor.constraint(equalTo: albumBackgroundImage.topAnchor).isActive = true
+        blur.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         blur.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         blur.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        blur.heightAnchor.constraint(equalToConstant: self.view.frame.height * 6/10).isActive = true
+        blur.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        //blur.heightAnchor.constraint(equalToConstant: self.view.frame.height * 5/10).isActive = true
     }
     
     func setupAlbumView() {
         albumView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        albumView.bottomAnchor.constraint(equalTo: albumBackgroundImage.bottomAnchor, constant: 100).isActive = true
+        albumView.bottomAnchor.constraint(equalTo: albumBackgroundImage.bottomAnchor, constant: 50).isActive = true
         albumView.widthAnchor.constraint(equalToConstant: 204).isActive = true
         albumView.heightAnchor.constraint(equalToConstant: 204).isActive = true
     }
@@ -197,13 +199,13 @@ class AlbumZoomViewController: UIViewController {
         albumTitleLabel.text = self.selectedAlbumTitle
         albumTitleLabel.leftAnchor.constraint(equalTo: albumView.leftAnchor).isActive = true
         albumTitleLabel.rightAnchor.constraint(equalTo: albumView.rightAnchor).isActive = true
-        albumTitleLabel.topAnchor.constraint(equalTo: albumView.bottomAnchor, constant: 13).isActive = true
+        albumTitleLabel.topAnchor.constraint(greaterThanOrEqualTo: albumView.bottomAnchor, constant: 13).isActive = true
     }
     
     func setupAlbumArtistLabel() {
         albumArtistLabel.text = self.selectedAlbumArtist
         albumArtistLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        albumArtistLabel.topAnchor.constraint(equalTo: albumTitleLabel.bottomAnchor, constant: 13).isActive = true
+        albumArtistLabel.topAnchor.constraint(greaterThanOrEqualTo: albumTitleLabel.bottomAnchor, constant: 13).isActive = true
     }
     
     func setupAlbumReleaseDateLabel() {
@@ -225,8 +227,11 @@ class AlbumZoomViewController: UIViewController {
     }
     
     func setupOpenButton() {
-        openButton.topAnchor.constraint(equalTo: albumArtistLabel.bottomAnchor, constant: 30).isActive = true
+        openButton.topAnchor.constraint(lessThanOrEqualTo: albumArtistLabel.bottomAnchor, constant: 30).isActive = true
+        //openButton.topAnchor.constraint(equalTo: albumArtistLabel.bottomAnchor, constant: 30).isActive = true
         openButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        openButton.bottomAnchor.constraint(lessThanOrEqualTo: addButton.topAnchor).isActive = true
+        //openButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
     }
     
 }
