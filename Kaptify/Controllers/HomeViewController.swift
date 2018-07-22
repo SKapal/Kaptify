@@ -248,9 +248,26 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let albumZoom = AlbumZoomViewController()
         albumZoom.modalPresentationStyle = .overFullScreen
-        //let navController = UINavigationController(rootViewController: albumZoom)
-//        show(album, sender: nil)
-        present(albumZoom, animated: true, completion: nil)
+        albumZoom.selectedAlbumTitle = albums[indexPath.item].name!
+        albumZoom.selectedAlbumArtist = albums[indexPath.item].artistName!
+        albumZoom.selectedAlbumReleaseDate = albums[indexPath.item].releaseDate!
+        albumZoom.selectedAlbumURL = albums[indexPath.item].url!
+
+        if let artwork = self.albums[indexPath.item].artworkUrl100, let imageURL = URL(string: artwork) {
+            // Load image data on background thread
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: imageURL)
+                if let data = data {
+                    let image = UIImage(data: data)
+                    // Update UI on main thread
+                    DispatchQueue.main.async {
+                        albumZoom.selectedAlbumImage = image!
+                       self.present(albumZoom, animated: true, completion: nil)
+                    }
+                }
+                
+            }
+        }
     }
     
 }

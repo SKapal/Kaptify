@@ -11,7 +11,7 @@ import Foundation
 struct Album: Decodable {
     let artistName: String?
 //    let id: String?
-//    let releaseDate: String?
+    let releaseDate: String?
     let name: String?
     let artworkUrl100: String?
 //    let kind: String?
@@ -24,12 +24,14 @@ struct Album: Decodable {
 //        let url: String?
 //    }
 //    let genres: [Genre]?
-//    let url: String?
+    let url: String?
     
-    init(artist: String, name: String, artUrl: String) {
+    init(artist: String, name: String, artUrl: String, releaseDate: String, url: String) {
         self.artistName = artist
         self.name = name
         self.artworkUrl100 = artUrl
+        self.releaseDate = releaseDate
+        self.url = url
     }
     
     func stringToUrl(url: String) -> URL {
