@@ -15,8 +15,6 @@ protocol NetworkRequestDelegate {
 
 class HomeViewController: UIViewController, NetworkRequestDelegate {
     
-    
-    
     let dataFetcher = DataFetcher()
     
     let cellIdentifier = "cellIdentifier"
@@ -76,10 +74,9 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
     
     var isOpen:Bool = false
     @objc func handleDrop() {
-        print(isOpen)
         if !isOpen {
             isOpen = true
-            animateDropDown(toHeight: 86, with: 1)
+            animateDropDown(toHeight: 87, with: 1)
         } else {
             isOpen = false
             animateDropDown(toHeight: 0, with: -1)
@@ -245,6 +242,15 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         albumCollection.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+    }
+    
+    // Display album zoom view
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let albumZoom = AlbumZoomViewController()
+        albumZoom.modalPresentationStyle = .overFullScreen
+        //let navController = UINavigationController(rootViewController: albumZoom)
+//        show(album, sender: nil)
+        present(albumZoom, animated: true, completion: nil)
     }
     
 }
