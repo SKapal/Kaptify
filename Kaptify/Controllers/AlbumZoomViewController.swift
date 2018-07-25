@@ -25,7 +25,7 @@ class AlbumZoomViewController: UIViewController {
         let bg = UIImageView()
 
         bg.translatesAutoresizingMaskIntoConstraints = false
-        bg.contentMode = .scaleAspectFill
+        bg.contentMode = .scaleAspectFit
         return bg
     }()
     
@@ -142,8 +142,6 @@ class AlbumZoomViewController: UIViewController {
         
         self.view.insertSubview(blur, aboveSubview: albumBackgroundImage)
 
-        //albumBackgroundImage.addSubview(blur)
-        
         self.view.addSubview(albumTitleLabel)
         self.view.addSubview(albumArtistLabel)
         self.view.addSubview(albumReleaseDateLabel)
@@ -151,6 +149,7 @@ class AlbumZoomViewController: UIViewController {
         self.view.addSubview(addButton)
         self.view.addSubview(openButton)
         
+        self.setupBlur()
         self.setupAlbumBackgroundImage()
         self.setupAlbumView()
         self.setupAlbumImage()
@@ -160,7 +159,6 @@ class AlbumZoomViewController: UIViewController {
         self.setupSlideImage()
         self.setupAddButton()
         self.setupOpenButton()
-        self.setupBlur()
     }
     
     func setupAlbumBackgroundImage() {
@@ -177,7 +175,6 @@ class AlbumZoomViewController: UIViewController {
         blur.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         blur.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         blur.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        //blur.heightAnchor.constraint(equalToConstant: self.view.frame.height * 5/10).isActive = true
     }
     
     func setupAlbumView() {

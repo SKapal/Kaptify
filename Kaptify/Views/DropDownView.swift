@@ -12,7 +12,7 @@ import UIKit
 
 class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
     
-    let dropDownOptions = ["⭐️  Top", "🌊  Fresh"]
+    let dropDownOptions = ["📈  Albums", "🌊  Albums"]
     var tableView = UITableView()
     let dataFetcher = DataFetcher()
     var dropDelegate: NetworkRequestDelegate!
@@ -29,7 +29,6 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
         setupTableView()
         self.bringSubview(toFront: tableView)
         self.tableView.isScrollEnabled = false
-        
     }
     
     
@@ -65,7 +64,6 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = UIColor(r: 28, b: 27, g: 27)
         return cell
     }
-    var completionHandler: (([Album]) -> Void)?
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.item == 0 {
