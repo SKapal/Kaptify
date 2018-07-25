@@ -19,8 +19,7 @@ class AlbumZoomViewController: UIViewController {
     var selectedAlbumReleaseDate = String()
     var selectedAlbumURL = String()
     
-
-    
+    //MARK: View property setup
     let albumBackgroundImage: UIImageView = {
         let bg = UIImageView()
 
@@ -107,18 +106,16 @@ class AlbumZoomViewController: UIViewController {
     }()
     
     @objc func handleOpenButton() {
-        UIApplication.shared.open(URL(string: self.selectedAlbumURL)!, options: [:]) { (status) in
-            
-        }
+        UIApplication.shared.open(URL(string: self.selectedAlbumURL)!, options: [:]) { (status) in }
     }
     
     @objc func handleAddButton() {
-        //
+        // TODO
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor =  .clear //UIColor(r: 51, b: 51, g: 51)
+        self.view.backgroundColor =  .clear
         self.view.isOpaque = false
         
         self.setupView()
@@ -130,7 +127,6 @@ class AlbumZoomViewController: UIViewController {
     let blur: UIVisualEffectView = {
         let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
         let blurredView = UIVisualEffectView(effect: blur)
-        //blurredView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurredView.translatesAutoresizingMaskIntoConstraints = false
         return blurredView
     }()
@@ -161,6 +157,7 @@ class AlbumZoomViewController: UIViewController {
         self.setupOpenButton()
     }
     
+    //MARK: Setup view constraints & pass data to UI
     func setupAlbumBackgroundImage() {
         albumBackgroundImage.image = selectedAlbumImage
         albumBackgroundImage.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -210,7 +207,6 @@ class AlbumZoomViewController: UIViewController {
         albumReleaseDateLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 30).isActive = true
         albumReleaseDateLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
         albumReleaseDateLabel.rightAnchor.constraint(lessThanOrEqualTo: addButton.leftAnchor).isActive = true
-        
     }
     
     func setupSlideImage() {
@@ -225,10 +221,8 @@ class AlbumZoomViewController: UIViewController {
     
     func setupOpenButton() {
         openButton.topAnchor.constraint(lessThanOrEqualTo: albumArtistLabel.bottomAnchor, constant: 30).isActive = true
-        //openButton.topAnchor.constraint(equalTo: albumArtistLabel.bottomAnchor, constant: 30).isActive = true
         openButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         openButton.bottomAnchor.constraint(lessThanOrEqualTo: addButton.topAnchor).isActive = true
-        //openButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
     }
     
 }
@@ -254,9 +248,5 @@ extension AlbumZoomViewController {
                 })
             }
         }
-    }
-    
-    override var shouldAutorotate: Bool {
-        return false
     }
 }
