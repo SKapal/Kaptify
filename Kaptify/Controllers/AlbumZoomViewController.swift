@@ -22,7 +22,6 @@ class AlbumZoomViewController: UIViewController {
     //MARK: View property setup
     let albumBackgroundImage: UIImageView = {
         let bg = UIImageView()
-
         bg.translatesAutoresizingMaskIntoConstraints = false
         bg.contentMode = .scaleAspectFit
         return bg

@@ -21,6 +21,5 @@ class ProfileViewController: UIViewController {
         let imageView = UIImageView(image: title)
         imageView.contentMode = .scaleAspectFill
         self.navigationItem.titleView = imageView
-
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 protocol NetworkRequestDelegate {
     func requestDataAndPopulateView(jsonString: String)
@@ -20,6 +21,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
     let cellIdentifier = "cellIdentifier"
     
     var albums = [Album]()
+    var fbaseRef: DatabaseReference?
     
     //MARK: Home View UI Elements
     let albumCollection: UICollectionView = {
@@ -108,6 +110,8 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         checkIfValidUser()
         setupNavBar()
         
+        fbaseRef = Database.database().reference()
+        
         albumCollection.delegate = self
         albumCollection.dataSource = self
         dropView.dropDelegate = self
@@ -123,11 +127,27 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
             DispatchQueue.main.async {
                 self.albumCollection.reloadData()
             }
+            self.updateFirebase(Albums: self.albums)
         }
         // if drop down is open, close:
         if(height.constant > 0) {
             self.animateDropDown(toHeight: 0, with: -1)
             self.isOpen = false
+        }
+    }
+    
+    func updateFirebase(Albums: [Album]) {
+        for album in albums {
+            guard let id = album.id, let name = album.name, let artist = album.artistName, let link = album.url, let artURL = album.artworkUrl100, let releaseDate = album.releaseDate else { return }
+            fbaseRef?.child("Albums").observeSingleEvent(of: .value, with: { (snapshot) in
+                if !snapshot.hasChild(id) {
+                    self.fbaseRef?.child("Albums").child(id).child("name").setValue(name)
+                    self.fbaseRef?.child("Albums").child(id).child("artist").setValue(artist)
+                    self.fbaseRef?.child("Albums").child(id).child("link").setValue(link)
+                    self.fbaseRef?.child("Albums").child(id).child("releaseDate").setValue(releaseDate)
+                    self.fbaseRef?.child("Albums").child(id).child("artURL").setValue(artURL)
+                }
+            })
         }
     }
     
@@ -218,6 +238,8 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
 
         cell.artistLabel.text = self.albums[indexPath.item].artistName
         cell.artistLabel.textColor = .white
+        
+        print(self.albums[indexPath.item].id!)
 
         guard let artwork = self.albums[indexPath.item].artworkUrl100 else { return UICollectionViewCell() }
         if let imageURL = URL(string: artwork) {
