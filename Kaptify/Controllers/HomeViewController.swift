@@ -127,6 +127,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
             DispatchQueue.main.async {
                 self.albumCollection.reloadData()
             }
+            //update firebase albums
             self.updateFirebase(Albums: self.albums)
         }
         // if drop down is open, close:
@@ -141,6 +142,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
             guard let id = album.id, let name = album.name, let artist = album.artistName, let link = album.url, let artURL = album.artworkUrl100, let releaseDate = album.releaseDate else { return }
             fbaseRef?.child("Albums").observeSingleEvent(of: .value, with: { (snapshot) in
                 if !snapshot.hasChild(id) {
+                    print("Adding new data...")
                     self.fbaseRef?.child("Albums").child(id).child("name").setValue(name)
                     self.fbaseRef?.child("Albums").child(id).child("artist").setValue(artist)
                     self.fbaseRef?.child("Albums").child(id).child("link").setValue(link)
@@ -233,13 +235,12 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
         cell.albumImage.layer.masksToBounds = true
         cell.albumImage.layer.cornerRadius = 7
 
+        // Load cell data with backing array data
         cell.albumLabel.text = self.albums[indexPath.item].name
         cell.albumLabel.textColor = .white
 
         cell.artistLabel.text = self.albums[indexPath.item].artistName
         cell.artistLabel.textColor = .white
-        
-        print(self.albums[indexPath.item].id!)
 
         guard let artwork = self.albums[indexPath.item].artworkUrl100 else { return UICollectionViewCell() }
         if let imageURL = URL(string: artwork) {
