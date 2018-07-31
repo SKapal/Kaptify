@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class AlbumZoomViewController: UIViewController {
     
@@ -18,6 +20,9 @@ class AlbumZoomViewController: UIViewController {
     var selectedAlbumArtist = String()
     var selectedAlbumReleaseDate = String()
     var selectedAlbumURL = String()
+    var selectedAlbumId = String()
+    
+    var fBaseRef: DatabaseReference?
     
     //MARK: View property setup
     let albumBackgroundImage: UIImageView = {
@@ -93,6 +98,16 @@ class AlbumZoomViewController: UIViewController {
         return add
     }()
     
+    var numberOfAddsLabel: UILabel = {
+        let adds = UILabel()
+        adds.textAlignment = .center
+        let font = UIFont(name: "HelveticaNeue-Light", size: 14)
+        adds.font = font
+        adds.textColor = .white
+        adds.translatesAutoresizingMaskIntoConstraints = false
+        return adds
+    }()
+    
     lazy var openButton: UIButton = {
         let open = UIButton(type: .custom)
         let openImage = UIImage(named: "openButton")
@@ -110,6 +125,7 @@ class AlbumZoomViewController: UIViewController {
     
     @objc func handleAddButton() {
         // TODO
+        
     }
     
     override func viewDidLoad() {
@@ -143,6 +159,7 @@ class AlbumZoomViewController: UIViewController {
         self.view.addSubview(slideImage)
         self.view.addSubview(addButton)
         self.view.addSubview(openButton)
+        self.view.addSubview(numberOfAddsLabel)
         
         self.setupBlur()
         self.setupAlbumBackgroundImage()
@@ -154,9 +171,16 @@ class AlbumZoomViewController: UIViewController {
         self.setupSlideImage()
         self.setupAddButton()
         self.setupOpenButton()
+        self.setupNumberOfAddsLabel()
     }
     
     //MARK: Setup view constraints & pass data to UI
+    func setupNumberOfAddsLabel() {
+        numberOfAddsLabel.text = "0000000"
+        numberOfAddsLabel.rightAnchor.constraint(equalTo: addButton.rightAnchor).isActive = true
+        numberOfAddsLabel.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 10).isActive = true
+    }
+    
     func setupAlbumBackgroundImage() {
         albumBackgroundImage.image = selectedAlbumImage
         albumBackgroundImage.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -204,7 +228,7 @@ class AlbumZoomViewController: UIViewController {
     func setupAlbumReleaseDateLabel() {
         albumReleaseDateLabel.text = "Released on \(selectedAlbumReleaseDate)"
         albumReleaseDateLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 30).isActive = true
-        albumReleaseDateLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
+        albumReleaseDateLabel.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 10).isActive = true
         albumReleaseDateLabel.rightAnchor.constraint(lessThanOrEqualTo: addButton.leftAnchor).isActive = true
     }
     
@@ -215,7 +239,7 @@ class AlbumZoomViewController: UIViewController {
     
     func setupAddButton() {
         addButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -30).isActive = true
-        addButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
+        addButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -60).isActive = true
     }
     
     func setupOpenButton() {

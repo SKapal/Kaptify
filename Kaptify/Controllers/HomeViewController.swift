@@ -275,7 +275,8 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
         albumZoom.selectedAlbumArtist = albums[indexPath.item].artistName!
         albumZoom.selectedAlbumReleaseDate = albums[indexPath.item].releaseDate!
         albumZoom.selectedAlbumURL = albums[indexPath.item].url!
-
+        albumZoom.selectedAlbumId = albums[indexPath.item].id!
+        
         if let artwork = self.albums[indexPath.item].artworkUrl100, let imageURL = URL(string: artwork) {
             // Load image data on background thread
             DispatchQueue.global().async {
