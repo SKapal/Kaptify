@@ -98,6 +98,17 @@ class AlbumZoomViewController: UIViewController {
         return add
     }()
     
+    lazy var commentsButton: UIButton = {
+        let comment = UIButton(type: .custom)
+        let commentImage = UIImage(named: "Comments")
+        let commentImageView = UIImageView(image: commentImage)
+        commentImageView.contentMode = .scaleAspectFill
+        comment.setImage(commentImageView.image, for: .normal)
+        comment.translatesAutoresizingMaskIntoConstraints = false
+        comment.addTarget(self, action: #selector(handleCommentsButton), for: .touchUpInside)
+        return comment
+    }()
+    
     var numberOfAddsLabel: UILabel = {
         let adds = UILabel()
         adds.textAlignment = .center
@@ -107,6 +118,8 @@ class AlbumZoomViewController: UIViewController {
         adds.translatesAutoresizingMaskIntoConstraints = false
         return adds
     }()
+    
+    var addStack = UIStackView()
     
     lazy var openButton: UIButton = {
         let open = UIButton(type: .custom)
@@ -128,12 +141,19 @@ class AlbumZoomViewController: UIViewController {
         
     }
     
+    @objc func handleCommentsButton() {
+        // TODO
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor =  .clear
         self.view.isOpaque = false
         
         self.setupView()
+        
+
         
         let slide = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler(gesture:)))
         view.addGestureRecognizer(slide)
@@ -157,9 +177,15 @@ class AlbumZoomViewController: UIViewController {
         self.view.addSubview(albumArtistLabel)
         self.view.addSubview(albumReleaseDateLabel)
         self.view.addSubview(slideImage)
-        self.view.addSubview(addButton)
         self.view.addSubview(openButton)
-        self.view.addSubview(numberOfAddsLabel)
+        self.view.addSubview(commentsButton)
+        
+        addStack = UIStackView(arrangedSubviews: [addButton, numberOfAddsLabel])
+        addStack.axis = .vertical
+        addStack.translatesAutoresizingMaskIntoConstraints = false
+        addStack.spacing = 1
+
+        self.view.addSubview(addStack)
         
         self.setupBlur()
         self.setupAlbumBackgroundImage()
@@ -169,12 +195,25 @@ class AlbumZoomViewController: UIViewController {
         self.setupAlbumArtistLabel()
         self.setupAlbumReleaseDateLabel()
         self.setupSlideImage()
-        self.setupAddButton()
         self.setupOpenButton()
-        self.setupNumberOfAddsLabel()
+        self.setupAddStack()
+        self.setupCommentsButton()
     }
     
     //MARK: Setup view constraints & pass data to UI
+    func setupCommentsButton() {
+        commentsButton.rightAnchor.constraint(equalTo: addButton.rightAnchor).isActive = true
+        commentsButton.topAnchor.constraint(equalTo: slideImage.bottomAnchor).isActive = true
+        commentsButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        commentsButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    }
+    
+    func setupAddStack() {
+        numberOfAddsLabel.text = "0000000"
+        addStack.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -30).isActive = true
+        addStack.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
+    }
+    
     func setupNumberOfAddsLabel() {
         numberOfAddsLabel.text = "0000000"
         numberOfAddsLabel.rightAnchor.constraint(equalTo: addButton.rightAnchor).isActive = true
@@ -187,7 +226,7 @@ class AlbumZoomViewController: UIViewController {
         albumBackgroundImage.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         albumBackgroundImage.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         albumBackgroundImage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -self.view.frame.height/2).isActive = true
-        albumBackgroundImage.heightAnchor.constraint(equalToConstant: self.view.frame.height * 4/10).isActive = true
+        albumBackgroundImage.heightAnchor.constraint(equalToConstant: self.view.frame.height * 4/9).isActive = true
     }
     
     func setupBlur() {
@@ -199,7 +238,7 @@ class AlbumZoomViewController: UIViewController {
     
     func setupAlbumView() {
         albumView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        albumView.bottomAnchor.constraint(equalTo: albumBackgroundImage.bottomAnchor, constant: 50).isActive = true
+        albumView.topAnchor.constraint(equalTo: slideImage.bottomAnchor, constant: self.view.frame.height/10).isActive = true
         albumView.widthAnchor.constraint(equalToConstant: 204).isActive = true
         albumView.heightAnchor.constraint(equalToConstant: 204).isActive = true
     }
@@ -216,20 +255,20 @@ class AlbumZoomViewController: UIViewController {
         albumTitleLabel.text = self.selectedAlbumTitle
         albumTitleLabel.leftAnchor.constraint(equalTo: albumView.leftAnchor).isActive = true
         albumTitleLabel.rightAnchor.constraint(equalTo: albumView.rightAnchor).isActive = true
-        albumTitleLabel.topAnchor.constraint(greaterThanOrEqualTo: albumView.bottomAnchor, constant: 13).isActive = true
+        albumTitleLabel.topAnchor.constraint(greaterThanOrEqualTo: albumView.bottomAnchor, constant: 5).isActive = true
     }
     
     func setupAlbumArtistLabel() {
         albumArtistLabel.text = self.selectedAlbumArtist
         albumArtistLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        albumArtistLabel.topAnchor.constraint(greaterThanOrEqualTo: albumTitleLabel.bottomAnchor, constant: 13).isActive = true
+        albumArtistLabel.topAnchor.constraint(greaterThanOrEqualTo: albumTitleLabel.bottomAnchor, constant: 5).isActive = true
     }
     
     func setupAlbumReleaseDateLabel() {
         albumReleaseDateLabel.text = "Released on \(selectedAlbumReleaseDate)"
         albumReleaseDateLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 30).isActive = true
-        albumReleaseDateLabel.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 10).isActive = true
-        albumReleaseDateLabel.rightAnchor.constraint(lessThanOrEqualTo: addButton.leftAnchor).isActive = true
+        albumReleaseDateLabel.bottomAnchor.constraint(equalTo: addStack.bottomAnchor).isActive = true
+        albumReleaseDateLabel.rightAnchor.constraint(lessThanOrEqualTo: addStack.leftAnchor).isActive = true
     }
     
     func setupSlideImage() {
@@ -245,7 +284,7 @@ class AlbumZoomViewController: UIViewController {
     func setupOpenButton() {
         openButton.topAnchor.constraint(lessThanOrEqualTo: albumArtistLabel.bottomAnchor, constant: 30).isActive = true
         openButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        openButton.bottomAnchor.constraint(lessThanOrEqualTo: addButton.topAnchor).isActive = true
+//        openButton.bottomAnchor.constraint(lessThanOrEqualTo: addStack.topAnchor).isActive = true
     }
     
 }
