@@ -136,13 +136,60 @@ class AlbumZoomViewController: UIViewController {
         UIApplication.shared.open(URL(string: self.selectedAlbumURL)!, options: [:]) { (status) in }
     }
     
+    fileprivate func changeButtonImage(named imageName: String) {
+        DispatchQueue.main.async {
+            let addImageView = UIImageView(image: UIImage(named: imageName))
+            addImageView.contentMode = .scaleAspectFill
+            self.addButton.setImage(addImageView.image, for: .normal)
+        }
+    }
+    
     @objc func handleAddButton() {
-        // TODO
+
+        /*
+         * - Add to user profile (Album fb object: title, image URL, artist, release date, id, URL)
+         * - Increment/Decrement adds counter
+         * - Replace "addButton" with "minusButton" and vice versa
+         */
+        print("add")
+        fBaseRef?.child("Albums").child(selectedAlbumId).runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+            if var album = currentData.value as? [String: AnyObject], let uid = Auth.auth().currentUser?.uid {
+                var adds: Dictionary<String, Bool>
+                adds = album["adds"] as? [String: Bool] ?? [:]
+                var addsCount = album["addsCount"] as? Int ?? 0
+                if let _ = adds[uid] {
+                    addsCount -= 1
+                    adds.removeValue(forKey: uid)
+                    self.changeButtonImage(named: "addButton")
+                } else {
+                    addsCount += 1
+                    adds[uid] = true
+                    self.changeButtonImage(named: "minusButton")
+                }
+                album["addsCount"] = addsCount as AnyObject?
+                album["adds"] = adds as AnyObject?
+                
+                currentData.value = album
+                // update UI
+                DispatchQueue.main.async {
+                    self.numberOfAddsLabel.text = String(addsCount)
+                    
+                }
+                return TransactionResult.success(withValue: currentData)
+            }
+            return TransactionResult.success(withValue: currentData)
+        }) { (error, comitted, snapshot) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
         
     }
     
     @objc func handleCommentsButton() {
-        // TODO
+        // TODO: present new view w/ comments
+        
         
     }
     
@@ -152,6 +199,8 @@ class AlbumZoomViewController: UIViewController {
         self.view.isOpaque = false
         
         self.setupView()
+        
+        fBaseRef = Database.database().reference()
         
 
         
@@ -279,12 +328,13 @@ class AlbumZoomViewController: UIViewController {
     func setupAddButton() {
         addButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -30).isActive = true
         addButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -60).isActive = true
+        addButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        addButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
     func setupOpenButton() {
         openButton.topAnchor.constraint(lessThanOrEqualTo: albumArtistLabel.bottomAnchor, constant: 30).isActive = true
         openButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        openButton.bottomAnchor.constraint(lessThanOrEqualTo: addStack.topAnchor).isActive = true
     }
     
 }
