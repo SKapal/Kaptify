@@ -275,7 +275,7 @@ class AlbumZoomViewController: UIViewController {
     
 }
 
-//MARK: Gesture
+//MARK: Methods and Helpers
 extension AlbumZoomViewController {
     
     @objc func panGestureRecognizerHandler(gesture: UIPanGestureRecognizer) {
@@ -329,7 +329,19 @@ extension AlbumZoomViewController {
         }
     }
     
-    //MARK: Button Selectors:
+    fileprivate func addRemoveAlbumToUser(album: [String: AnyObject]) {
+        if let uid = Auth.auth().currentUser?.uid {
+            fBaseRef?.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if !snapshot.childSnapshot(forPath: "addedAlbums").hasChild(self.selectedAlbumId) {
+                    self.fBaseRef?.child("Users").child(uid).child("addedAlbums").child(self.selectedAlbumId).setValue(album)
+                } else {
+                    self.fBaseRef?.child("Users").child(uid).child("addedAlbums").child(self.selectedAlbumId).removeValue()
+                }
+            })
+        }
+    }
+    
+    //MARK: Button pressed handler Selectors:
     @objc fileprivate func handleOpenButton() {
         UIApplication.shared.open(URL(string: self.selectedAlbumURL)!, options: [:]) { (status) in }
     }
@@ -347,6 +359,7 @@ extension AlbumZoomViewController {
                 var adds: Dictionary<String, Bool>
                 adds = album["adds"] as? [String: Bool] ?? [:]
                 var addsCount = album["addsCount"] as? Int ?? 0
+                
                 if let _ = adds[uid] {
                     addsCount -= 1
                     adds.removeValue(forKey: uid)
@@ -358,8 +371,9 @@ extension AlbumZoomViewController {
                 }
                 album["addsCount"] = addsCount as AnyObject?
                 album["adds"] = adds as AnyObject?
-                
+                self.addRemoveAlbumToUser(album: album)
                 currentData.value = album
+                
                 // update UI
                 DispatchQueue.main.async {
                     self.numberOfAddsLabel.text = String(addsCount)
