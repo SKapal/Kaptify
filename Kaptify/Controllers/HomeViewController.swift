@@ -290,7 +290,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
                     // Update UI on main thread
                     DispatchQueue.main.async {
                         albumZoom.selectedAlbumImage = image!
-                       self.present(albumZoom, animated: true, completion: nil)
+                        self.present(albumZoom, animated: true, completion: nil)
                     }
                 }
                 
