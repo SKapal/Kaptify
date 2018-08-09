@@ -253,7 +253,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
                     // Update UI on main thread
                     DispatchQueue.main.async {
                         cell.albumImage.image = image
-                        UIView.animate(withDuration: 0.5, animations: {
+                        UIView.animate(withDuration: 1, animations: {
                             cell.albumImage.alpha = 1
                         })
                     }
