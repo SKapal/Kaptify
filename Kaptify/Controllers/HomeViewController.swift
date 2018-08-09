@@ -234,6 +234,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
         // Round album image
         cell.albumImage.layer.masksToBounds = true
         cell.albumImage.layer.cornerRadius = 7
+        cell.albumImage.alpha = 0
 
         // Load cell data with backing array data
         cell.albumLabel.text = self.albums[indexPath.item].name
@@ -241,7 +242,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
 
         cell.artistLabel.text = self.albums[indexPath.item].artistName
         cell.artistLabel.textColor = .white
-
+        
         guard let artwork = self.albums[indexPath.item].artworkUrl100 else { return UICollectionViewCell() }
         if let imageURL = URL(string: artwork) {
             // Load image data on background thread
@@ -252,6 +253,9 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
                     // Update UI on main thread
                     DispatchQueue.main.async {
                         cell.albumImage.image = image
+                        UIView.animate(withDuration: 0.5, animations: {
+                            cell.albumImage.alpha = 1
+                        })
                     }
                 }
                 
