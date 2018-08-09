@@ -306,14 +306,14 @@ extension AlbumZoomViewController {
                     self.changeButtonImage(named: "minusButton")
                     DispatchQueue.main.async {
                         if let addsCount = snapshot.childSnapshot(forPath: "addsCount").value {
-                            self.numberOfAddsLabel.text = "\(addsCount)"
+                            self.numberOfAddsLabel.text = "\(addsCount) stars"
                         } else {
-                            self.numberOfAddsLabel.text = "0"
+                            self.numberOfAddsLabel.text = "0 stars"
                         }
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.numberOfAddsLabel.text = "0"
+                        self.numberOfAddsLabel.text = "0 stars"
                     }
                 }
             }
@@ -376,7 +376,7 @@ extension AlbumZoomViewController {
                 
                 // update UI
                 DispatchQueue.main.async {
-                    self.numberOfAddsLabel.text = String(addsCount)
+                    self.numberOfAddsLabel.text = "\(addsCount) stars"
                     
                 }
                 return TransactionResult.success(withValue: currentData)

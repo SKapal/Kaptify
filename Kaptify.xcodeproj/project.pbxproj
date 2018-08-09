@@ -13,6 +13,9 @@
 		B735668B20FEF41B0038370A /* MetadataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735668A20FEF41B0038370A /* MetadataModel.swift */; };
 		B735668D21017E470038370A /* AlbumZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735668C21017E470038370A /* AlbumZoomViewController.swift */; };
 		B7356691210195FA0038370A /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7356690210195FA0038370A /* DropDownView.swift */; };
+		B7356697211BDC370038370A /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7356695211BDC370038370A /* CommentsTableViewController.swift */; };
+		B735669B211BDCB70038370A /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7356699211BDCB70038370A /* CommentTableViewCell.swift */; };
+		B735669C211BDCB70038370A /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B735669A211BDCB70038370A /* CommentTableViewCell.xib */; };
 		B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */; };
 		B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */; };
 		B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2220E0600E0012C34F /* AppDelegate.swift */; };
@@ -36,6 +39,9 @@
 		B735668A20FEF41B0038370A /* MetadataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataModel.swift; sourceTree = "<group>"; };
 		B735668C21017E470038370A /* AlbumZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumZoomViewController.swift; sourceTree = "<group>"; };
 		B7356690210195FA0038370A /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		B7356695211BDC370038370A /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
+		B7356699211BDCB70038370A /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		B735669A211BDCB70038370A /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B75EBD1F20E0600E0012C34F /* Kaptify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kaptify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +106,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B7356692211BDB260038370A /* Comments_Flow */ = {
+			isa = PBXGroup;
+			children = (
+				B7356695211BDC370038370A /* CommentsTableViewController.swift */,
+			);
+			path = Comments_Flow;
+			sourceTree = "<group>";
+		};
 		B75EBD1620E0600E0012C34F = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +157,7 @@
 				B7E21D8A20F83D0E00D60FE1 /* ProfileViewController.swift */,
 				B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */,
 				B735668C21017E470038370A /* AlbumZoomViewController.swift */,
+				B7356692211BDB260038370A /* Comments_Flow */,
 				B7C05F2C20E5C4EC00B26E0A /* Registration_Flow */,
 			);
 			path = Controllers;
@@ -171,6 +186,8 @@
 				B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */,
 				B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */,
 				B7356690210195FA0038370A /* DropDownView.swift */,
+				B7356699211BDCB70038370A /* CommentTableViewCell.swift */,
+				B735669A211BDCB70038370A /* CommentTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B75EBD2D20E060100012C34F /* LaunchScreen.storyboard in Resources */,
+				B735669C211BDCB70038370A /* CommentTableViewCell.xib in Resources */,
 				B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */,
 				B7E21D8620EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib in Resources */,
 				B75EBD2A20E060100012C34F /* Assets.xcassets in Resources */,
@@ -302,6 +320,8 @@
 				B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */,
 				B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */,
 				B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */,
+				B735669B211BDCB70038370A /* CommentTableViewCell.swift in Sources */,
+				B7356697211BDC370038370A /* CommentsTableViewController.swift in Sources */,
 				B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */,
 				B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */,
 				B735668620FEF3D10038370A /* DataFetcher.swift in Sources */,
