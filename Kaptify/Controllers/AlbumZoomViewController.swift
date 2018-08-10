@@ -24,6 +24,12 @@ class AlbumZoomViewController: UIViewController {
     
     var fBaseRef: DatabaseReference?
     
+    lazy var menuBar: MenuBar = {
+        let menu = MenuBar()
+        menu.translatesAutoresizingMaskIntoConstraints = false
+        return menu
+    }()
+    
     //MARK: View property setup
     let albumBackgroundImage: UIImageView = {
         let bg = UIImageView()
@@ -154,16 +160,18 @@ class AlbumZoomViewController: UIViewController {
     fileprivate func setupView() {
         updateAddButtonAndLabelWithUserData()
         self.view.addSubview(albumBackgroundImage)
+
         self.view.addSubview(albumView)
         self.view.addSubview(albumImage)
         
         self.view.insertSubview(blur, aboveSubview: albumBackgroundImage)
-
+        self.view.addSubview(menuBar)
         self.view.addSubview(albumTitleLabel)
         self.view.addSubview(albumArtistLabel)
         self.view.addSubview(albumReleaseDateLabel)
         self.view.addSubview(slideImage)
         self.view.addSubview(openButton)
+        
 //        self.view.addSubview(commentsButton)
         
         addStack = UIStackView(arrangedSubviews: [addButton, numberOfAddsLabel])
@@ -173,7 +181,9 @@ class AlbumZoomViewController: UIViewController {
 
         self.view.addSubview(addStack)
         
+        
         self.setupBlur()
+        
         self.setupAlbumBackgroundImage()
         self.setupAlbumView()
         self.setupAlbumImage()
@@ -183,10 +193,22 @@ class AlbumZoomViewController: UIViewController {
         self.setupSlideImage()
         self.setupOpenButton()
         self.setupAddStack()
+        self.setupMenuBar()
+        
 //        self.setupCommentsButton()
+        
     }
     
     //MARK: Setup view constraints & pass data to UI
+    fileprivate func setupMenuBar() {
+        menuBar.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        menuBar.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        menuBar.topAnchor.constraint(equalTo: self.slideImage.topAnchor).isActive = true
+        menuBar.bottomAnchor.constraint(lessThanOrEqualTo: albumView.topAnchor, constant: 20).isActive = true
+        menuBar.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
     fileprivate func setupCommentsButton() {
         commentsButton.rightAnchor.constraint(equalTo: addButton.rightAnchor).isActive = true
         commentsButton.topAnchor.constraint(equalTo: slideImage.bottomAnchor).isActive = true
@@ -259,6 +281,7 @@ class AlbumZoomViewController: UIViewController {
     fileprivate func setupSlideImage() {
         slideImage.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 45).isActive = true
         slideImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        slideImage.bottomAnchor.constraint(lessThanOrEqualTo: albumView.topAnchor, constant: 50)
     }
     
     fileprivate func setupAddButton() {
