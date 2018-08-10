@@ -9,10 +9,13 @@
 import UIKit
 
 class CommentsTableViewController: UITableViewController {
+    
+    
+    let cellIdentifier = "commentCellIdentifier"
         
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -91,5 +94,4 @@ class CommentsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
 }

@@ -164,7 +164,7 @@ class AlbumZoomViewController: UIViewController {
         self.view.addSubview(albumReleaseDateLabel)
         self.view.addSubview(slideImage)
         self.view.addSubview(openButton)
-        self.view.addSubview(commentsButton)
+//        self.view.addSubview(commentsButton)
         
         addStack = UIStackView(arrangedSubviews: [addButton, numberOfAddsLabel])
         addStack.axis = .vertical
@@ -183,7 +183,7 @@ class AlbumZoomViewController: UIViewController {
         self.setupSlideImage()
         self.setupOpenButton()
         self.setupAddStack()
-        self.setupCommentsButton()
+//        self.setupCommentsButton()
     }
     
     //MARK: Setup view constraints & pass data to UI
@@ -306,7 +306,7 @@ extension AlbumZoomViewController {
                     self.changeButtonImage(named: "minusButton")
                     DispatchQueue.main.async {
                         if let addsCount = snapshot.childSnapshot(forPath: "addsCount").value {
-                            self.numberOfAddsLabel.text = "\(addsCount) stars"
+                            self.numberOfAddsLabel.text = addsCount as! Int > 1 || addsCount as! Int == 0 ? "\(addsCount) stars" : "\(addsCount) star"
                         } else {
                             self.numberOfAddsLabel.text = "0 stars"
                         }
@@ -376,7 +376,7 @@ extension AlbumZoomViewController {
                 
                 // update UI
                 DispatchQueue.main.async {
-                    self.numberOfAddsLabel.text = "\(addsCount) stars"
+                    self.numberOfAddsLabel.text = addsCount > 1 || addsCount == 0 ? "\(addsCount) stars" : "\(addsCount) star"
                     
                 }
                 return TransactionResult.success(withValue: currentData)
@@ -391,7 +391,5 @@ extension AlbumZoomViewController {
     
     @objc fileprivate func handleCommentsButton() {
         // TODO: present new view w/ comments
-        
-        
     }
 }
