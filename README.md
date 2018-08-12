@@ -3,4 +3,4 @@
 # Preview
 
 ![Alt text](./demo.png?raw=true "Demo")
-![Alt text](./demo1.png?raw=true "Demo1")
+![Alt text](./demo1.png?raw=true "Demo2")
