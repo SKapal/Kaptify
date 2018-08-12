@@ -24,6 +24,20 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
+    
+    let horizontalBarView: UIView = {
+        let bar = UIView()
+        bar.backgroundColor = .white
+        bar.layer.shadowColor = UIColor.black.cgColor
+        bar.layer.shadowRadius = 2.0
+        bar.layer.shadowOpacity = 0.2
+        bar.layer.shadowOffset = CGSize(width: 2, height: 2)
+        bar.layer.masksToBounds = false
+        
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        return bar
+    }()
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,9 +48,18 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         DispatchQueue.main.async {
             self.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .centeredVertically)
         }
+        setupHorizontalBar()
         
     }
-    
+    func setupHorizontalBar() {
+        
+        addSubview(horizontalBarView)
+        
+        horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/8).isActive = true
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
@@ -50,6 +73,26 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         //cell.isSelected = indexPath.item == 0 ? true : false
        // cell.isHighlighted = indexPath.item == 0 ? true : false
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            animateBar("left")
+        } else {
+            animateBar("right")
+        }
+    }
+    
+    func animateBar(_ direction: String) {
+        if direction == "left" {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.horizontalBarView.frame.origin.x = self.frame.origin.x
+            }, completion: nil)
+        } else {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.horizontalBarView.frame.origin.x = self.frame.width / 2
+            }, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -76,7 +119,6 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
 
 class MenuCell: UICollectionViewCell {
     
-    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Album"
@@ -84,7 +126,7 @@ class MenuCell: UICollectionViewCell {
         label.layer.shadowColor = blackColor.cgColor
         label.layer.shadowRadius = 2.0
         label.layer.shadowOpacity = 0.2
-        label.layer.shadowOffset = CGSize(width: 4, height: 4)
+        label.layer.shadowOffset = CGSize(width: 2, height: 2)
         label.layer.masksToBounds = false
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
