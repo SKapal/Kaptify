@@ -2,5 +2,4 @@
 
 # Preview
 
-![Alt text](./demo3.png?raw=true "Demo3")
-![Alt text](./demo2.png?raw=true "Demo2")
+![Alt text](./Demo_image.png?raw=true =100x100 "Demo")
