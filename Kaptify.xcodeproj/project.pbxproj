@@ -19,6 +19,7 @@
 		B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */; };
 		B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */; };
 		B74F53E7211D296A008A3C6E /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74F53E6211D296A008A3C6E /* MenuBar.swift */; };
+		B758A6D1212BA8E60084D9C7 /* HorizontalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */; };
 		B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2220E0600E0012C34F /* AppDelegate.swift */; };
 		B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2420E0600E0012C34F /* HomeViewController.swift */; };
 		B75EBD2820E0600E0012C34F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75EBD2620E0600E0012C34F /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B74F53E6211D296A008A3C6E /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollection.swift; sourceTree = "<group>"; };
 		B75EBD1F20E0600E0012C34F /* Kaptify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kaptify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75EBD2220E0600E0012C34F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B75EBD2420E0600E0012C34F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				B7356699211BDCB70038370A /* CommentTableViewCell.swift */,
 				B735669A211BDCB70038370A /* CommentTableViewCell.xib */,
 				B74F53E6211D296A008A3C6E /* MenuBar.swift */,
+				B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				B7356697211BDC370038370A /* CommentsTableViewController.swift in Sources */,
 				B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */,
 				B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */,
+				B758A6D1212BA8E60084D9C7 /* HorizontalCollection.swift in Sources */,
 				B735668620FEF3D10038370A /* DataFetcher.swift in Sources */,
 				B735668D21017E470038370A /* AlbumZoomViewController.swift in Sources */,
 				B7E21D8B20F83D0E00D60FE1 /* ProfileViewController.swift in Sources */,
