@@ -1,175 +1,18 @@
 //
-//  HorizontalCollection.swift
+//  AlbumViewCollectionViewCell.swift
 //  Kaptify
 //
-//  Created by Sahil Kapal on 2018-08-20.
+//  Created by Sahil Kapal on 2018-08-22.
 //  Copyright © 2018 Sahil Kapal. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import Firebase
 import FirebaseDatabase
 
 
-class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    var selectedAlbumImage: UIImage?
-    var selectedAlbumTitle: String?
-    var selectedAlbumArtist: String?
-    var selectedAlbumReleaseDate: String?
-    var selectedAlbumURL: String?
-    var selectedAlbumId:String?
-    
-    let cellId = "cellIdentifier"
-    let cellId2 =  "cellIdentifier2"
-    
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
-        
-        
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .clear
-        cv.isPagingEnabled = true
-        cv.dataSource = self
-        cv.delegate = self
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        return cv
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.addSubview(collectionView)
-        collectionView.register(AlbumViewCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(CommentsViewCell.self, forCellWithReuseIdentifier: cellId2)
-        self.setupCollectionView()
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AlbumViewCell
-            
-
-            cell.albumTitleLabel.text = self.selectedAlbumTitle!
-            cell.albumImage.image = self.selectedAlbumImage!
-            cell.albumArtistLabel.text = self.selectedAlbumArtist!
-            cell.albumReleaseDateLabel.text = "Released on \(self.selectedAlbumReleaseDate!)"
-            
-            DispatchQueue.main.async {
-                cell.selectedAlbumId = self.selectedAlbumId!
-                cell.selectedAlbumURL = self.selectedAlbumURL!
-                cell.updateAddButtonAndLabelWithUserData()
-            }
-            
-            return cell
-            
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId2, for: indexPath) as! CommentsViewCell
-            
-            return cell
-        }
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width, height: frame.height)
-    }
-    
-    fileprivate func setupCollectionView() {
-        collectionView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        collectionView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-    }
-    
-
-}
-
-class CommentsViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
-    
-    var tableView = UITableView()
-    let cellIdentifier = "commentCellIdentifier"
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CommentTableViewCell
-        
-        cell.usernameLabel.text = "Splashbruh"
-        cell.dateLabel.text = "Today"
-        cell.commentLabel.text = "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the"
-        cell.backgroundColor = .clear
-        return cell
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return UITableViewAutomaticDimension
-    }
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.addSubview(tableView)
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        tableView.backgroundColor = .clear
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = UITableViewAutomaticDimension
-        
-        tableView.separatorInset = UIEdgeInsets.zero
-        tableView.layoutMargins = UIEdgeInsets.zero
-        
-
-        tableView.register(UINib(nibName: "CommentTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        
-        self.setupTableView()
-        
-    }
-    func setupTableView() {
-        tableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.layoutMargins = UIEdgeInsets.zero
-        
-    }
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-class AlbumViewCell: UICollectionViewCell {
+class AlbumViewCollectionViewCell: UICollectionViewCell {
     
     var selectedAlbumImage = UIImage()
     var selectedAlbumTitle = String()
@@ -179,7 +22,7 @@ class AlbumViewCell: UICollectionViewCell {
     var selectedAlbumId = String()
     
     var fBaseRef: DatabaseReference?
-
+    
     let albumImage: UIImageView = {
         let albumImg = UIImageView()
         
@@ -187,14 +30,14 @@ class AlbumViewCell: UICollectionViewCell {
         albumImg.contentMode = .scaleAspectFit
         return albumImg
     }()
-
+    
     let albumView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     let albumTitleLabel: UILabel = {
         let title = UILabel()
         title.textAlignment = .center
@@ -205,7 +48,7 @@ class AlbumViewCell: UICollectionViewCell {
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
-
+    
     let albumArtistLabel: UILabel = {
         let artist = UILabel()
         artist.textAlignment = .center
@@ -215,7 +58,7 @@ class AlbumViewCell: UICollectionViewCell {
         artist.translatesAutoresizingMaskIntoConstraints = false
         return artist
     }()
-
+    
     let albumReleaseDateLabel: UILabel = {
         let release = UILabel()
         release.textAlignment = .center
@@ -225,7 +68,7 @@ class AlbumViewCell: UICollectionViewCell {
         release.translatesAutoresizingMaskIntoConstraints = false
         return release
     }()
-
+    
     lazy var addButton: UIButton = {
         let add = UIButton(type: .custom)
         let addImage = UIImage(named: "addButton")
@@ -279,7 +122,7 @@ class AlbumViewCell: UICollectionViewCell {
         
         self.addSubview(albumView)
         self.addSubview(albumImage)
-
+        
         self.addSubview(albumTitleLabel)
         self.addSubview(albumArtistLabel)
         self.addSubview(albumReleaseDateLabel)
@@ -302,7 +145,7 @@ class AlbumViewCell: UICollectionViewCell {
         self.setupAlbumArtistLabel()
         self.setupAlbumReleaseDateLabel()
         self.setupOpenButton()
-
+        
     }
     
     fileprivate func setupAlbumView() {
@@ -313,7 +156,6 @@ class AlbumViewCell: UICollectionViewCell {
     }
     
     fileprivate func setupAlbumImage() {
-//        albumImage.image = selectedAlbumImage
         albumImage.centerXAnchor.constraint(equalTo: albumView.centerXAnchor).isActive = true
         albumImage.centerYAnchor.constraint(equalTo: albumView.centerYAnchor).isActive = true
         albumImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
@@ -321,20 +163,17 @@ class AlbumViewCell: UICollectionViewCell {
     }
     
     fileprivate func setupAlbumTitleLabel() {
-//        albumTitleLabel.text = self.selectedAlbumTitle
         albumTitleLabel.leftAnchor.constraint(equalTo: albumView.leftAnchor).isActive = true
         albumTitleLabel.rightAnchor.constraint(equalTo: albumView.rightAnchor).isActive = true
         albumTitleLabel.topAnchor.constraint(greaterThanOrEqualTo: albumView.bottomAnchor, constant: 5).isActive = true
     }
     
     fileprivate func setupAlbumArtistLabel() {
-//        albumArtistLabel.text = self.selectedAlbumArtist
         albumArtistLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         albumArtistLabel.topAnchor.constraint(greaterThanOrEqualTo: albumTitleLabel.bottomAnchor, constant: 5).isActive = true
     }
     
     fileprivate func setupAlbumReleaseDateLabel() {
-//        albumReleaseDateLabel.text = "Released on \(selectedAlbumReleaseDate)"
         albumReleaseDateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 30).isActive = true
         albumReleaseDateLabel.bottomAnchor.constraint(equalTo: addStack.bottomAnchor).isActive = true
         albumReleaseDateLabel.rightAnchor.constraint(lessThanOrEqualTo: addStack.leftAnchor).isActive = true
@@ -347,7 +186,7 @@ class AlbumViewCell: UICollectionViewCell {
     
     fileprivate func setupOpenButton() {
         openButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        openButton.topAnchor.constraint(greaterThanOrEqualTo: albumArtistLabel.bottomAnchor, constant: 50).isActive = true
+        openButton.topAnchor.constraint(greaterThanOrEqualTo: albumArtistLabel.bottomAnchor, constant: 25).isActive = true
     }
     
     
@@ -439,3 +278,4 @@ class AlbumViewCell: UICollectionViewCell {
     }
     
 }
+

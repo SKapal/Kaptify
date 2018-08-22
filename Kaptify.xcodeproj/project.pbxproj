@@ -13,13 +13,14 @@
 		B735668B20FEF41B0038370A /* MetadataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735668A20FEF41B0038370A /* MetadataModel.swift */; };
 		B735668D21017E470038370A /* AlbumZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B735668C21017E470038370A /* AlbumZoomViewController.swift */; };
 		B7356691210195FA0038370A /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7356690210195FA0038370A /* DropDownView.swift */; };
-		B7356697211BDC370038370A /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7356695211BDC370038370A /* CommentsTableViewController.swift */; };
 		B735669B211BDCB70038370A /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7356699211BDCB70038370A /* CommentTableViewCell.swift */; };
 		B735669C211BDCB70038370A /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B735669A211BDCB70038370A /* CommentTableViewCell.xib */; };
 		B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */; };
 		B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */; };
 		B74F53E7211D296A008A3C6E /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74F53E6211D296A008A3C6E /* MenuBar.swift */; };
 		B758A6D1212BA8E60084D9C7 /* HorizontalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */; };
+		B758A6E3212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B758A6E2212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift */; };
+		B758A6E5212D1C8D0084D9C7 /* AlbumViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B758A6E4212D1C8D0084D9C7 /* AlbumViewCollectionViewCell.swift */; };
 		B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2220E0600E0012C34F /* AppDelegate.swift */; };
 		B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2420E0600E0012C34F /* HomeViewController.swift */; };
 		B75EBD2820E0600E0012C34F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75EBD2620E0600E0012C34F /* Main.storyboard */; };
@@ -41,13 +42,14 @@
 		B735668A20FEF41B0038370A /* MetadataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataModel.swift; sourceTree = "<group>"; };
 		B735668C21017E470038370A /* AlbumZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumZoomViewController.swift; sourceTree = "<group>"; };
 		B7356690210195FA0038370A /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
-		B7356695211BDC370038370A /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		B7356699211BDCB70038370A /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		B735669A211BDCB70038370A /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B74F53E6211D296A008A3C6E /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollection.swift; sourceTree = "<group>"; };
+		B758A6E2212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		B758A6E4212D1C8D0084D9C7 /* AlbumViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		B75EBD1F20E0600E0012C34F /* Kaptify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kaptify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75EBD2220E0600E0012C34F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B75EBD2420E0600E0012C34F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -110,12 +112,94 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		B7356692211BDB260038370A /* Comments_Flow */ = {
+		B758A6D6212D1A200084D9C7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B7356695211BDC370038370A /* CommentsTableViewController.swift */,
+				B758A6D9212D1A4C0084D9C7 /* Controllers */,
+				B758A6D8212D1A460084D9C7 /* Views */,
 			);
-			path = Comments_Flow;
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B758A6D7212D1A290084D9C7 /* AlbumZoom */ = {
+			isa = PBXGroup;
+			children = (
+				B758A6DC212D1ACB0084D9C7 /* Controllers */,
+				B758A6DE212D1AF70084D9C7 /* Views */,
+			);
+			path = AlbumZoom;
+			sourceTree = "<group>";
+		};
+		B758A6D8212D1A460084D9C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */,
+				B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */,
+				B7356690210195FA0038370A /* DropDownView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B758A6D9212D1A4C0084D9C7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B75EBD2420E0600E0012C34F /* HomeViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B758A6DA212D1A8E0084D9C7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B758A6DB212D1A980084D9C7 /* Controllers */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		B758A6DB212D1A980084D9C7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7E21D8A20F83D0E00D60FE1 /* ProfileViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B758A6DC212D1ACB0084D9C7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B735668C21017E470038370A /* AlbumZoomViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B758A6DD212D1ADC0084D9C7 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */,
+				B7C05F2620E34DF600B26E0A /* LoginViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		B758A6DE212D1AF70084D9C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B74F53E6211D296A008A3C6E /* MenuBar.swift */,
+				B758A6DF212D1B870084D9C7 /* CollectionViews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B758A6DF212D1B870084D9C7 /* CollectionViews */ = {
+			isa = PBXGroup;
+			children = (
+				B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */,
+				B7356699211BDCB70038370A /* CommentTableViewCell.swift */,
+				B735669A211BDCB70038370A /* CommentTableViewCell.xib */,
+				B758A6E2212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift */,
+				B758A6E4212D1C8D0084D9C7 /* AlbumViewCollectionViewCell.swift */,
+			);
+			path = CollectionViews;
 			sourceTree = "<group>";
 		};
 		B75EBD1620E0600E0012C34F = {
@@ -139,8 +223,11 @@
 		B75EBD2120E0600E0012C34F /* Kaptify */ = {
 			isa = PBXGroup;
 			children = (
+				B758A6DD212D1ADC0084D9C7 /* Registration */,
+				B758A6DA212D1A8E0084D9C7 /* Profile */,
+				B758A6D7212D1A290084D9C7 /* AlbumZoom */,
+				B758A6D6212D1A200084D9C7 /* Home */,
 				B735668720FEF3F00038370A /* Model */,
-				B7C05F3320E5F7C500B26E0A /* Views */,
 				B75EBD3420E066900012C34F /* Controllers */,
 				B735668420FEF3AF0038370A /* Networking */,
 				B7C05F2920E5C48C00B26E0A /* Extensions */,
@@ -157,12 +244,7 @@
 		B75EBD3420E066900012C34F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B75EBD2420E0600E0012C34F /* HomeViewController.swift */,
-				B7E21D8A20F83D0E00D60FE1 /* ProfileViewController.swift */,
 				B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */,
-				B735668C21017E470038370A /* AlbumZoomViewController.swift */,
-				B7356692211BDB260038370A /* Comments_Flow */,
-				B7C05F2C20E5C4EC00B26E0A /* Registration_Flow */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -173,29 +255,6 @@
 				B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		B7C05F2C20E5C4EC00B26E0A /* Registration_Flow */ = {
-			isa = PBXGroup;
-			children = (
-				B73BBE6720E06FC700F27C16 /* RegisterViewController.swift */,
-				B7C05F2620E34DF600B26E0A /* LoginViewController.swift */,
-			);
-			path = Registration_Flow;
-			sourceTree = "<group>";
-		};
-		B7C05F3320E5F7C500B26E0A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */,
-				B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */,
-				B7356690210195FA0038370A /* DropDownView.swift */,
-				B7356699211BDCB70038370A /* CommentTableViewCell.swift */,
-				B735669A211BDCB70038370A /* CommentTableViewCell.xib */,
-				B74F53E6211D296A008A3C6E /* MenuBar.swift */,
-				B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +380,7 @@
 			files = (
 				B7C05F2720E34DF600B26E0A /* LoginViewController.swift in Sources */,
 				B735668B20FEF41B0038370A /* MetadataModel.swift in Sources */,
+				B758A6E3212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift in Sources */,
 				B74F53E7211D296A008A3C6E /* MenuBar.swift in Sources */,
 				B735668920FEF4060038370A /* AlbumModel.swift in Sources */,
 				B7356691210195FA0038370A /* DropDownView.swift in Sources */,
@@ -328,7 +388,6 @@
 				B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */,
 				B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */,
 				B735669B211BDCB70038370A /* CommentTableViewCell.swift in Sources */,
-				B7356697211BDC370038370A /* CommentsTableViewController.swift in Sources */,
 				B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */,
 				B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */,
 				B758A6D1212BA8E60084D9C7 /* HorizontalCollection.swift in Sources */,
@@ -336,6 +395,7 @@
 				B735668D21017E470038370A /* AlbumZoomViewController.swift in Sources */,
 				B7E21D8B20F83D0E00D60FE1 /* ProfileViewController.swift in Sources */,
 				B7E21D8520EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift in Sources */,
+				B758A6E5212D1C8D0084D9C7 /* AlbumViewCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
