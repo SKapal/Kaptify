@@ -26,6 +26,7 @@ class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDa
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
         
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -107,7 +108,7 @@ class CommentsViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDa
         
         cell.usernameLabel.text = "Splashbruh"
         cell.dateLabel.text = "Today"
-        cell.commentLabel.text = "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been"
+        cell.commentLabel.text = "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the"
         cell.backgroundColor = .clear
         return cell
     }
@@ -117,11 +118,11 @@ class CommentsViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 15
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        print(UITableViewAutomaticDimension)
+        
         return UITableViewAutomaticDimension
     }
     
@@ -136,6 +137,13 @@ class CommentsViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDa
         tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.layoutMargins = UIEdgeInsets.zero
+        
 
         tableView.register(UINib(nibName: "CommentTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
@@ -147,6 +155,11 @@ class CommentsViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDa
         tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.layoutMargins = UIEdgeInsets.zero
+        
     }
     
     
@@ -333,8 +346,8 @@ class AlbumViewCell: UICollectionViewCell {
     }
     
     fileprivate func setupOpenButton() {
-        openButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 50).isActive = true
         openButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        openButton.topAnchor.constraint(greaterThanOrEqualTo: albumArtistLabel.bottomAnchor, constant: 50).isActive = true
     }
     
     
