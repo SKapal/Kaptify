@@ -205,6 +205,7 @@
 		B75EBD1620E0600E0012C34F = {
 			isa = PBXGroup;
 			children = (
+				B75EBD2920E060100012C34F /* Assets.xcassets */,
 				B75EBD2120E0600E0012C34F /* Kaptify */,
 				B75EBD2020E0600E0012C34F /* Products */,
 				7C3EE87DAB4D42EF58F905A5 /* Pods */,
@@ -233,7 +234,6 @@
 				B7C05F2920E5C48C00B26E0A /* Extensions */,
 				B75EBD2220E0600E0012C34F /* AppDelegate.swift */,
 				B75EBD2620E0600E0012C34F /* Main.storyboard */,
-				B75EBD2920E060100012C34F /* Assets.xcassets */,
 				B75EBD2B20E060100012C34F /* LaunchScreen.storyboard */,
 				B75EBD2E20E060100012C34F /* Info.plist */,
 				B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */,
