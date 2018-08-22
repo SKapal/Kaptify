@@ -10,8 +10,12 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+protocol ScrollMenuDelegate {
+    func scrollToMenuIndex(menuIndex: Int)
+}
 
-class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ScrollMenuDelegate {
     
     var selectedAlbumImage: UIImage?
     var selectedAlbumTitle: String?
@@ -19,6 +23,8 @@ class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDa
     var selectedAlbumReleaseDate: String?
     var selectedAlbumURL: String?
     var selectedAlbumId:String?
+    
+    var menuBar: MenuBar?
     
     let cellId = "cellIdentifier"
     let cellId2 =  "cellIdentifier2"
@@ -40,7 +46,6 @@ class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDa
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         self.addSubview(collectionView)
         collectionView.register(AlbumViewCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(CommentsTableViewCollectionViewCell.self, forCellWithReuseIdentifier: cellId2)
@@ -87,12 +92,27 @@ class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDa
         return CGSize(width: frame.width, height: frame.height)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.menuBar?.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 2
+    }
+    
     fileprivate func setupCollectionView() {
         collectionView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+    }
+    
+    func scrollToMenuIndex(menuIndex: Int) {
+        let index = IndexPath(item: menuIndex, section: 0)
+        self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let scrollIndex = IndexPath(item: Int(targetContentOffset.pointee.x / self.frame.width), section: 0)
+        
+        menuBar?.collectionView.selectItem(at: scrollIndex, animated: true, scrollPosition: .centeredHorizontally)
     }
 }
 

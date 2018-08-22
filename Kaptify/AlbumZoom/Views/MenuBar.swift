@@ -11,8 +11,10 @@ import UIKit
 class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellIdentifier"
-    
+    var scrollDelegate: ScrollMenuDelegate?
     let menuTitles = ["Album", "Comments"]
+    
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,14 +53,19 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         setupHorizontalBar()
         
     }
+    
+
+    
     func setupHorizontalBar() {
         
         addSubview(horizontalBarView)
         
-        horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarLeftAnchorConstraint?.isActive = true
         horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
         horizontalBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/8).isActive = true
+        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -77,23 +84,12 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
-            animateBar("left")
+            scrollDelegate?.scrollToMenuIndex(menuIndex: indexPath.item)
         } else {
-            animateBar("right")
+            scrollDelegate?.scrollToMenuIndex(menuIndex: indexPath.item)
         }
     }
     
-    func animateBar(_ direction: String) {
-        if direction == "left" {
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.horizontalBarView.frame.origin.x = self.frame.origin.x
-            }, completion: nil)
-        } else {
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.horizontalBarView.frame.origin.x = self.frame.width / 2
-            }, completion: nil)
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: frame.width/2, height: frame.height)

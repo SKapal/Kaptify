@@ -33,7 +33,6 @@ class AlbumZoomViewController: UIViewController{
     
     lazy var menuCollection: HorizontalCollection = {
         let collection = HorizontalCollection(frame: .zero)
-        
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
@@ -95,6 +94,9 @@ class AlbumZoomViewController: UIViewController{
     
     //MARK: Setup view constraints & pass data to UI
     fileprivate func setupMenuCollection() {
+        
+        menuCollection.menuBar = self.menuBar
+        
         menuCollection.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         menuCollection.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
         menuCollection.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
@@ -111,6 +113,7 @@ class AlbumZoomViewController: UIViewController{
 
     
     fileprivate func setupMenuBar() {
+        menuBar.scrollDelegate = self.menuCollection
         menuBar.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         menuBar.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         menuBar.topAnchor.constraint(equalTo: self.slideImage.topAnchor).isActive = true
