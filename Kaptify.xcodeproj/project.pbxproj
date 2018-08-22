@@ -103,18 +103,10 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		B735668720FEF3F00038370A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B735668820FEF4060038370A /* AlbumModel.swift */,
-				B735668A20FEF41B0038370A /* MetadataModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		B758A6D6212D1A200084D9C7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B758A6E6212D1DE00084D9C7 /* Models */,
 				B758A6D9212D1A4C0084D9C7 /* Controllers */,
 				B758A6D8212D1A460084D9C7 /* Views */,
 			);
@@ -124,6 +116,7 @@
 		B758A6D7212D1A290084D9C7 /* AlbumZoom */ = {
 			isa = PBXGroup;
 			children = (
+				B758A6E7212D1E220084D9C7 /* Models */,
 				B758A6DC212D1ACB0084D9C7 /* Controllers */,
 				B758A6DE212D1AF70084D9C7 /* Views */,
 			);
@@ -143,6 +136,7 @@
 		B758A6D9212D1A4C0084D9C7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */,
 				B75EBD2420E0600E0012C34F /* HomeViewController.swift */,
 			);
 			path = Controllers;
@@ -202,6 +196,22 @@
 			path = CollectionViews;
 			sourceTree = "<group>";
 		};
+		B758A6E6212D1DE00084D9C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B735668820FEF4060038370A /* AlbumModel.swift */,
+				B735668A20FEF41B0038370A /* MetadataModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B758A6E7212D1E220084D9C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B75EBD1620E0600E0012C34F = {
 			isa = PBXGroup;
 			children = (
@@ -228,8 +238,6 @@
 				B758A6DA212D1A8E0084D9C7 /* Profile */,
 				B758A6D7212D1A290084D9C7 /* AlbumZoom */,
 				B758A6D6212D1A200084D9C7 /* Home */,
-				B735668720FEF3F00038370A /* Model */,
-				B75EBD3420E066900012C34F /* Controllers */,
 				B735668420FEF3AF0038370A /* Networking */,
 				B7C05F2920E5C48C00B26E0A /* Extensions */,
 				B75EBD2220E0600E0012C34F /* AppDelegate.swift */,
@@ -239,14 +247,6 @@
 				B74BB67420E1D41300C9DA19 /* GoogleService-Info.plist */,
 			);
 			path = Kaptify;
-			sourceTree = "<group>";
-		};
-		B75EBD3420E066900012C34F /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		B7C05F2920E5C48C00B26E0A /* Extensions */ = {
