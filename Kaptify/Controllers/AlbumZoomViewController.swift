@@ -84,7 +84,7 @@ class AlbumZoomViewController: UIViewController{
         self.view.addSubview(slideImage)
         self.view.addSubview(menuCollection)
         
-        
+
         self.setupMenuBar()
         self.setupBlur()
         
@@ -99,7 +99,16 @@ class AlbumZoomViewController: UIViewController{
         menuCollection.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
         menuCollection.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         menuCollection.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        
+        self.menuCollection.selectedAlbumArtist = selectedAlbumArtist
+        self.menuCollection.selectedAlbumTitle = selectedAlbumTitle
+        self.menuCollection.selectedAlbumImage = selectedAlbumImage
+        self.menuCollection.selectedAlbumId = selectedAlbumId
+        self.menuCollection.selectedAlbumURL = selectedAlbumURL
+        self.menuCollection.selectedAlbumReleaseDate = selectedAlbumReleaseDate
+        
     }
+
     
     fileprivate func setupMenuBar() {
         menuBar.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true

@@ -273,14 +273,16 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     
     // Display album zoom view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let albumZoom = AlbumZoomViewController()
         albumZoom.modalPresentationStyle = .overFullScreen
+        
         albumZoom.selectedAlbumTitle = albums[indexPath.item].name!
         albumZoom.selectedAlbumArtist = albums[indexPath.item].artistName!
         albumZoom.selectedAlbumReleaseDate = albums[indexPath.item].releaseDate!
         albumZoom.selectedAlbumURL = albums[indexPath.item].url!
         albumZoom.selectedAlbumId = albums[indexPath.item].id!
-        
+
         if let artwork = self.albums[indexPath.item].artworkUrl100, let imageURL = URL(string: artwork) {
             // Load image data on background thread
             DispatchQueue.global().async {
@@ -293,7 +295,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
                         self.present(albumZoom, animated: true, completion: nil)
                     }
                 }
-                
+
             }
         }
     }
