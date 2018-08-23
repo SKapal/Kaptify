@@ -21,6 +21,7 @@
 		B758A6D1212BA8E60084D9C7 /* HorizontalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */; };
 		B758A6E3212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B758A6E2212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift */; };
 		B758A6E5212D1C8D0084D9C7 /* AlbumViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B758A6E4212D1C8D0084D9C7 /* AlbumViewCollectionViewCell.swift */; };
+		B758A6EB212E34C90084D9C7 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B758A6EA212E34C90084D9C7 /* CommentModel.swift */; };
 		B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2220E0600E0012C34F /* AppDelegate.swift */; };
 		B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75EBD2420E0600E0012C34F /* HomeViewController.swift */; };
 		B75EBD2820E0600E0012C34F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75EBD2620E0600E0012C34F /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		B758A6D0212BA8E60084D9C7 /* HorizontalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollection.swift; sourceTree = "<group>"; };
 		B758A6E2212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		B758A6E4212D1C8D0084D9C7 /* AlbumViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		B758A6EA212E34C90084D9C7 /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		B75EBD1F20E0600E0012C34F /* Kaptify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kaptify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75EBD2220E0600E0012C34F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B75EBD2420E0600E0012C34F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		B758A6E7212D1E220084D9C7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B758A6EA212E34C90084D9C7 /* CommentModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */,
 				B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */,
 				B735669B211BDCB70038370A /* CommentTableViewCell.swift in Sources */,
+				B758A6EB212E34C90084D9C7 /* CommentModel.swift in Sources */,
 				B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */,
 				B75EBD2320E0600E0012C34F /* AppDelegate.swift in Sources */,
 				B758A6D1212BA8E60084D9C7 /* HorizontalCollection.swift in Sources */,

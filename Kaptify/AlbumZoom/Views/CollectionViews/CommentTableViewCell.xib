@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ivY-Em-CA0">
-                        <rect key="frame" x="8" y="19" width="144" height="20.5"/>
+                        <rect key="frame" x="8" y="12" width="144" height="20.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SahilKapal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-Yx-78H" userLabel="usernameLabel">
                                 <rect key="frame" x="0.0" y="0.0" width="86.5" height="20.5"/>
@@ -43,7 +43,7 @@
                         </subviews>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kro-EM-Dnl" userLabel="commentLabel">
-                        <rect key="frame" x="8" y="47.5" width="349" height="160.5"/>
+                        <rect key="frame" x="8" y="40.5" width="349" height="160.5"/>
                         <string key="text">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been</string>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                         <nil key="textColor"/>
@@ -53,7 +53,7 @@
                 <constraints>
                     <constraint firstItem="ivY-Em-CA0" firstAttribute="leading" secondItem="kro-EM-Dnl" secondAttribute="leading" id="2yv-BR-wwC"/>
                     <constraint firstItem="kro-EM-Dnl" firstAttribute="top" secondItem="ivY-Em-CA0" secondAttribute="bottom" constant="8" id="38r-Bp-gGn"/>
-                    <constraint firstItem="ivY-Em-CA0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="XwJ-tX-ku5"/>
+                    <constraint firstItem="ivY-Em-CA0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="XwJ-tX-ku5"/>
                     <constraint firstAttribute="trailing" secondItem="kro-EM-Dnl" secondAttribute="trailing" constant="8" id="nRk-no-UQG"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kro-EM-Dnl" secondAttribute="bottom" constant="8" id="zRq-8f-dld"/>
                     <constraint firstItem="kro-EM-Dnl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="zoW-3v-3Df"/>

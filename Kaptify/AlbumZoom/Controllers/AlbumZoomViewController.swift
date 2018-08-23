@@ -65,8 +65,32 @@ class AlbumZoomViewController: UIViewController{
         
         let slide = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler(gesture:)))
         view.addGestureRecognizer(slide)
+        
+        // sub to notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: .UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillChangeFrame, object: nil)
+    }
+
+    @objc func keyboardWillChange(notification: Notification) {
+        
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        if notification.name == Notification.Name.UIKeyboardWillShow {
+            self.view.frame.origin.y = -keyboardRect.height
+        } else {
+            self.view.frame.origin.y = 0
+        }
+        
+    }
+
     let blur: UIVisualEffectView = {
         let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
         let blurredView = UIVisualEffectView(effect: blur)
