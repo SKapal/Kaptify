@@ -75,7 +75,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         cell.titleLabel.text = self.menuTitles[indexPath.item]
         cell.titleLabel.textColor = .white
-        let font = UIFont(name: "HelveticaNeue-Medium", size: 16)
+        let font = UIFont(name: "HelveticaNeue-Light", size: 16)
         cell.titleLabel.font = font
         //cell.isSelected = indexPath.item == 0 ? true : false
        // cell.isHighlighted = indexPath.item == 0 ? true : false
@@ -129,8 +129,8 @@ class MenuCell: UICollectionViewCell {
         return label
     }()
     
-    let selectedFont = UIFont(name: "HelveticaNeue-Medium", size: 24)
-    let unselectedFont = UIFont(name: "HelveticaNeue-Medium", size: 16)
+    let selectedFont = UIFont(name: "HelveticaNeue-Bold", size: 16)
+    let unselectedFont = UIFont(name: "HelveticaNeue-Light", size: 16)
     
     override var isHighlighted: Bool {
         didSet {
