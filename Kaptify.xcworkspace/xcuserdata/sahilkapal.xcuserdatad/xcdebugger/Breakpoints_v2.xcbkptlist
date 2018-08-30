@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
             endingLineNumber = "65"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkName = "handlePost()"
             landmarkType = "7">
             <Locations>
                <Location

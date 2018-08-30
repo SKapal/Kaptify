@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CommentModel {
+struct Comment {
     let username: String?
     let date: String?
     let comment: String?

@@ -25,6 +25,7 @@ class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDa
     var selectedAlbumId:String?
     
     var menuBar: MenuBar?
+
     
     let cellId = "cellIdentifier"
     let cellId2 =  "cellIdentifier2"
@@ -50,6 +51,7 @@ class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDa
         collectionView.register(AlbumViewCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(CommentsTableViewCollectionViewCell.self, forCellWithReuseIdentifier: cellId2)
         self.setupCollectionView()
+        
         
     }
     
@@ -82,7 +84,8 @@ class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDa
             
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId2, for: indexPath) as! CommentsTableViewCollectionViewCell
-            
+            cell.parent = self
+            cell.populateView();
             return cell
         }
         

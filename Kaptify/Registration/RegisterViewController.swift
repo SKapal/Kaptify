@@ -129,6 +129,7 @@ class RegisterViewController: UIViewController {
         }
         
         // Register user to firebase
+        
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, err) in
             if err != nil {
                 print(err!)
@@ -143,12 +144,23 @@ class RegisterViewController: UIViewController {
             let usersRef = ref.child("Users").child(uid)
             let values = ["Username": username, "Email": email]
             
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+            changeRequest?.displayName = username
+            changeRequest?.commitChanges(completion: { (changeError) in
+                if (changeError != nil) {
+                    print(changeError!)
+                    return
+                }
+            })
+            
             usersRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
                 if error != nil {
                     print(error ?? "Error occured")
                     return
                 }
             })
+            
+            
             /* Authentication successful, pop loginview */
             self.dismiss(animated: true, completion: nil)
             // maybe show a wheel load spin?

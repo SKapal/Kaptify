@@ -8,11 +8,18 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var tableView = UITableView()
     let cellIdentifier = "commentCellIdentifier"
+    var fBaseRef: DatabaseReference?
+    
+    var parent: HorizontalCollection?
+    
+    var comments = [Comment]()
     
     let commentField: UITextField = {
         let tf = UITextField()
@@ -38,7 +45,62 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     }()
     
     @objc func handlePost() {
-        print(123)
+        guard let comment = self.commentField.text, let user = Auth.auth().currentUser, let albumID = parent?.selectedAlbumId, let username = user.displayName else { return }
+        if !(comment.count > 0) {
+            commentField.resignFirstResponder()
+            return
+        }
+
+        guard let commentsRef = fBaseRef?.child("Comments"), let post = fBaseRef?.child("Comments").childByAutoId(), let albumRef = fBaseRef?.child("Albums").child(albumID), let userRef = fBaseRef?.child("Users").child(user.uid) else {return}
+        let dispatchGroup = DispatchGroup()
+        
+        // add to Comments block
+        dispatchGroup.enter()
+        commentsRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            post.child(albumID).setValue(true)
+            post.child(user.uid).setValue(true)
+            post.child("Username").setValue(username)
+            post.child("Comment").setValue(comment)
+            post.child("Date").setValue(self.getDate())
+            
+            dispatchGroup.leave()
+        })
+        
+        dispatchGroup.notify(queue: DispatchQueue.global(qos: .background)) {
+            commentsRef.observeSingleEvent(of: .value) { (snapshot) in
+                for comment in snapshot.children {
+                    guard let commentSnap = comment as? DataSnapshot else {return}
+                    if let value = commentSnap.childSnapshot(forPath: albumID).value as? Bool {
+                        if value == true {
+                            let commentID = commentSnap.key
+                            // add to Album block
+                            albumRef.child("Comments").child(commentID).setValue(true)
+                            albumRef.child("Comments_by").child(user.uid).setValue(true)
+                            // add to User block
+                            userRef.child("Commented_albums").child(albumID).setValue(true)
+                            userRef.child("Comments").child(commentID).setValue(true)
+                        }
+                    }
+                }
+            }
+        }
+        
+
+        commentField.text = ""
+        commentField.resignFirstResponder()
+        
+    }
+    
+    func getDate() -> String {
+        let date = Date()
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: date)
+        let month = calendar.component(.month, from: date)
+        let year = calendar.component(.year, from: date)
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        
+        return "\(day)/\(month)/\(year) \(hour):\(minute)"
     }
     
     let blur: UIVisualEffectView = {
@@ -51,9 +113,9 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CommentTableViewCell
         cell.selectionStyle = .none
-        cell.usernameLabel.text = "Splashbruh"
-        cell.dateLabel.text = "Today"
-        cell.commentLabel.text = "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. \n\nLorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been is simply dummy text of the is simply dummy text of the printing and typesetting industry. \n\nLorem Ipsum has been is simply dummy text of the"
+        cell.usernameLabel.text = comments[indexPath.row].username
+        cell.dateLabel.text = comments[indexPath.row].date
+        cell.commentLabel.text = comments[indexPath.row].comment
         cell.backgroundColor = .clear
         return cell
     }
@@ -63,7 +125,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return comments.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -74,6 +136,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.fBaseRef = Database.database().reference()
         
         self.addSubview(tableView)
         self.addSubview(commentField)
@@ -86,6 +149,27 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         self.setupCommentField()
         self.setupBlur()
         self.setupPostButton()
+        //self.populateView()
+    }
+
+    
+    func populateView() {
+        guard let albumID = self.parent?.selectedAlbumId else {return}
+        fBaseRef?.child("Comments").observeSingleEvent(of: .value, with: { (snapshot) in
+            for comment in snapshot.children {
+                guard let commentSnap = comment as? DataSnapshot else {return}
+                if commentSnap.hasChild(albumID) {
+                    guard
+                        let username = commentSnap.childSnapshot(forPath: "Username").value as? String,
+                        let date = commentSnap.childSnapshot(forPath: "Date").value as? String,
+                        let comment = commentSnap.childSnapshot(forPath: "Comment").value as? String else { return }
+                    self.comments.append(Comment(username: username, date: date, comment: comment))
+                }
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
         
     }
     
