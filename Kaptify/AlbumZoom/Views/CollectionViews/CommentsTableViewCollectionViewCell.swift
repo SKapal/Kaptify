@@ -39,7 +39,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         button.setImage(postIV.image, for: .normal)
         
         button.addTarget(self, action: #selector(handlePost), for: .touchUpInside)
-        
+        button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -136,7 +136,6 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         return UITableViewAutomaticDimension
     }
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.fBaseRef = Database.database().reference()
@@ -144,9 +143,9 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         self.addSubview(tableView)
         self.addSubview(commentField)
         self.insertSubview(blur, aboveSubview: tableView)
-//        self.insertSubview(postButton, aboveSubview: blur)
         self.addSubview(postButton)
-        
+        self.bringSubview(toFront: postButton)
+        postButton.setNeedsDisplay()
 
         self.setupTableView()
         self.setupCommentField()
@@ -177,10 +176,10 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     }
     
     func setupPostButton() {
-        postButton.rightAnchor.constraint(equalTo: blur.rightAnchor, constant: -16).isActive = true
+        postButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         postButton.topAnchor.constraint(equalTo: commentField.topAnchor).isActive = true
-        postButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         postButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        postButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     func setupBlur() {
@@ -192,9 +191,9 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     
     func setupCommentField() {
         commentField.delegate = self
-        commentField.leftAnchor.constraint(equalTo: blur.leftAnchor, constant: 16).isActive = true
+        commentField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         commentField.rightAnchor.constraint(equalTo: postButton.leftAnchor, constant: -16).isActive = true
-        commentField.bottomAnchor.constraint(equalTo: self.blur.bottomAnchor, constant: -10).isActive = true
+        commentField.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         commentField.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
     
