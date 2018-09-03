@@ -62,7 +62,10 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
             post.child("Username").setValue(username)
             post.child("Comment").setValue(comment)
             post.child("Date").setValue(self.getDate())
-            
+            self.comments.append(Comment(username: username, date: self.getDate(), comment: comment))
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             dispatchGroup.leave()
         })
         
@@ -152,7 +155,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         //self.populateView()
     }
 
-    
+
     func populateView() {
         guard let albumID = self.parent?.selectedAlbumId else {return}
         fBaseRef?.child("Comments").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -203,6 +206,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     func setupTableView() {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.tableFooterView = UIView()
         
         tableView.backgroundColor = .clear
         tableView.delegate = self

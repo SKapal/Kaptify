@@ -13,53 +13,5 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kaptify/AlbumZoom/Views/CollectionViews/CommentsTableViewCollectionViewCell.swift"
-            timestampString = "557121476.891167"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "handlePost()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.DataSnapshot) -&gt; () in Kaptify.CommentsTableViewCollectionViewCell.handlePost() -&gt; ()"
-                  moduleName = "Kaptify"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sahilkapal/Documents/~Self-Study/Development/Kaptify/App/Kaptify/Kaptify/AlbumZoom/Views/CollectionViews/CommentsTableViewCollectionViewCell.swift"
-                  timestampString = "557121476.943976"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "1156">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (__ObjC.DataSnapshot) -&gt; () in Kaptify.CommentsTableViewCollectionViewCell.handlePost() -&gt; ()"
-                  moduleName = "Kaptify"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sahilkapal/Documents/~Self-Study/Development/Kaptify/App/Kaptify/Kaptify/AlbumZoom/Views/CollectionViews/CommentsTableViewCollectionViewCell.swift"
-                  timestampString = "557121476.9489599"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "14">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
