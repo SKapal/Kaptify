@@ -22,6 +22,7 @@ class DataFetcher {
             
             do {
                 let obj = try JSONDecoder().decode(object.self, from: data)
+                
                 guard let results = obj.feed?.results else {
                     completion(nil, error)
                     return

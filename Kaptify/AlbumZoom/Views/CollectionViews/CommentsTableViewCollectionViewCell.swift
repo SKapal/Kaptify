@@ -23,7 +23,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     
     let commentField: UITextField = {
         let tf = UITextField()
-        let font = UIFont(name: "HelveticaNeue-Light", size: 17)
+        let font = UIFont(name: "HelveticaNeue-Regular", size: 17)
         tf.font = font
         tf.textColor = .white
         tf.placeholder = "Add comment"
@@ -33,11 +33,9 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     
     lazy var postButton: UIButton = {
         let button = UIButton(type: .system)
-        let postImage = UIImage(named: "post")?.withRenderingMode(.alwaysOriginal)
-        let postIV = UIImageView(image: postImage)
-        postIV.contentMode = .scaleAspectFit
-        button.setImage(postIV.image, for: .normal)
-        
+        button.setTitle("Post", for: .normal)
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 17)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handlePost), for: .touchUpInside)
         button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -178,8 +176,8 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     func setupPostButton() {
         postButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         postButton.topAnchor.constraint(equalTo: commentField.topAnchor).isActive = true
-        postButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        postButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        postButton.heightAnchor.constraint(equalTo: self.commentField.heightAnchor).isActive = true
+        postButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
     func setupBlur() {
