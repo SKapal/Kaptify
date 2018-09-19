@@ -237,10 +237,7 @@
 		B75EBD2120E0600E0012C34F /* Kaptify */ = {
 			isa = PBXGroup;
 			children = (
-				B758A6DD212D1ADC0084D9C7 /* Registration */,
-				B758A6DA212D1A8E0084D9C7 /* Profile */,
-				B758A6D7212D1A290084D9C7 /* AlbumZoom */,
-				B758A6D6212D1A200084D9C7 /* Home */,
+				B7D730EA2152FC5E009EA069 /* Screens */,
 				B735668420FEF3AF0038370A /* Networking */,
 				B7C05F2920E5C48C00B26E0A /* Extensions */,
 				B75EBD2220E0600E0012C34F /* AppDelegate.swift */,
@@ -258,6 +255,17 @@
 				B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B7D730EA2152FC5E009EA069 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				B758A6D6212D1A200084D9C7 /* Home */,
+				B758A6DA212D1A8E0084D9C7 /* Profile */,
+				B758A6D7212D1A290084D9C7 /* AlbumZoom */,
+				B758A6DD212D1ADC0084D9C7 /* Registration */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

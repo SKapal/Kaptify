@@ -14,6 +14,7 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor =  UIColor(r: 51, b: 51, g: 51)
+        self.setupNavigationBar()
     }
     
     private func setupNavigationBar() {
@@ -23,10 +24,5 @@ class ProfileViewController: UITableViewController {
         self.navigationItem.title = Auth.auth().currentUser?.displayName
     }
     
-    
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
     
 }
