@@ -30,6 +30,8 @@
 		B7C05F2720E34DF600B26E0A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2620E34DF600B26E0A /* LoginViewController.swift */; };
 		B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */; };
 		B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */; };
+		B7D730EE2152FD10009EA069 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D730EC2152FD10009EA069 /* TableViewCell.swift */; };
+		B7D730EF2152FD10009EA069 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D730ED2152FD10009EA069 /* TableViewCell.xib */; };
 		B7E21D8520EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */; };
 		B7E21D8620EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */; };
 		B7E21D8B20F83D0E00D60FE1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E21D8A20F83D0E00D60FE1 /* ProfileViewController.swift */; };
@@ -62,6 +64,8 @@
 		B7C05F2620E34DF600B26E0A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		B7D730EC2152FD10009EA069 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		B7D730ED2152FD10009EA069 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		B7E21D8A20F83D0E00D60FE1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 		B758A6DA212D1A8E0084D9C7 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B7D730EB2152FCF6009EA069 /* Views */,
 				B758A6DB212D1A980084D9C7 /* Controllers */,
 			);
 			path = Profile;
@@ -268,6 +273,15 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		B7D730EB2152FCF6009EA069 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B7D730EC2152FD10009EA069 /* TableViewCell.swift */,
+				B7D730ED2152FD10009EA069 /* TableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -330,6 +344,7 @@
 			files = (
 				B75EBD2D20E060100012C34F /* LaunchScreen.storyboard in Resources */,
 				B735669C211BDCB70038370A /* CommentTableViewCell.xib in Resources */,
+				B7D730EF2152FD10009EA069 /* TableViewCell.xib in Resources */,
 				B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */,
 				B7E21D8620EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib in Resources */,
 				B75EBD2A20E060100012C34F /* Assets.xcassets in Resources */,
@@ -394,6 +409,7 @@
 				B758A6E3212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift in Sources */,
 				B74F53E7211D296A008A3C6E /* MenuBar.swift in Sources */,
 				B735668920FEF4060038370A /* AlbumModel.swift in Sources */,
+				B7D730EE2152FD10009EA069 /* TableViewCell.swift in Sources */,
 				B7356691210195FA0038370A /* DropDownView.swift in Sources */,
 				B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */,
 				B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */,
