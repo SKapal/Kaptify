@@ -32,6 +32,7 @@
 		B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */; };
 		B7D730EE2152FD10009EA069 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D730EC2152FD10009EA069 /* TableViewCell.swift */; };
 		B7D730EF2152FD10009EA069 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D730ED2152FD10009EA069 /* TableViewCell.xib */; };
+		B7D730F22152FDBB009EA069 /* RecentActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D730F12152FDBB009EA069 /* RecentActivityModel.swift */; };
 		B7E21D8520EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */; };
 		B7E21D8620EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */; };
 		B7E21D8B20F83D0E00D60FE1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E21D8A20F83D0E00D60FE1 /* ProfileViewController.swift */; };
@@ -66,6 +67,7 @@
 		B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		B7D730EC2152FD10009EA069 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		B7D730ED2152FD10009EA069 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		B7D730F12152FDBB009EA069 /* RecentActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityModel.swift; sourceTree = "<group>"; };
 		B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		B7E21D8A20F83D0E00D60FE1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		B758A6DA212D1A8E0084D9C7 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B7D730F02152FD8F009EA069 /* Models */,
 				B7D730EB2152FCF6009EA069 /* Views */,
 				B758A6DB212D1A980084D9C7 /* Controllers */,
 			);
@@ -280,6 +283,14 @@
 				B7D730ED2152FD10009EA069 /* TableViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B7D730F02152FD8F009EA069 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B7D730F12152FDBB009EA069 /* RecentActivityModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,6 +425,7 @@
 				B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */,
 				B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */,
 				B73BBE6820E06FC700F27C16 /* RegisterViewController.swift in Sources */,
+				B7D730F22152FDBB009EA069 /* RecentActivityModel.swift in Sources */,
 				B735669B211BDCB70038370A /* CommentTableViewCell.swift in Sources */,
 				B758A6EB212E34C90084D9C7 /* CommentModel.swift in Sources */,
 				B75EBD2520E0600E0012C34F /* HomeViewController.swift in Sources */,
