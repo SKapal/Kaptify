@@ -37,7 +37,7 @@ class RegisterViewController: UIViewController {
         return cancel
     }()
     
-    @objc func handleCancel() {
+    @objc private func handleCancel() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -186,7 +186,7 @@ class RegisterViewController: UIViewController {
         return message
     }()
     
-    @objc func handleLogin() {
+    @objc private func handleLogin() {
         let loginController = LoginViewController()
         present(loginController, animated: true, completion: nil)
     }
@@ -201,7 +201,7 @@ class RegisterViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
     }
     
-    func setupViewsAndConstraints() {
+    private func setupViewsAndConstraints() {
         // add subviews
         view.addSubview(loginCardImage)
         view.addSubview(loginButton)
@@ -232,14 +232,14 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: Setup view constraints
-    func setupLoginMessageLabel() {
+    private func setupLoginMessageLabel() {
         // x, y, width, height constraints
         loginMessageLabel.leftAnchor.constraint(equalTo: registerLabel.leftAnchor).isActive = true
         loginMessageLabel.topAnchor.constraint(equalTo: loginButton.topAnchor).isActive = true
         loginMessageLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupCancelButton() {
+    private func setupCancelButton() {
         // x, y, width, height constraints
         cancelButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50).isActive = true
         cancelButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
@@ -247,7 +247,7 @@ class RegisterViewController: UIViewController {
         cancelButton.heightAnchor.constraint(equalToConstant: CANCEL_HEIGHT).isActive = true
     }
     
-    func setupRegisterLabel() {
+    private func setupRegisterLabel() {
         // x, y, width, height constraints
         registerLabel.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         registerLabel.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
@@ -255,7 +255,7 @@ class RegisterViewController: UIViewController {
         registerLabel.widthAnchor.constraint(equalToConstant: 185).isActive = true
         registerLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
-    func setupUserTextField() {
+    private func setupUserTextField() {
         // x, y, width, height constraints
         userTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
         userTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
@@ -264,7 +264,7 @@ class RegisterViewController: UIViewController {
         userTextField.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupUserUIView() {
+    private func setupUserUIView() {
         // x, y, width, height constraints
         userUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         userUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
@@ -273,7 +273,7 @@ class RegisterViewController: UIViewController {
         userUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupEmailUIView() {
+    private func setupEmailUIView() {
         // x, y, width, height constraints
         emailUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         emailUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
@@ -282,7 +282,7 @@ class RegisterViewController: UIViewController {
         emailUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupPassUIView() {
+    private func setupPassUIView() {
         // x, y, width, height constraints
         passUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         passUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
@@ -291,7 +291,7 @@ class RegisterViewController: UIViewController {
         passUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupEmailTextField() {
+    private func setupEmailTextField() {
         // x, y, width, height constraints
         emailTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
         emailTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
@@ -300,7 +300,7 @@ class RegisterViewController: UIViewController {
         emailTextField.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupPassTextField() {
+    private func setupPassTextField() {
         // x, y, width, height constraints
         passTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
         passTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
@@ -310,7 +310,7 @@ class RegisterViewController: UIViewController {
     }
     
     
-    func setupRegisterButton() {
+    private func setupRegisterButton() {
         // x, y, width, height constraints
         registerButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         registerButton.topAnchor.constraint(equalTo: loginCardImage.bottomAnchor, constant: 12).isActive = true
@@ -318,14 +318,14 @@ class RegisterViewController: UIViewController {
         registerButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-    func setupLoginButton() {
+    private func setupLoginButton() {
         // x, y, width, height constraints
         loginButton.leftAnchor.constraint(equalTo: loginMessageLabel.rightAnchor, constant: 5).isActive = true
         loginButton.topAnchor.constraint(equalTo: registerButton.bottomAnchor, constant: 12).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 40).isActive = false
     }
     
-    func setupLoginCardImage() {
+    private func setupLoginCardImage() {
         // x, y, width, height constraints
         loginCardImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         loginCardImage.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -50).isActive = true

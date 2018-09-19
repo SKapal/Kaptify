@@ -7,20 +7,26 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor =  UIColor(r: 51, b: 51, g: 51)
-        
-        // add leftButton
-        self.navigationItem.leftItemsSupplementBackButton = true
-        // add title
-        let title = UIImage(named: "Logo_text")
-        let imageView = UIImageView(image: title)
-        imageView.contentMode = .scaleAspectFill
-        self.navigationItem.titleView = imageView
+    }
+    
+    private func setupNavigationBar() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.barStyle = .default
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationItem.title = Auth.auth().currentUser?.displayName
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
     }
     
 }

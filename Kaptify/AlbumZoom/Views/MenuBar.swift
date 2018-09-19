@@ -56,7 +56,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
 
     
-    func setupHorizontalBar() {
+    private func setupHorizontalBar() {
         
         addSubview(horizontalBarView)
         
@@ -149,7 +149,7 @@ class MenuCell: UICollectionViewCell {
         setupViews()
     }
 
-    func setupViews() {
+    private func setupViews() {
         backgroundColor = .clear
         
         self.addSubview(titleLabel)

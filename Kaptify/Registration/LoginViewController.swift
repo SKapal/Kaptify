@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         return cancel
     }()
     
-    @objc func handleCancel() {
+    @objc private func handleCancel() {
         dismissViewsOnSuccess()
     }
     
@@ -97,7 +97,7 @@ class LoginViewController: UIViewController {
         return login
     }()
     
-    @objc func handleLogin () {
+    @objc private func handleLogin () {
         guard let email = emailTextField.text, let password = passTextField.text else { return }
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
@@ -118,7 +118,7 @@ class LoginViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
     }
     
-    func setupViewsAndConstraints() {
+    private func setupViewsAndConstraints() {
         // Add subviews to view
 
         self.view.addSubview(cancelButton)
@@ -142,7 +142,7 @@ class LoginViewController: UIViewController {
         setupLoginButton()
     }
     
-    func setupCancelButton() {
+    private func setupCancelButton() {
         // x, y, width, height constraints
         cancelButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
         cancelButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
@@ -150,7 +150,7 @@ class LoginViewController: UIViewController {
         cancelButton.heightAnchor.constraint(equalToConstant: CANCEL_HEIGHT).isActive = true
     }
     
-    func setupLoginCardImage() {
+    private func setupLoginCardImage() {
         // x, y, width, height constraints
         loginCardImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         loginCardImage.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -50).isActive = true
@@ -158,7 +158,7 @@ class LoginViewController: UIViewController {
         loginCardImage.heightAnchor.constraint(equalToConstant: IMAGE_HEIGHT).isActive = true
     }
     
-    func setupLoginLabel() {
+    private func setupLoginLabel() {
         // x, y, width, height constraints
         loginLabel.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         loginLabel.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
@@ -167,7 +167,7 @@ class LoginViewController: UIViewController {
         loginLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupEmailUIView() {
+    private func setupEmailUIView() {
         // x, y, width, height constraints
         emailUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         emailUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
@@ -176,7 +176,7 @@ class LoginViewController: UIViewController {
         emailUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupPassUIView() {
+    private func setupPassUIView() {
         // x, y, width, height constraints
         passUIView.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 8).isActive = true
         passUIView.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -8).isActive = true
@@ -185,7 +185,7 @@ class LoginViewController: UIViewController {
         passUIView.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupEmailTextField() {
+    private func setupEmailTextField() {
         // x, y, width, height constraints
         emailTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
         emailTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
@@ -194,7 +194,7 @@ class LoginViewController: UIViewController {
         emailTextField.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupPassTextField() {
+    private func setupPassTextField() {
         // x, y, width, height constraints
         passTextField.leftAnchor.constraint(equalTo: loginCardImage.leftAnchor, constant: 12).isActive = true
         passTextField.rightAnchor.constraint(equalTo: loginCardImage.rightAnchor, constant: -12).isActive = true
@@ -203,7 +203,7 @@ class LoginViewController: UIViewController {
         passTextField.heightAnchor.constraint(equalToConstant: 28).isActive = true
     }
     
-    func setupLoginButton() {
+    private func setupLoginButton() {
         // x, y, width, height constraints
         loginButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         loginButton.topAnchor.constraint(equalTo: loginCardImage.bottomAnchor, constant: 12).isActive = true

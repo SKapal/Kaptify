@@ -99,7 +99,7 @@ class HorizontalCollection: UIView, UICollectionViewDelegate, UICollectionViewDa
         self.menuBar?.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 2
     }
     
-    fileprivate func setupCollectionView() {
+    private func setupCollectionView() {
         collectionView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true

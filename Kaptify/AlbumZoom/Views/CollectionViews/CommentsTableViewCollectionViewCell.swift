@@ -153,7 +153,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     }
 
 
-    func populateView() {
+    public func populateView() {
         guard let albumID = self.parent?.selectedAlbumId else {return}
         fBaseRef?.child("Comments").observeSingleEvent(of: .value, with: { (snapshot) in
             for comment in snapshot.children {
@@ -173,21 +173,21 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         
     }
     
-    func setupPostButton() {
+    private func setupPostButton() {
         postButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
         postButton.topAnchor.constraint(equalTo: commentField.topAnchor).isActive = true
         postButton.heightAnchor.constraint(equalTo: self.commentField.heightAnchor).isActive = true
         postButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
-    func setupBlur() {
+    private func setupBlur() {
         blur.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         blur.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         blur.topAnchor.constraint(equalTo: commentField.topAnchor, constant: -10).isActive = true
         blur.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
-    func setupCommentField() {
+    private func setupCommentField() {
         commentField.delegate = self
         commentField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
         commentField.rightAnchor.constraint(equalTo: postButton.leftAnchor, constant: -16).isActive = true
@@ -200,7 +200,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         return true
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.tableFooterView = UIView()
