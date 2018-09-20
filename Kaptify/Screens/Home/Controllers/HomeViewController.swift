@@ -14,6 +14,7 @@ protocol NetworkRequestDelegate {
     func requestDataAndPopulateView(jsonString: String)
 }
 
+
 class HomeViewController: UIViewController, NetworkRequestDelegate {
     
     let dataFetcher = DataFetcher()
@@ -22,6 +23,8 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
     
     var albums = [Album]()
     var fbaseRef: DatabaseReference?
+
+    var imageCache: [String: UIImage] = [:]
     
     //MARK: Home View UI Elements
     let albumCollection: UICollectionView = {
@@ -245,20 +248,26 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
         
         guard let artwork = self.albums[indexPath.item].artworkUrl100 else { return UICollectionViewCell() }
         if let imageURL = URL(string: artwork) {
-            // Load image data on background thread
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageURL)
-                if let data = data {
-                    let image = UIImage(data: data)
-                    // Update UI on main thread
-                    DispatchQueue.main.async {
-                        cell.albumImage.image = image
-                        UIView.animate(withDuration: 1, animations: {
-                            cell.albumImage.alpha = 1
-                        })
+            if let cachedImage = imageCache[artwork] { // used cached image if available
+                cell.albumImage.image = cachedImage
+                cell.albumImage.alpha = 1
+            } else {
+                // Load image data on background thread
+                DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: imageURL)
+                    if let data = data {
+                        let image = UIImage(data: data)
+                        self.imageCache[artwork] = image
+                        // Update UI on main thread
+                        DispatchQueue.main.async {
+                            cell.albumImage.image = image
+                            UIView.animate(withDuration: 1, animations: {
+                                cell.albumImage.alpha = 1
+                            })
+                        }
                     }
+                    
                 }
-                
             }
         }
 
