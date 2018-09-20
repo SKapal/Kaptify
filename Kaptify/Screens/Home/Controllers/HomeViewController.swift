@@ -123,6 +123,10 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         requestDataAndPopulateView(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/25/explicit.json")
     }
     
+    override func didReceiveMemoryWarning() {
+        imageCache = [:]
+    }
+    
     public func requestDataAndPopulateView(jsonString: String) {
         dataFetcher.obtainData(jsonString: jsonString) { (result, err) in
             guard let payload = result else {return}
