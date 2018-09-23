@@ -49,7 +49,7 @@ class CustomTabBarController: UITabBarController {
     private func setupNavBarAppearance() {
         UINavigationBar.appearance().barTintColor = UIColor(r: 28, b: 27, g: 27)
         UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
     }
 

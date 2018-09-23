@@ -105,7 +105,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     }
     
     let blur: UIVisualEffectView = {
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
         let blurredView = UIVisualEffectView(effect: blur)
         blurredView.translatesAutoresizingMaskIntoConstraints = false
         return blurredView
@@ -131,7 +131,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     override init(frame: CGRect) {
@@ -142,7 +142,7 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         self.addSubview(commentField)
         self.insertSubview(blur, aboveSubview: tableView)
         self.addSubview(postButton)
-        self.bringSubview(toFront: postButton)
+        self.bringSubviewToFront(postButton)
         postButton.setNeedsDisplay()
 
         self.setupTableView()
@@ -212,8 +212,8 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         
         
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.layoutMargins = UIEdgeInsets.zero

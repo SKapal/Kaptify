@@ -104,6 +104,7 @@ class LoginViewController: UIViewController {
                 print(error ?? "Login error")
                 return
             }
+            print("\(email) signed in")
             self.dismissViewsOnSuccess()
         }
     }

@@ -130,13 +130,13 @@ class RegisterViewController: UIViewController {
         
         // Register user to firebase
         
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, err) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (user, err) in
             if err != nil {
                 print(err!)
                 return
             }
             
-            guard let uid = user?.uid else {
+            guard let uid = user?.user.uid else {
                 return
             }
             

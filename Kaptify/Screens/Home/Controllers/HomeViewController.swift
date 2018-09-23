@@ -32,7 +32,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: 150, height: 195)
-        layout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20)
+        layout.sectionInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .clear
         return collection
@@ -164,7 +164,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         self.view.addSubview(collectionBg)
         self.view.addSubview(albumCollection)
         self.view.addSubview(dropView)
-        self.view.bringSubview(toFront: dropView)
+        self.view.bringSubviewToFront(dropView)
         
         setupCollectionBg()
         setupAlbumCollection()

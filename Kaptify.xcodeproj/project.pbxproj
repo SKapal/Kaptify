@@ -30,8 +30,8 @@
 		B7C05F2720E34DF600B26E0A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2620E34DF600B26E0A /* LoginViewController.swift */; };
 		B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */; };
 		B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */; };
-		B7D730EE2152FD10009EA069 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D730EC2152FD10009EA069 /* TableViewCell.swift */; };
-		B7D730EF2152FD10009EA069 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D730ED2152FD10009EA069 /* TableViewCell.xib */; };
+		B7D730EE2152FD10009EA069 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D730EC2152FD10009EA069 /* ProfileTableViewCell.swift */; };
+		B7D730EF2152FD10009EA069 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7D730ED2152FD10009EA069 /* ProfileTableViewCell.xib */; };
 		B7D730F22152FDBB009EA069 /* RecentActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D730F12152FDBB009EA069 /* RecentActivityModel.swift */; };
 		B7E21D8520EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */; };
 		B7E21D8620EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */; };
@@ -65,8 +65,8 @@
 		B7C05F2620E34DF600B26E0A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7C05F2A20E5C4A600B26E0A /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		B7C05F2D20E5D3F000B26E0A /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
-		B7D730EC2152FD10009EA069 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		B7D730ED2152FD10009EA069 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		B7D730EC2152FD10009EA069 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		B7D730ED2152FD10009EA069 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		B7D730F12152FDBB009EA069 /* RecentActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentActivityModel.swift; sourceTree = "<group>"; };
 		B7E21D8320EC5CBC00D60FE1 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		B7E21D8420EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -279,8 +279,8 @@
 		B7D730EB2152FCF6009EA069 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B7D730EC2152FD10009EA069 /* TableViewCell.swift */,
-				B7D730ED2152FD10009EA069 /* TableViewCell.xib */,
+				B7D730EC2152FD10009EA069 /* ProfileTableViewCell.swift */,
+				B7D730ED2152FD10009EA069 /* ProfileTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -327,6 +327,7 @@
 				TargetAttributes = {
 					B75EBD1E20E0600E0012C34F = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -355,7 +356,7 @@
 			files = (
 				B75EBD2D20E060100012C34F /* LaunchScreen.storyboard in Resources */,
 				B735669C211BDCB70038370A /* CommentTableViewCell.xib in Resources */,
-				B7D730EF2152FD10009EA069 /* TableViewCell.xib in Resources */,
+				B7D730EF2152FD10009EA069 /* ProfileTableViewCell.xib in Resources */,
 				B74BB67520E1D41300C9DA19 /* GoogleService-Info.plist in Resources */,
 				B7E21D8620EC5CBC00D60FE1 /* AlbumCollectionViewCell.xib in Resources */,
 				B75EBD2A20E060100012C34F /* Assets.xcassets in Resources */,
@@ -392,14 +393,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kaptify/Pods-Kaptify-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -420,7 +421,7 @@
 				B758A6E3212D1C460084D9C7 /* CommentsTableViewCollectionViewCell.swift in Sources */,
 				B74F53E7211D296A008A3C6E /* MenuBar.swift in Sources */,
 				B735668920FEF4060038370A /* AlbumModel.swift in Sources */,
-				B7D730EE2152FD10009EA069 /* TableViewCell.swift in Sources */,
+				B7D730EE2152FD10009EA069 /* ProfileTableViewCell.swift in Sources */,
 				B7356691210195FA0038370A /* DropDownView.swift in Sources */,
 				B7C05F2B20E5C4A600B26E0A /* UIColor+Extensions.swift in Sources */,
 				B7C05F2E20E5D3F000B26E0A /* CustomTabBarController.swift in Sources */,
@@ -589,7 +590,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sahilkapal.Kaptify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -608,7 +609,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sahilkapal.Kaptify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

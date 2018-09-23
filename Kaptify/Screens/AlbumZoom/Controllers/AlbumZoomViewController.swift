@@ -67,23 +67,23 @@ class AlbumZoomViewController: UIViewController{
         view.addGestureRecognizer(slide)
         
         // sub to notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: .UIKeyboardDidHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
 
     @objc func keyboardWillChange(notification: Notification) {
         
-        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
-        if notification.name == Notification.Name.UIKeyboardWillShow {
+        if notification.name == UIResponder.keyboardWillShowNotification {
             self.view.frame.origin.y = -keyboardRect.height
         } else {
             self.view.frame.origin.y = 0
@@ -92,7 +92,7 @@ class AlbumZoomViewController: UIViewController{
     }
 
     let blur: UIVisualEffectView = {
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
         let blurredView = UIVisualEffectView(effect: blur)
         blurredView.translatesAutoresizingMaskIntoConstraints = false
         return blurredView
@@ -175,13 +175,13 @@ extension AlbumZoomViewController {
     @objc func panGestureRecognizerHandler(gesture: UIPanGestureRecognizer) {
         let touchPoint = gesture.location(in: self.view?.window)
         
-        if gesture.state == UIGestureRecognizerState.began {
+        if gesture.state == UIGestureRecognizer.State.began {
             initialTouchPoint = touchPoint
-        } else if gesture.state == UIGestureRecognizerState.changed {
+        } else if gesture.state == UIGestureRecognizer.State.changed {
             if touchPoint.y - initialTouchPoint.y > 0 {
                 self.view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
             }
-        } else if gesture.state == UIGestureRecognizerState.ended || gesture.state == UIGestureRecognizerState.cancelled {
+        } else if gesture.state == UIGestureRecognizer.State.ended || gesture.state == UIGestureRecognizer.State.cancelled {
             if touchPoint.y - initialTouchPoint.y > 100 {
                 self.dismiss(animated: true, completion: nil)
             } else {

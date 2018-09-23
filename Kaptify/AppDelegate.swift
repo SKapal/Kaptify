@@ -14,20 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Creating a window the same size as the screen
         window = UIWindow(frame: UIScreen.main.bounds)
-        UIApplication.shared.statusBarStyle = .lightContent
+        
+        // UIApplication.shared.statusBarStyle = .lightContent
         // set the window to our view controller
         window!.rootViewController = CustomTabBarController()
-        //Add navigation bar with style	
-//        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
-//        UINavigationBar.appearance().barTintColor = UIColor(r: 28, b: 27, g: 27)
-//        UINavigationBar.appearance().tintColor = .white
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-//        UINavigationBar.appearance().isTranslucent = false
+
         // setup firebase
         FirebaseApp.configure()
         // show window
