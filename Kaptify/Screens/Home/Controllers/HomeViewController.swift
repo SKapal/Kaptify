@@ -25,6 +25,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
     var fbaseRef: DatabaseReference?
 
     var imageCache: [String: UIImage] = [:]
+ 
     
     //MARK: Home View UI Elements
     let albumCollection: UICollectionView = {

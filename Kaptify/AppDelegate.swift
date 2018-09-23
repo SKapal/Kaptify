@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Creating a window the same size as the screen
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        // UIApplication.shared.statusBarStyle = .lightContent
         // set the window to our view controller
         window!.rootViewController = CustomTabBarController()
 
