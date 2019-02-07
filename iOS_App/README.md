@@ -4,7 +4,7 @@
 
 ![Alt text](./Demo_image.png?raw=true "Demo")
 
-# Todo:
+# Todo
 - [ ] Create profile activity feed
 - [ ] Create settings page
 - [ ] Create server
