@@ -147,7 +147,12 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
     
     func updateFirebase(Albums: [Album]) {
         for album in albums {
-            guard let id = album.id, let name = album.name, let artist = album.artistName, let link = album.url, let artURL = album.artworkUrl100, let releaseDate = album.releaseDate else { return }
+            guard let id = album.id,
+                  let name = album.name,
+                  let artist = album.artistName,
+                  let link = album.url,
+                  let artURL = album.artworkUrl100,
+                  let releaseDate = album.releaseDate else { return }
             fbaseRef?.child("Albums").observeSingleEvent(of: .value, with: { (snapshot) in
                 if !snapshot.hasChild(id) {
                     print("Adding new data...")
@@ -225,7 +230,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
     }
 }
 
-//MARK: Extension with Collection View protocol methods
+//MARK: Extension with Collection View delegate methods
 extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSource  {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
