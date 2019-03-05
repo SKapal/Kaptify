@@ -11,13 +11,13 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+final class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     var tableView = UITableView()
     let cellIdentifier = "commentCellIdentifier"
     var fBaseRef: DatabaseReference?
     
-    var parent: HorizontalCollection?
+    var parent: OverviewAndCommentsHorizontalCollectionView?
     
     var comments = [Comment]()
     
@@ -231,7 +231,6 @@ class CommentsTableViewCollectionViewCell: UICollectionViewCell, UITableViewDele
         cell.layoutMargins = UIEdgeInsets.zero
         
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

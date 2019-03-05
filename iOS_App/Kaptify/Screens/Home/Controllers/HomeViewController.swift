@@ -14,21 +14,17 @@ protocol NetworkRequestDelegate {
     func requestDataAndPopulateView(jsonString: String)
 }
 
+final class HomeViewController: UIViewController, NetworkRequestDelegate {
+    
+    private let dataFetcher = DataFetcher()
+    private let cellIdentifier = "cellIdentifier"
+    private var albums = [Album]()
+    private var fbaseRef: DatabaseReference?
+    private var imageCache: [String: UIImage] = [:]
+    private var dropViewHeightConstraint = NSLayoutConstraint()
 
-class HomeViewController: UIViewController, NetworkRequestDelegate {
-    
-    let dataFetcher = DataFetcher()
-    
-    let cellIdentifier = "cellIdentifier"
-    
-    var albums = [Album]()
-    var fbaseRef: DatabaseReference?
-
-    var imageCache: [String: UIImage] = [:]
- 
-    
     //MARK: Home View UI Elements
-    let albumCollection: UICollectionView = {
+    private let albumCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.scrollDirection = .vertical
@@ -39,7 +35,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         return collection
     }()
     
-    let collectionBg: UIImageView = {
+    private let collectionBg: UIImageView = {
         let imV = UIImageView()
         let im = UIImage(named: "collection_bg")
         imV.image = im
@@ -48,7 +44,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         return imV
     }()
     
-    lazy var optionsButton: UIButton = {
+    private lazy var optionsButton: UIButton = {
         let options = UIButton(type: .system)
         let optionsImage = UIImage(named: "options_btn")
         let optionsImageView = UIImageView(image: optionsImage)
@@ -59,7 +55,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         return options
     }()
     
-    lazy var dropButton: UIButton = {
+    private lazy var dropButton: UIButton = {
         let drop = UIButton(type: .system)
         let dropImage = UIImage(named: "DropDownButton")
         let dropIV = UIImageView(image: dropImage)
@@ -71,15 +67,14 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         return drop
     }()
     
-    let dropView: DropDownView = {
+    private let dropView: DropDownView = {
         let view = DropDownView.init(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    
-    var isOpen:Bool = false
-    @objc func handleDrop() {
+    private var isOpen:Bool = false
+    @objc private func handleDrop() {
         if !isOpen {
             isOpen = true
             animateDropDown(toHeight: 87, with: 1)
@@ -89,10 +84,10 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         }
     }
     
-    func animateDropDown(toHeight height: CGFloat, with multiplier: CGFloat) {
-        NSLayoutConstraint.deactivate([self.height])
-        self.height.constant = height
-        NSLayoutConstraint.activate([self.height])
+    private func animateDropDown(toHeight height: CGFloat, with multiplier: CGFloat) {
+        NSLayoutConstraint.deactivate([dropViewHeightConstraint])
+        dropViewHeightConstraint.constant = height
+        NSLayoutConstraint.activate([dropViewHeightConstraint])
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
             if multiplier == 1 {
                 self.dropView.layoutIfNeeded()
@@ -109,7 +104,7 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
+        view.backgroundColor = UIColor(r: 51, b: 51, g: 51)
         
         checkIfValidUser()
         setupNavBar()
@@ -127,7 +122,12 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
     override func didReceiveMemoryWarning() {
         imageCache = [:]
     }
-    
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        albumCollection.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+    }
+
     public func requestDataAndPopulateView(jsonString: String) {
         dataFetcher.obtainData(jsonString: jsonString) { (result, err) in
             guard let payload = result else {return}
@@ -139,13 +139,13 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
             self.updateFirebase(Albums: self.albums)
         }
         // if drop down is open, close:
-        if(height.constant > 0) {
-            self.animateDropDown(toHeight: 0, with: -1)
-            self.isOpen = false
+        if(dropViewHeightConstraint.constant > 0) {
+            animateDropDown(toHeight: 0, with: -1)
+            isOpen = false
         }
     }
     
-    func updateFirebase(Albums: [Album]) {
+    private func updateFirebase(Albums: [Album]) {
         for album in albums {
             guard let id = album.id,
                   let name = album.name,
@@ -153,9 +153,10 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
                   let link = album.url,
                   let artURL = album.artworkUrl100,
                   let releaseDate = album.releaseDate else { return }
-            fbaseRef?.child("Albums").observeSingleEvent(of: .value, with: { (snapshot) in
+            fbaseRef?.child("Albums").observeSingleEvent(of: .value, with: { [weak self] snapshot in
                 if !snapshot.hasChild(id) {
-                    print("Adding new data...")
+                    print("Adding new data: \(name)")
+                    guard let self = self else { return }
                     self.fbaseRef?.child("Albums").child(id).child("name").setValue(name)
                     self.fbaseRef?.child("Albums").child(id).child("artist").setValue(artist)
                     self.fbaseRef?.child("Albums").child(id).child("link").setValue(link)
@@ -166,47 +167,47 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         }
     }
     
-    func setupUIElements() {
-        self.view.addSubview(collectionBg)
-        self.view.addSubview(albumCollection)
-        self.view.addSubview(dropView)
-        self.view.bringSubviewToFront(dropView)
+    private func setupUIElements() {
+        view.addSubview(collectionBg)
+        view.addSubview(albumCollection)
+        view.addSubview(dropView)
+        view.bringSubviewToFront(dropView)
         
         setupCollectionBg()
         setupAlbumCollection()
         setupDropView()
     }
-    var height = NSLayoutConstraint()
+    
     
     //MARK: Setup view constraints
-    func setupDropView() {
-        dropView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        dropView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+    private func setupDropView() {
+        dropView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        dropView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         dropView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        height = dropView.heightAnchor.constraint(equalToConstant: 0)
+        dropViewHeightConstraint = dropView.heightAnchor.constraint(equalToConstant: 0)
     }
     
-    func setupAlbumCollection() {
+    private func setupAlbumCollection() {
         //load cell from nib
-        self.albumCollection.register(UINib(nibName: "AlbumCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
+        albumCollection.register(UINib(nibName: "AlbumCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
     }
     
-    func setupCollectionBg() {
-        collectionBg.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        collectionBg.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        collectionBg.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        collectionBg.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+    private func setupCollectionBg() {
+        collectionBg.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        collectionBg.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        collectionBg.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        collectionBg.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         collectionBg.heightAnchor.constraint(equalToConstant: 229).isActive = true
     }
     
-    func checkIfValidUser() {
+    private func checkIfValidUser() {
         if Auth.auth().currentUser?.uid == nil {
             perform(#selector(handleOptions), with: nil, afterDelay: 0)
             handleOptions()
         }
     }
     
-    @objc func handleOptions() {
+    @objc private func handleOptions() {
         do {
             try Auth.auth().signOut()
         } catch let logoutErr {
@@ -217,16 +218,16 @@ class HomeViewController: UIViewController, NetworkRequestDelegate {
         present(registerController, animated: true, completion: nil)
     }
     
-    func setupNavBar() {
+    private func setupNavBar() {
         // add leftButton and rightButton
-        self.navigationItem.leftItemsSupplementBackButton = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: optionsButton)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dropButton)
+        navigationItem.leftItemsSupplementBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: optionsButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dropButton)
         // add title 
         let title = UIImage(named: "Logo_text")
         let imageView = UIImageView(image: title)
         imageView.contentMode = .scaleAspectFill
-        self.navigationItem.titleView = imageView
+        navigationItem.titleView = imageView
     }
 }
 
@@ -238,7 +239,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.albums.count
+        return albums.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -250,13 +251,13 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
         cell.albumImage.alpha = 0
 
         // Load cell data with backing array data
-        cell.albumLabel.text = self.albums[indexPath.item].name
+        cell.albumLabel.text = albums[indexPath.item].name
         cell.albumLabel.textColor = .white
 
-        cell.artistLabel.text = self.albums[indexPath.item].artistName
+        cell.artistLabel.text = albums[indexPath.item].artistName
         cell.artistLabel.textColor = .white
         
-        guard let artwork = self.albums[indexPath.item].artworkUrl100 else { return UICollectionViewCell() }
+        guard let artwork = albums[indexPath.item].artworkUrl100 else { return UICollectionViewCell() }
         if let imageURL = URL(string: artwork) {
             if let cachedImage = imageCache[artwork] { // used cached image if available
                 cell.albumImage.image = cachedImage
@@ -284,12 +285,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
         cell.backgroundColor = .clear
         return cell
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        albumCollection.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-    }
-    
+
     // Display album zoom view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -302,7 +298,7 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
         albumZoom.selectedAlbumURL = albums[indexPath.item].url!
         albumZoom.selectedAlbumId = albums[indexPath.item].id!
 
-        if let artwork = self.albums[indexPath.item].artworkUrl100, let imageURL = URL(string: artwork) {
+        if let artwork = albums[indexPath.item].artworkUrl100, let imageURL = URL(string: artwork) {
             // Load image data on background thread
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageURL)
@@ -320,12 +316,3 @@ extension HomeViewController:  UICollectionViewDelegate, UICollectionViewDataSou
     }
     
 }
-
-
-
-
-
-
-
-
-

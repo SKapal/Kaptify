@@ -8,12 +8,11 @@
 
 import UIKit
 
-class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    let cellId = "cellIdentifier"
+final class MenuBar: UIView {
+    private let cellId = "cellIdentifier"
+    private let menuTitles = ["Album", "Comments"]
+
     var scrollDelegate: ScrollMenuDelegate?
-    let menuTitles = ["Album", "Comments"]
-    
     var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
     
     lazy var collectionView: UICollectionView = {
@@ -27,7 +26,7 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return cv
     }()
     
-    let horizontalBarView: UIView = {
+    private let horizontalBarView: UIView = {
         let bar = UIView()
         bar.backgroundColor = .white
         bar.layer.shadowColor = UIColor.black.cgColor
@@ -39,7 +38,6 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         bar.translatesAutoresizingMaskIntoConstraints = false
         return bar
     }()
-
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,11 +51,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         setupHorizontalBar()
         
     }
-    
 
-    
     private func setupHorizontalBar() {
-        
         addSubview(horizontalBarView)
         
         horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
@@ -65,8 +60,22 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
         horizontalBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1/8).isActive = true
-        
     }
+
+    private func setupCollectionView() {
+        collectionView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        collectionView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MenuBar: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
@@ -78,43 +87,25 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let font = UIFont(name: "HelveticaNeue-Light", size: 16)
         cell.titleLabel.font = font
         //cell.isSelected = indexPath.item == 0 ? true : false
-       // cell.isHighlighted = indexPath.item == 0 ? true : false
+        // cell.isHighlighted = indexPath.item == 0 ? true : false
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            scrollDelegate?.scrollToMenuIndex(menuIndex: indexPath.item)
-        } else {
-            scrollDelegate?.scrollToMenuIndex(menuIndex: indexPath.item)
-        }
+        scrollDelegate?.scrollToMenuIndex(menuIndex: indexPath.item)
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: frame.width/2, height: frame.height)
     }
     
-    fileprivate func setupCollectionView() {
-        collectionView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        collectionView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
 
 class MenuCell: UICollectionViewCell {
-    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Album"
@@ -161,6 +152,5 @@ class MenuCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 

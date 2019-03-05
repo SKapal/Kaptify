@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AlbumCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var albumImage: UIImageView!
-    @IBOutlet weak var albumLabel: UILabel!
-    @IBOutlet weak var artistLabel: UILabel!
+final class AlbumCollectionViewCell: UICollectionViewCell {
+    @IBOutlet var albumImage: UIImageView!
+    @IBOutlet var albumLabel: UILabel!
+    @IBOutlet var artistLabel: UILabel!
 }

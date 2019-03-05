@@ -25,16 +25,7 @@ struct Album: Decodable {
 //    }
 //    let genres: [Genre]?
     let url: String?
-    
-    init(artist: String, name: String, artUrl: String, releaseDate: String, url: String, id: String) {
-        self.artistName = artist
-        self.name = name
-        self.artworkUrl100 = artUrl
-        self.releaseDate = releaseDate
-        self.url = url
-        self.id = id
-    }
-    
+
     func stringToUrl(url: String) -> URL {
         return URL(string: url)!
     }

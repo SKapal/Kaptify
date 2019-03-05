@@ -9,22 +9,22 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UITableViewController {
+final class ProfileViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor =  UIColor(r: 51, b: 51, g: 51)
-        self.setupNavigationBar()
-        self.tableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "profileCellId")
+        view.backgroundColor =  UIColor(r: 51, b: 51, g: 51)
+        setupNavigationBar()
+        tableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "profileCellId")
     }
     
     private func setupNavigationBar() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationController?.navigationBar.barStyle = .default
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         let user = Auth.auth().currentUser
         if let user = user {
-            self.navigationItem.title = "\(user.displayName ?? "User")s Activity"
+            navigationItem.title = "\(user.displayName ?? "User")s Activity"
         }
     }
     

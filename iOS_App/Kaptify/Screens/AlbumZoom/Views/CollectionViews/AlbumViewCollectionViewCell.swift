@@ -13,7 +13,6 @@ import FirebaseDatabase
 
 
 class AlbumViewCollectionViewCell: UICollectionViewCell {
-    
     var selectedAlbumImage = UIImage()
     var selectedAlbumTitle = String()
     var selectedAlbumArtist = String()

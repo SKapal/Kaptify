@@ -11,6 +11,4 @@ import Foundation
 struct RecentActivity {
     let title: String
     let url: URL
-    
-    
 }

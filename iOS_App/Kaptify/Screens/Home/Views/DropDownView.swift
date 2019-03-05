@@ -10,42 +10,44 @@ import UIKit
 
 
 
-class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
-    
-    let dropDownOptions = ["📈  Albums", "🌊  Albums"]
-    var tableView = UITableView()
-    let dataFetcher = DataFetcher()
+final class DropDownView: UIView {
+
+    private let dropDownOptions = ["🔥  Albums", "📅  Albums"]
+    private let tableView = UITableView()
+    private let dataFetcher = DataFetcher()
     var dropDelegate: NetworkRequestDelegate!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(tableView)
-        self.backgroundColor = UIColor(r: 28, b: 27, g: 27)
+        addSubview(tableView)
+        backgroundColor = UIColor(r: 28, b: 27, g: 27)
+        setupTableView()
+
+    }
+    
+    private func setupTableView() {
         tableView.backgroundColor = UIColor(r: 28, b: 27, g: 27)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.allowsSelection = true
-        setupTableView()
-        self.bringSubviewToFront(tableView)
-        self.tableView.isScrollEnabled = false
-    }
-    
-    
-    func setupTableView() {
         tableView.tableFooterView = nil
-        
+        tableView.isScrollEnabled = false
         
         tableView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        bringSubviewToFront(tableView)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+extension DropDownView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dropDownOptions.count
     }
@@ -60,7 +62,7 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont(name: "Helvetica Neue", size: 12)
         cell.selectionStyle = .none
-
+        
         cell.backgroundColor = UIColor(r: 28, b: 27, g: 27)
         return cell
     }
@@ -74,9 +76,4 @@ class DropDownView: UIView, UITableViewDelegate, UITableViewDataSource {
             dropDelegate.requestDataAndPopulateView(jsonString: "https://rss.itunes.apple.com/api/v1/us/apple-music/new-releases/all/25/explicit.json")
         }
     }
-    
-    
 }
-
-
-

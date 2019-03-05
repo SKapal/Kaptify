@@ -10,11 +10,10 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class AlbumZoomViewController: UIViewController{
-
+final class AlbumZoomViewController: UIViewController{
     
     // initial touch position
-    var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
+    private var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
     
     var selectedAlbumImage = UIImage()
     var selectedAlbumTitle = String()
@@ -23,29 +22,29 @@ class AlbumZoomViewController: UIViewController{
     var selectedAlbumURL = String()
     var selectedAlbumId = String()
     
-    var fBaseRef: DatabaseReference?
+    private var fBaseRef: DatabaseReference?
     
-    lazy var menuBar: MenuBar = {
+    private lazy var menuBar: MenuBar = {
         let menu = MenuBar()
         menu.translatesAutoresizingMaskIntoConstraints = false
         return menu
     }()
     
-    lazy var menuCollection: HorizontalCollection = {
-        let collection = HorizontalCollection(frame: .zero)
+    private lazy var menuCollection: OverviewAndCommentsHorizontalCollectionView = {
+        let collection = OverviewAndCommentsHorizontalCollectionView(frame: .zero)
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
     
     //MARK: View property setup
-    let albumBackgroundImage: UIImageView = {
+    private let albumBackgroundImage: UIImageView = {
         let bg = UIImageView()
         bg.translatesAutoresizingMaskIntoConstraints = false
         bg.contentMode = .scaleAspectFit
         return bg
     }()
     
-    let slideImage: UIImageView = {
+    private let slideImage: UIImageView = {
         let slide = UIImageView()
         let img = UIImage(named: "slideView")
         slide.image = img
@@ -54,7 +53,13 @@ class AlbumZoomViewController: UIViewController{
         return slide
     }()
     
-    
+    private let blur: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
+        let blurredView = UIVisualEffectView(effect: blur)
+        blurredView.translatesAutoresizingMaskIntoConstraints = false
+        return blurredView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor =  .clear
@@ -70,7 +75,6 @@ class AlbumZoomViewController: UIViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardDidHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
     }
     
     deinit {
@@ -79,111 +83,98 @@ class AlbumZoomViewController: UIViewController{
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
 
-    @objc func keyboardWillChange(notification: Notification) {
+    @objc private func keyboardWillChange(notification: Notification) {
         
         guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         if notification.name == UIResponder.keyboardWillShowNotification {
-            self.view.frame.origin.y = -keyboardRect.height
+            view.frame.origin.y = -keyboardRect.height
         } else {
-            self.view.frame.origin.y = 0
+            view.frame.origin.y = 0
         }
         
     }
 
-    let blur: UIVisualEffectView = {
-        let blur = UIBlurEffect(style: UIBlurEffect.Style.light)
-        let blurredView = UIVisualEffectView(effect: blur)
-        blurredView.translatesAutoresizingMaskIntoConstraints = false
-        return blurredView
-    }()
-    
-    fileprivate func setupView() {
-        self.view.addSubview(albumBackgroundImage)
+    private func setupView() {
+        view.addSubview(albumBackgroundImage)
         
-        self.view.insertSubview(blur, aboveSubview: albumBackgroundImage)
-        self.view.addSubview(menuBar)
+        view.insertSubview(blur, aboveSubview: albumBackgroundImage)
+        view.addSubview(menuBar)
 
-        self.view.addSubview(slideImage)
-        self.view.addSubview(menuCollection)
-        
+        view.addSubview(slideImage)
+        view.addSubview(menuCollection)
 
-        self.setupMenuBar()
-        self.setupBlur()
+        setupMenuBar()
+        setupBlur()
         
-        self.setupAlbumBackgroundImage()
-        self.setupSlideImage()
-        self.setupMenuCollection()
+        setupAlbumBackgroundImage()
+        setupSlideImage()
+        setupMenuCollection()
     }
     
     //MARK: Setup view constraints & pass data to UI
-    fileprivate func setupMenuCollection() {
+    private func setupMenuCollection() {
+        menuCollection.menuBar = menuBar
         
-        menuCollection.menuBar = self.menuBar
-        
-        menuCollection.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        menuCollection.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         menuCollection.topAnchor.constraint(equalTo: menuBar.bottomAnchor).isActive = true
-        menuCollection.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        menuCollection.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        menuCollection.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        menuCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        self.menuCollection.selectedAlbumArtist = selectedAlbumArtist
-        self.menuCollection.selectedAlbumTitle = selectedAlbumTitle
-        self.menuCollection.selectedAlbumImage = selectedAlbumImage
-        self.menuCollection.selectedAlbumId = selectedAlbumId
-        self.menuCollection.selectedAlbumURL = selectedAlbumURL
-        self.menuCollection.selectedAlbumReleaseDate = selectedAlbumReleaseDate
-        
+        menuCollection.selectedAlbumArtist = selectedAlbumArtist
+        menuCollection.selectedAlbumTitle = selectedAlbumTitle
+        menuCollection.selectedAlbumImage = selectedAlbumImage
+        menuCollection.selectedAlbumId = selectedAlbumId
+        menuCollection.selectedAlbumURL = selectedAlbumURL
+        menuCollection.selectedAlbumReleaseDate = selectedAlbumReleaseDate
     }
 
-    
-    fileprivate func setupMenuBar() {
-        menuBar.scrollDelegate = self.menuCollection
-        menuBar.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        menuBar.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        menuBar.topAnchor.constraint(equalTo: self.slideImage.topAnchor).isActive = true
-        menuBar.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+    private func setupMenuBar() {
+        menuBar.scrollDelegate = menuCollection
+        menuBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        menuBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        menuBar.topAnchor.constraint(equalTo: slideImage.topAnchor).isActive = true
+        menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         menuBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    fileprivate func setupAlbumBackgroundImage() {
+    private func setupAlbumBackgroundImage() {
         albumBackgroundImage.image = selectedAlbumImage
-        albumBackgroundImage.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        albumBackgroundImage.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        albumBackgroundImage.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        albumBackgroundImage.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -self.view.frame.height/2).isActive = true
-        albumBackgroundImage.heightAnchor.constraint(equalToConstant: self.view.frame.height * 4/9).isActive = true
+        albumBackgroundImage.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        albumBackgroundImage.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        albumBackgroundImage.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        albumBackgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -self.view.frame.height/2).isActive = true
+        albumBackgroundImage.heightAnchor.constraint(equalToConstant: view.frame.height * 4/9).isActive = true
     }
     
-    fileprivate func setupBlur() {
-        blur.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        blur.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        blur.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        blur.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    private func setupBlur() {
+        blur.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        blur.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        blur.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        blur.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
-    fileprivate func setupSlideImage() {
-        slideImage.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 45).isActive = true
-        slideImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+    private func setupSlideImage() {
+        slideImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 45).isActive = true
+        slideImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         slideImage.bottomAnchor.constraint(lessThanOrEqualTo: slideImage.topAnchor, constant: 5)
     }
-    
 }
 
 //MARK: Methods and Helpers
 extension AlbumZoomViewController {
-    
     @objc func panGestureRecognizerHandler(gesture: UIPanGestureRecognizer) {
-        let touchPoint = gesture.location(in: self.view?.window)
+        let touchPoint = gesture.location(in: view?.window)
         
         if gesture.state == UIGestureRecognizer.State.began {
             initialTouchPoint = touchPoint
         } else if gesture.state == UIGestureRecognizer.State.changed {
             if touchPoint.y - initialTouchPoint.y > 0 {
-                self.view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: view.frame.size.width, height: view.frame.size.height)
             }
         } else if gesture.state == UIGestureRecognizer.State.ended || gesture.state == UIGestureRecognizer.State.cancelled {
             if touchPoint.y - initialTouchPoint.y > 100 {
-                self.dismiss(animated: true, completion: nil)
+                dismiss(animated: true, completion: nil)
             } else {
                 UIView.animate(withDuration: 0.3, animations: {
                     self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)

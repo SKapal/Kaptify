@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ProfileTableViewCell: UITableViewCell {
-    @IBOutlet weak var albumImageView: UIImageView!
-    @IBOutlet weak var activityLabel: UILabel!
+final class ProfileTableViewCell: UITableViewCell {
+    @IBOutlet var albumImageView: UIImageView!
+    @IBOutlet var activityLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,5 +23,4 @@ class ProfileTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }

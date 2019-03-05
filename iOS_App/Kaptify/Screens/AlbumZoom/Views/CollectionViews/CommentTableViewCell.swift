@@ -8,13 +8,12 @@
 
 import UIKit
 
-class CommentTableViewCell: UITableViewCell {
+final class CommentTableViewCell: UITableViewCell {
+    @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet var separatorLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
     
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var separatorLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    
-    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet var commentLabel: UILabel!
     
     override func awakeFromNib() {
         usernameLabel.textColor = UIColor(r: 255, b: 157, g: 41)
@@ -23,8 +22,5 @@ class CommentTableViewCell: UITableViewCell {
         dateLabel.textColor = .white
         commentLabel.textColor = .white
         commentLabel.preferredMaxLayoutWidth = self.frame.width
-        
-        
     }
-
 }
