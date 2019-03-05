@@ -7,6 +7,4 @@
 # Todo
 - [ ] Create profile activity feed
 - [ ] Create settings page
-- [ ] Migrate app to Django server
-- [ ] Remove Firebase dependency 
 - [ ] Create a website application
