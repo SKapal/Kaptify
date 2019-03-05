@@ -11,8 +11,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-
-class AlbumViewCollectionViewCell: UICollectionViewCell {
+final class AlbumViewCollectionViewCell: UICollectionViewCell {
     var selectedAlbumImage = UIImage()
     var selectedAlbumTitle = String()
     var selectedAlbumArtist = String()
@@ -20,7 +19,9 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
     var selectedAlbumURL = String()
     var selectedAlbumId = String()
     
-    var fBaseRef: DatabaseReference?
+    private var fBaseRef: DatabaseReference?
+
+    private var addStack = UIStackView()
     
     let albumImage: UIImageView = {
         let albumImg = UIImageView()
@@ -68,7 +69,7 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
         return release
     }()
     
-    lazy var addButton: UIButton = {
+    private lazy var addButton: UIButton = {
         let add = UIButton(type: .custom)
         let addImage = UIImage(named: "addButton")
         let addImageView = UIImageView(image: addImage)
@@ -79,7 +80,7 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
         return add
     }()
     
-    var numberOfAddsLabel: UILabel = {
+    private var numberOfAddsLabel: UILabel = {
         let adds = UILabel()
         adds.textAlignment = .center
         let font = UIFont(name: "HelveticaNeue-Medium", size: 14)
@@ -89,9 +90,7 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
         return adds
     }()
     
-    var addStack = UIStackView()
-    
-    lazy var openButton: UIButton = {
+    private lazy var openButton: UIButton = {
         let open = UIButton(type: .custom)
         let openImage = UIImage(named: "openButton")
         let openImageView = UIImageView(image: openImage)
@@ -102,7 +101,7 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
         return open
     }()
     
-    @objc fileprivate func handleOpenButton() {
+    @objc private func handleOpenButton() {
         UIApplication.shared.open(URL(string: self.selectedAlbumURL)!, options: [:]) { (status) in }
     }
     
@@ -117,81 +116,73 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate func setupView() {
-        
-        self.addSubview(albumView)
-        self.addSubview(albumImage)
-        
-        self.addSubview(albumTitleLabel)
-        self.addSubview(albumArtistLabel)
-        self.addSubview(albumReleaseDateLabel)
-        
-        
-        self.addSubview(openButton)
-        
+    private func setupView() {
+        addSubview(albumView)
+        addSubview(albumImage)
+        addSubview(albumTitleLabel)
+        addSubview(albumArtistLabel)
+        addSubview(albumReleaseDateLabel)
+        addSubview(openButton)
         
         addStack = UIStackView(arrangedSubviews: [addButton, numberOfAddsLabel])
         addStack.axis = .vertical
         addStack.translatesAutoresizingMaskIntoConstraints = false
         addStack.spacing = 1
         
-        self.addSubview(addStack)
+        addSubview(addStack)
         
-        self.setupAlbumView()
-        self.setupAlbumImage()
-        self.setupAlbumTitleLabel()
-        self.setupAddStack()
-        self.setupAlbumArtistLabel()
-        self.setupAlbumReleaseDateLabel()
-        self.setupOpenButton()
-        
+        setupAlbumView()
+        setupAlbumImage()
+        setupAlbumTitleLabel()
+        setupAddStack()
+        setupAlbumArtistLabel()
+        setupAlbumReleaseDateLabel()
+        setupOpenButton()
     }
     
-    fileprivate func setupAlbumView() {
-        albumView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        albumView.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
+    private func setupAlbumView() {
+        albumView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        albumView.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
         albumView.widthAnchor.constraint(equalToConstant: 204).isActive = true
         albumView.heightAnchor.constraint(equalToConstant: 204).isActive = true
     }
     
-    fileprivate func setupAlbumImage() {
+    private func setupAlbumImage() {
         albumImage.centerXAnchor.constraint(equalTo: albumView.centerXAnchor).isActive = true
         albumImage.centerYAnchor.constraint(equalTo: albumView.centerYAnchor).isActive = true
         albumImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
         albumImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
     }
     
-    fileprivate func setupAlbumTitleLabel() {
+    private func setupAlbumTitleLabel() {
         albumTitleLabel.leftAnchor.constraint(equalTo: albumView.leftAnchor).isActive = true
         albumTitleLabel.rightAnchor.constraint(equalTo: albumView.rightAnchor).isActive = true
         albumTitleLabel.topAnchor.constraint(greaterThanOrEqualTo: albumView.bottomAnchor, constant: 5).isActive = true
     }
     
-    fileprivate func setupAlbumArtistLabel() {
-        albumArtistLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    private func setupAlbumArtistLabel() {
+        albumArtistLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         albumArtistLabel.topAnchor.constraint(greaterThanOrEqualTo: albumTitleLabel.bottomAnchor, constant: 5).isActive = true
     }
     
-    fileprivate func setupAlbumReleaseDateLabel() {
-        albumReleaseDateLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 30).isActive = true
+    private func setupAlbumReleaseDateLabel() {
+        albumReleaseDateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 30).isActive = true
         albumReleaseDateLabel.bottomAnchor.constraint(equalTo: addStack.bottomAnchor).isActive = true
         albumReleaseDateLabel.rightAnchor.constraint(lessThanOrEqualTo: addStack.leftAnchor).isActive = true
     }
     
-    fileprivate func setupAddStack() {
-        addStack.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -30).isActive = true
-        addStack.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30).isActive = true
+    private func setupAddStack() {
+        addStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -30).isActive = true
+        addStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
     }
     
-    fileprivate func setupOpenButton() {
-        openButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    private func setupOpenButton() {
+        openButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         openButton.topAnchor.constraint(greaterThanOrEqualTo: albumArtistLabel.bottomAnchor, constant: 25).isActive = true
     }
     
-    
-    
     // Update button image helper
-    fileprivate func changeButtonImage(named imageName: String) {
+    private func changeButtonImage(named imageName: String) {
         DispatchQueue.main.async {
             let addImageView = UIImageView(image: UIImage(named: imageName))
             addImageView.contentMode = .scaleAspectFill
@@ -199,9 +190,10 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func addRemoveAlbumToUser(album: [String: AnyObject]) {
+    private func addRemoveAlbumToUser(album: [String: AnyObject]) {
         if let uid = Auth.auth().currentUser?.uid {
-            fBaseRef?.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            fBaseRef?.child("Users").child(uid).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+                guard let self = self else { return }
                 if !snapshot.childSnapshot(forPath: "addedAlbums").hasChild(self.selectedAlbumId) {
                     self.fBaseRef?.child("Users").child(uid).child("addedAlbums").child(self.selectedAlbumId).setValue(album)
                 } else {
@@ -211,7 +203,7 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @objc fileprivate func handleAddButton() {
+    @objc private func handleAddButton() {
         
         /*
          * - Add to user profile (Album fb object: title, image URL, artist, release date, id, URL)
@@ -219,7 +211,7 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
          * - Replace "addButton" with "minusButton" and vice versa
          */
         print("add")
-        fBaseRef?.child("Albums").child(selectedAlbumId).runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
+        fBaseRef?.child("Albums").child(selectedAlbumId).runTransactionBlock({ [weak self] (currentData: MutableData) -> TransactionResult in
             if var album = currentData.value as? [String: AnyObject], let uid = Auth.auth().currentUser?.uid {
                 var adds: Dictionary<String, Bool>
                 adds = album["adds"] as? [String: Bool] ?? [:]
@@ -228,20 +220,20 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
                 if let _ = adds[uid] {
                     addsCount -= 1
                     adds.removeValue(forKey: uid)
-                    self.changeButtonImage(named: "addButton")
+                    self?.changeButtonImage(named: "addButton")
                 } else {
                     addsCount += 1
                     adds[uid] = true
-                    self.changeButtonImage(named: "minusButton")
+                    self?.changeButtonImage(named: "minusButton")
                 }
                 album["addsCount"] = addsCount as AnyObject?
                 album["adds"] = adds as AnyObject?
-                self.addRemoveAlbumToUser(album: album)
+                self?.addRemoveAlbumToUser(album: album)
                 currentData.value = album
                 
                 // update UI
                 DispatchQueue.main.async {
-                    self.numberOfAddsLabel.text = addsCount > 1 || addsCount == 0 ? "\(addsCount) stars" : "\(addsCount) star"
+                    self?.numberOfAddsLabel.text = addsCount > 1 || addsCount == 0 ? "\(addsCount) stars" : "\(addsCount) star"
                     
                 }
                 return TransactionResult.success(withValue: currentData)
@@ -256,7 +248,8 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
     
     // Load Add Button UI
     func updateAddButtonAndLabelWithUserData() {
-        fBaseRef?.child("Albums").child(selectedAlbumId).observeSingleEvent(of: .value, with: { (snapshot) in
+        fBaseRef?.child("Albums").child(selectedAlbumId).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
+            guard let self = self else { return }
             if let uid = Auth.auth().currentUser?.uid {
                 if snapshot.childSnapshot(forPath: "adds").hasChild(uid){
                     self.changeButtonImage(named: "minusButton")
@@ -275,6 +268,5 @@ class AlbumViewCollectionViewCell: UICollectionViewCell {
             }
         })
     }
-    
 }
 
