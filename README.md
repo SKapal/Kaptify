@@ -7,4 +7,3 @@
 # Todo
 - [ ] Create profile activity feed
 - [ ] Create settings page
-- [ ] Create a website application
